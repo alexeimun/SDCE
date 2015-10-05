@@ -1,0 +1,18 @@
+@startuml
+title Tablero de inicio Asesor
+
+actor Asesor
+
+(Tablero Inicio) as (ini)
+(Total practicantes) as (pra)
+(Total proyectos) as (pro)
+(Periodo académico) as (pe)
+(Notificaciones) as (not)
+
+Asesor - (ini)
+(ini)<.-(pra)
+(ini)<.-(pro)
+(ini)<.-(pe)
+(ini)<.-(not)
+
+@enduml

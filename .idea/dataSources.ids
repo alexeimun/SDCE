@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - sdce@localhost" uuid="17700775-4584-45f8-9413-5df717498c07">
+    <database-info product="MySQL" version="5.6.12-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="sdce"/>
+    <table name="t_agencias" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_AGENCIA" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_CIUDAD" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="NOMBRE_AGENCIA" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CORREO_AGENCIA" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DIRECCION" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TELEFONO1" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TELEFONO2" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FAX" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PAGINA_WEB" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_AGENCIA"/>
+    </table>
+    <table name="t_asesoria_practicas" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_ASESORIA_PRACTICA" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_PRACTICANTE" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TIPO_ASESORIA" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="FECHA_HORA" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="REUNION_ASESORIA" sqlType="VARCHAR" precision="1500" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="ID_ASESORIA_PRACTICA"/>
+    </table>
+    <table name="t_calificacion_practicantes" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_CALIFICACION_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="PERSONA" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12" remarks="Q2FsaWZpY2Fkb3I="/>
+      <column name="MOMENTO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="NOTA" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
+      <column name="OBS_SABERSER" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="OBS_SABERHACER" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="OBS_SABERSABER" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_CALIFICACION_PRACTICANTE"/>
+    </table>
+    <table name="t_ciudades" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_CIUDAD" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="NOMBRE" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DEPARTAMENTO" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_CIUDAD"/>
+    </table>
+    <table name="t_consecutivos" schema="" catalog="sdce" type="TABLE">
+      <column name="NOMBRE" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_USUARIO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+    </table>
+    <table name="t_cooperadores" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_COOPERADOR" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_AGENCIA" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="NOMBRE_COOPERADOR" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DIRECCION_COOPERADOR" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TELEFONO_COOPERADOR" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CORREO_COOPERADOR" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CARGO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_COOPERADOR"/>
+    </table>
+    <table name="t_evaluacion_estudiante" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_EVALUACION_ESTUDIANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="MOMENTO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="R1" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R2" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FUNCION1" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FUNCION2" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FUNCION3" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FUNCION4" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R3" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="RESP1" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R4" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R5" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R6" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R121" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R7" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="RESP2" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R8" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="RESP3" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R9" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="R10" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DEBFOR" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12"/>
+      <column name="METEST" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FD" sqlType="VARCHAR" precision="380" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_EVALUACION_ESTUDIANTE"/>
+    </table>
+    <table name="t_gastos_transporte" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_GASTOS_TRANSPORTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="FECHA_GASTO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <column name="LUGAR" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ACTIVIDAD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NUMERO_DESPLAZAMIENTOS" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="VALOR_UNITARIO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="ID_GASTOS_TRANSPORTE"/>
+    </table>
+    <table name="t_informes_mensuales" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_INFORME_MENSUAL" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="FECHAS" sqlType="VARCHAR" precision="90" scale="0" nullable="true" jdbcType="12"/>
+      <column name="AVANCES" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
+      <column name="OBSERVACIONES" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="ID_INFORME_MENSUAL"/>
+    </table>
+    <table name="t_links" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_LINK" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TIPO" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FINALIZADO" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MA=="/>
+      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="FECHA_CADUCA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="FECHA_FINALIZA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="RmVjaGEgZW4gbGEgcXVlIGVsIHByY2F0aWNhbnRlIGV2YWx1YQ=="/>
+      <primary-key name="PRIMARY" columns="ID_LINK"/>
+    </table>
+    <table name="t_modalidad_practica" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_MODALIDAD_PRACTICA" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NOMBRE_MODALIDAD_PRACTICA" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_MODALIDAD_PRACTICA"/>
+    </table>
+    <table name="t_practicantes" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_COOPERADOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_AGENCIA" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_PROGRAMA" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_MODALIDAD_PRACTICA" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="NOMBRE_PRACTICANTE" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CORREO_PRACTICANTE" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DOCUMENTO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TELEFONO" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CODIGO" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="ESTADO" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="ID_PRACTICANTE"/>
+    </table>
+    <table name="t_proyectos" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_TIPO_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="NOMBRE_PROYECTO" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HORARIO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="MOMENTO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MQ=="/>
+      <column name="FECHA_CADUCA_EVALUACION" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_PROYECTO"/>
+    </table>
+    <table name="t_registro_notas" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_REGISTRO_NOTA" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="CODIGO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NOTA1" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NOTA2" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="ID_REGISTRO_NOTA"/>
+    </table>
+    <table name="t_registros" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_REGISTRO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TIPO" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="TOTAL" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
+      <column name="MOMENTO_EVALUATIVO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="SEMESTRE" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="ID_REGISTRO"/>
+    </table>
+    <table name="t_tipo_proyectos" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_TIPO_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="NOMBRE_TIPO_PROYECTO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_TIPO_PROYECTO"/>
+    </table>
+    <table name="t_usuarios" schema="" catalog="sdce" type="TABLE">
+      <column name="ID_USUARIO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="NOMBRE" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DOCUMENTO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TELEFONO" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CELULAR" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CORREO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CLAVE" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NIVEL" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MA=="/>
+      <column name="FOTO" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12" def="J2F2YXRhci5wbmcn"/>
+      <column name="PERIODO" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="ESTADO" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MQ=="/>
+      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="FACHA_ULTIMO_INICIO_SESION" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_USUARIO"/>
+    </table>
+  </data-source>
+</component>

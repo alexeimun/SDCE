@@ -1,0 +1,13 @@
+@startuml
+title Módulo practicantes del asesor
+
+actor Asesor
+
+(Practicantes) as (pra)
+
+
+'Primer nivel
+
+Asesor - (pra)
+(pra)<.-(Ver practicantes)
+@enduml

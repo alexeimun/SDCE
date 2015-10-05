@@ -1,0 +1,25 @@
+@startuml
+title Módulo informes del asesor
+
+actor Asesor
+
+(Informes) as (info)
+
+(Asesoría) as (ase)
+(Gastos de transporte) as (gt)
+
+'Primer nivel
+
+Asesor - (info)
+(info)<.-(gt)
+(info)<.-(ase)
+
+'Segundo nivel
+
+(ase)<.-(Enviar formulario)
+(ase)<.-(Asesorías prácticas)
+
+(gt)<.-(Crear gasto de transporte)
+(gt)<.-(Gastos de tranporte)
+
+@enduml

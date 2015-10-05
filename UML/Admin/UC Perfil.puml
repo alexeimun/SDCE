@@ -1,0 +1,15 @@
+@startuml
+title Perfil del administrador
+
+actor Administrador as Admin
+
+(Perfil) as (per)
+
+(Cambiar contraseña) as (pass)
+
+'Primer nivel
+
+Admin - (per)
+(per)<.-(pass)
+
+@enduml

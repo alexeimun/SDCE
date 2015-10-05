@@ -1,0 +1,17 @@
+@startuml
+title Módulo proyectos del asesor
+
+actor Asesor
+
+(Proyectos) as (pro)
+
+(Horario proyectos) as (hp)
+(Proyectos) as (p)
+
+'Primer nivel
+
+Asesor - (pro)
+(pro)<.-(hp)
+(pro)<.-(p)
+
+@enduml

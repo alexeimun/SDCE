@@ -1,0 +1,17 @@
+@startuml
+title Módulo parámetros del administrador
+
+actor Administrador as Admin
+
+(Parámetros) as (para)
+
+(Administrar dependencias) as (dep)
+
+'Primer nivel
+
+Admin - (para)
+(para)<.-(dep)
+
+
+
+@enduml

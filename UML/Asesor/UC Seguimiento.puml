@@ -1,0 +1,26 @@
+@startuml
+title Módulo seguimiento del asesor
+
+actor Asesor
+
+(Seguimiento) as (seg)
+
+(Certificado paz y salvo) as (paz)
+(Registro de notas) as (rn)
+(Seguimiento prácticas) as (sp)
+
+'Primer nivel
+
+Asesor - (seg)
+(seg)<.-(paz)
+(seg)<.-(rn)
+(seg)<.-(sp)
+
+'Segundo nivel
+
+(sp)<.-(Seguimiento)
+(sp)<.-(Enviar formularios)
+(sp)<.-(Calificar practicante)
+
+
+@enduml

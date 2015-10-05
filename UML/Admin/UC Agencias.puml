@@ -1,0 +1,19 @@
+@startuml
+title Módulo agencias del administrador
+
+actor Administrador as Admin
+
+(Agencias) as (age)
+
+(Crear agencias) as (cag)
+(Listado agencias) as (ag)
+
+'Primer nivel
+
+Admin - (age)
+(age)<.-(cag)
+(age)<.-(ag)
+
+
+
+@enduml

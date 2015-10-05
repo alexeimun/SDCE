@@ -1,0 +1,19 @@
+@startuml
+title Tablero de inicio Administrador
+
+actor Asesor
+
+(Tablero Inicio) as (ini)
+
+(Total asesores) as (ase)
+(Total practicantes) as (pra)
+(Total proyectos) as (pro)
+(Total agencias) as (age)
+
+Asesor - (ini)
+(ini)<.-(ase)
+(ini)<.-(pro)
+(ini)<.-(pra)
+(ini)<.-(age)
+
+@enduml

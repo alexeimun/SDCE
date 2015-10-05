@@ -1,0 +1,36 @@
+@startuml
+title Cierre practicas
+
+actor Asesor
+
+(Cierre prácticas) as (cierre)
+
+(Admisiones) as (adm)
+(CIAD) as (ciad)
+(Centro de practicas) as (cp)
+(Decanatura) as (dec)
+
+'Primer nivel
+
+Asesor - (cierre)
+(cierre)<.-(adm)
+(cierre)<.-(ciad)
+(cierre)<.-(cp)
+(cierre)<.-(dec)
+
+'Segundo nivel
+
+(adm)<.-(Admisiones)
+(adm)<.-(Carta admisiones)
+
+(ciad)<.-(CIAD)
+(ciad)<.-(Carta CIAD)
+
+(cp)<.-(Centro de practicas)
+(cp)<.-(Carta practicas)
+
+(dec)<.-(Decanatura)
+(dec)<.-(Carta decanatura)
+
+
+@enduml

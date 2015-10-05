@@ -1,0 +1,24 @@
+@startuml
+title Módulo proyectos del administrador
+
+actor Administrador as Admin
+
+(Proyectos) as (pro)
+
+(Tipos de proyectos) as (tp)
+(Crear proyecto) as (cp)
+(Listado proyectos) as (lp)
+
+'Primer nivel
+
+Admin - (pro)
+(pro)<.-(tp)
+(pro)<.-(cp)
+(pro)<.-(lp)
+
+'Segundo nivel
+
+(tp)<.-(Crear tipo de proyecto)
+(tp)<.-(Listado tipo de proyectos)
+
+@enduml

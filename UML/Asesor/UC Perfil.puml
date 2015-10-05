@@ -1,0 +1,19 @@
+@startuml
+title Perfil del asesor
+
+actor Asesor
+
+(Perfil) as (per)
+
+(Cambiar foto) as (foto)
+(Cambiar contraseña) as (pass)
+(Cambiar datos \npersonales) as (datos)
+
+'Primer nivel
+
+Asesor - (per)
+(per)<.-(foto)
+(per)<.-(pass)
+(per)<.-(datos)
+
+@enduml

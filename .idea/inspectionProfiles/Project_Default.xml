@@ -1,0 +1,69 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <option name="myLocal" value="true" />
+    <inspection_tool class="Annotator" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="CheckEmptyScriptTag" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssUnitlessNumber" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="CssUnknownProperty" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="myCustomPropertiesEnabled" value="false" />
+      <option name="myIgnoreVendorSpecificProperties" value="true" />
+      <option name="myCustomPropertiesList">
+        <value>
+          <list size="0" />
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="CssUnusedSymbol" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="FunctionWithInconsistentReturnsJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="HtmlDeprecatedTag" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="HtmlExtraClosingTag" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="HtmlFormInputWithoutLabel" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="10">
+            <item index="0" class="java.lang.String" itemvalue="ng-app" />
+            <item index="1" class="java.lang.String" itemvalue="ng-click" />
+            <item index="2" class="java.lang.String" itemvalue="layout" />
+            <item index="3" class="java.lang.String" itemvalue="layout-sm" />
+            <item index="4" class="java.lang.String" itemvalue="layout-align" />
+            <item index="5" class="java.lang.String" itemvalue="ng-submit" />
+            <item index="6" class="java.lang.String" itemvalue="uml" />
+            <item index="7" class="java.lang.String" itemvalue="ng-checked" />
+            <item index="8" class="java.lang.String" itemvalue="ng-cut" />
+            <item index="9" class="java.lang.String" itemvalue="ng-copy" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="md-content" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="JSUndefinedPropertyAssignment" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PhpRedundantClosingTagInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PhpUndefinedMethodInspection" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+      <option name="processCode" value="true" />
+      <option name="processLiterals" value="true" />
+      <option name="processComments" value="true" />
+    </inspection_tool>
+    <inspection_tool class="SqlAmbiguousColumnInspection" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="SqlDerivedTableAliasInspection" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="SqlResolveInspection" enabled="true" level="ERROR" enabled_by_default="true" />
+  </profile>
+</component>

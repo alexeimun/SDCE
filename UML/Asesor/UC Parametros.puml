@@ -1,0 +1,13 @@
+@startuml
+title Módulo parámetros del asesor
+
+actor Asesor
+
+(Parámetros) as (pa)
+
+
+'Primer nivel
+
+Asesor - (pa)
+(pa)<.-(Cambiar periodo académico)
+@enduml
