@@ -44,7 +44,9 @@
             success: function () {
                 console.log();
                 $('body').removeClass('Wait');
-                Alerta('El tipo de proyecto se ha creado correctamente');
+                Alerta('El tipo de proyecto se ha creado correctamente',function () {
+                    location.href = '';
+                });
                 $('#spin').hide();
             }
         });

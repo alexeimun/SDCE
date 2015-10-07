@@ -28,7 +28,7 @@
             else
             {
                 $this->load->model('parametros_model');
-                $this->load->view('Seguimiento/RegistroNotas/RegistroNotas', ['Periodo' => $this->parametros_model->CrearPeriodoComponente(2015)]);
+                $this->load->view('Seguimiento/RegistroNotas/RegistroNotas', ['Periodo' => $this->parametros_model->CrearPeriodoComponente(YEAR_SDCE)]);
             }
         }
 
@@ -40,7 +40,7 @@
 
         public function calificarpracticante()
         {
-            if($this->input->is_ajax_request() && !empty($_POST))
+            if($this->input->is_ajax_request())
             {
                 /**
                  * Significado de los caracteres
@@ -48,25 +48,45 @@
                  * C = Cooperdor
                  * M = Ambos
                  */
+                $momento = $this->input->post('MOMENTO', true);
                 if($this->seguimientos_model->ExisteCalificacion('M'))
                 {
-                    echo utf8_encode('¡Ya se ha calificado como ambos a este practicante en el momento ' . $this->input->post('MOMENTO') . '!');
+                    echo '¡Ya se ha calificado como ambos a este practicante en el momento ' . $momento . '!';
                 }
                 else if($this->seguimientos_model->ExisteCalificacion('A') && $this->input->post('PERSONA') == 'A')
                 {
-                    echo utf8_encode('¡Ya se ha calificado como asesor a este practicante en el momento ' . $this->input->post('MOMENTO') . '!');
+                    echo '¡Ya se ha calificado como asesor a este practicante en el momento ' . $momento . '!';
                 }
                 else if($this->seguimientos_model->ExisteCalificacion('C') && $this->input->post('PERSONA') == 'C')
                 {
-                    echo utf8_encode('¡Ya se ha calificado como cooperador a este practicante en el momento ' . $this->input->post('MOMENTO') . '!');
+                    echo '¡Ya se ha calificado como cooperador a este practicante en el momento ' . $momento . '!';
                 }
                 else if($this->seguimientos_model->ExisteCalificacion('A,C') && $this->input->post('PERSONA') == 'M')
                 {
-                    echo utf8_encode('No se puede calificar como ambos a este practicante, debido a que fue calificado anteriormente en el el momento ' . $this->input->post('MOMENTO')) . '.';
+                    echo 'No se puede calificar como ambos a este practicante, debido a que fue calificado anteriormente en el el momento ' . $momento . '.';
                 }
                 else
                 {
+                    $persona = '';
+                    switch ($this->input->post('PERSONA', true))
+                    {
+                        case 'A':
+                            $persona = 'Asesor';
+                            break;
+                        case 'M':
+                            $persona = 'Ambos';
+                            break;
+                        case 'C':
+                            $persona = 'Cooperador';
+                            break;
+                    }
                     $this->seguimientos_model->InsertarCalificarPracticante();
+                    $correo = $this->practicantes_model->TraePracticante($this->input->post('ID_PRACTICANTE'))->CORREO_PRACTICANTE;
+                    $subjet = 'Calificación del ' . ($momento == 1 ? 'primer' : 'segundo') . ' momento calificado como: ' . $persona;
+                    $Nota = $this->seguimientos_model->TraeNotasPracticante($this->input->post('ID_PRACTICANTE'));
+                    $body = 'Su nota del ' . ($momento == 1 ? 'primer' : 'segundo') . ' momento es:' . $Nota['NOTA' . $momento];
+                    //Se envía un correo para poner al tanto al estudiante sobre su nota de evaluación
+                    mail($correo, $subjet, $body);
                 }
             }
             else
@@ -101,7 +121,7 @@
         {
             if($this->input->is_ajax_request() && !empty($_POST))
             {
-                echo select_input(['text' => 'Practicante', 'collabel' => 3, 'colinput' => 5, 'select' =>
+                echo select_input(['text' => 'Practicante', 'collabel' => 3, 'colinput' => 7, 'select' =>
                     Dropdown(['name' => 'ID_PRACTICANTE', 'simple' => true, 'dataProvider' => $this->seguimientos_model->TraePracticantes(),
                         'placeholder' => '-- Seleccione un practicante --', 'fields' => ['NOMBRE_PRACTICANTE']])]);
             }
@@ -142,7 +162,7 @@
                 {
                     $CalificacionMomentos = [0 => 'No hay momentos'];
                 }
-                echo form_dropdown('MOMENTO', $CalificacionMomentos, ['input' => ['col' => '5'], 'label' => ['text' => 'Momento', 'col' => 3]]);
+                echo form_dropdown('MOMENTO', $CalificacionMomentos, ['input' => ['col' => '7'], 'label' => ['text' => 'Momento', 'col' => 3]]);
             }
             else
             {
@@ -178,10 +198,7 @@
                         'FECHA_CADUCA' => $Caduca];
 
                     #Enviar por correo los links
-                    if(@mail($Practicante['correo'], 'Ingreso al portal de seguimiento al practicante', 'Buen día, su link de ingreso al portal es: ' . $link))
-                    {
-                        echo 'enviado';
-                    }
+                    mail($Practicante['correo'], 'Ingreso al portal de seguimiento al practicante', 'Buen día, su link de ingreso al portal es: ' . $link);
                 }
                 $this->seguimientos_model->InsertarLinkFormularioSeguimiento($Data);
                 var_dump($Links);
@@ -211,6 +228,18 @@
             else
             {
                 $this->load->view('Seguimiento/SeguimientoPracticas/Seguimientos');
+            }
+        }
+
+        public function eliminarcalificacion()
+        {
+            if($this->input->is_ajax_request())
+            {
+                $this->seguimientos_model->EliminarCalificacion();
+            }
+            else
+            {
+                $this->load->view('Seguimiento/SeguimientoPracticas/EliminarSeguimiento');
             }
         }
 
@@ -311,10 +340,10 @@
             $pdf->Text(180, 35, 'D0-68-F');
             $pdf->Text(85, 40, 'FORMATO REGISTRO DE NOTAS');
             $pdf->Text(80, 50, 'FUNDACIÓN UNIVERSITARIA MARÍA CANO');
-            $pdf->Text(83, 55, 'PROGRAMA: ' . strtoupper(($this->input->post('PROGRAMA'))));
+            $pdf->Text(83, 55, 'PROGRAMA: ' . Ucspecial(strtoupper(($this->input->post('PROGRAMA')))));
             $pdf->Text(10, 66, 'MOMENTO EVALUATIVO: PRIMER Y SEGUNDO MOMENTO');
             $pdf->Text(150, 66, 'FECHA: ' . FechaFormal(date('Y-m-d'), false));
-            $pdf->Text(10, 73, 'ASESOR: ' . ($this->session->userdata('NOMBRE_USUARIO')));
+            $pdf->Text(10, 73, 'ASESOR: ' . (Ucspecial($this->session->userdata('NOMBRE_USUARIO'))));
             $pdf->SetFont('Arial', 'B', 9);
             #Headers
             $pdf->SetXY(5, 82);
@@ -405,7 +434,7 @@
             $pdf->Cell(190, $h, '', 1, 0, 'L');
 
             $pdf->SetXY(10, 45 + ($f++ * $h));
-            $pdf->Cell(190, $h, 'INTENSIDAD HORARIA: '.($Practicantes[0]->MODALIDAD=='Práctica empresarial'?'400':'160').' horas', 1, 0, 'L');
+            $pdf->Cell(190, $h, 'INTENSIDAD HORARIA: ' . ($Practicantes[0]->MODALIDAD == 'Práctica empresarial' ? '400' : '160') . ' horas', 1, 0, 'L');
 
             $pdf->SetXY(10, 45 + ($f * $h));
             $pdf->Cell(60, $h, 'PERIODO DE REALIZACIÓN', 1, 0, 'L');
@@ -429,7 +458,7 @@
 
             $f = $f + 23;
             $pdf->SetXY(10, 45 + ($f++ * $h));
-            $pdf->MultiCell(190, $h, 'EL (LOS) ESTUDIANTE(S) QUEDA A PAZ Y SALVO POR TODO CONCEPTO EN LA AGENCIA DE PRACTICA Y CON EL ASESOR.
+            $pdf->MultiCell(190, $h, 'EL (LOS) ESTUDIANTE(S) QUEDA A PAZ Y SALVO POR TODO CONCEPTO EN LA AGENCIA DE PRÁCTICA Y CON EL ASESOR.
 SI  X                                   NO', 1, 'L');
             $f += 2;
 

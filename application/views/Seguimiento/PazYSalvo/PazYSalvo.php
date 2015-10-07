@@ -22,7 +22,7 @@
         <div class="box-body"></div>
     </div>
     <?= form_dropdown('PROGRAMA', ['Ingeniería de sistemas' => 'Ingeniería de sistemas', 'Ingeniería de software' => 'Ingeniería de software',
-        'Electromedicina' => 'Electromedicina'], ['input' => ['col' => 8], 'label' => ['text' => 'Programa', 'col' => 2]]) ?>
+        'Electromedicina' => 'Electromedicina', 'Robótica y automatización' => 'Robótica y automatización'], ['input' => ['col' => 8], 'label' => ['text' => 'Programa', 'col' => 2]]) ?>
     <div class="form-group">
         <label class="col-lg-3 control-label">Inicio:</label>
 

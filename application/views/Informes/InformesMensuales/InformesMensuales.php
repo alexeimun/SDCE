@@ -34,7 +34,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this + '[data-id]').data('id'), '<?=site_url('informe/eliminarinformemensual') ?>');
+            Alert($(this).data('id'), '<?=site_url('informe/eliminarinformemensual') ?>');
         });
 
         function Alert(id, url) {

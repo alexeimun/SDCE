@@ -35,7 +35,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this + '[data-id]').data('id'), '<?=site_url('usuario/EliminarAsesor') ?>');
+            Alert($(this).data('id'), '<?=site_url('usuario/EliminarAsesor') ?>');
         });
 
         function Alert(id, url) {

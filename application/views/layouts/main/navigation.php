@@ -17,7 +17,7 @@
                                         ['label' => 'Asesorías prácticas', 'url' => 'informe/asesoriapracticas', 'options' => ['icon' => 'ion-clipboard']],
                                     ],
                             ],
-                            ['label' => 'Gastos de transporte', 'options' => ['icon' => 'ion-android-list'],
+                            ['label' => 'Gastos de transporte', 'options' => ['icon' => 'ion-model-s'],
                                 'items' =>
                                     [
                                         ['label' => 'Crear Gasto transporte', 'url' => 'informe/creargastostransporte', 'options' => ['icon' => 'ion-android-add']],

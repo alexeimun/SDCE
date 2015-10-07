@@ -4,6 +4,7 @@
      */
     $this->Header(['assets' => ['datatables', 'dialogs']]);
     $color = $this->session->userdata('ASESOR') ? '#099a5b' : '#3D8EBC';
+    $admin = $this->session->userdata('ADMIN');
 ?>
 <section class="content">
     <div class="row">
@@ -15,11 +16,22 @@
                         Listado <?= pathinfo(__FILE__)['filename'] ?></h3>
                 </div>
                 <div class="box-body">
-                    <?= Component::Table(['columns' => ['Nombre', 'Tipo de proyecto', 'Asesor', '#Practicantes'],
-                        'tableName' => 'proyecto', 'autoNumeric' => true, 'id' => 'ID_PROYECTO', 'controller' => 'proyectos',
-                        'fields' => ['NOMBRE_PROYECTO', 'NOMBRE_TIPO_PROYECTO', 'NOMBRE_USUARIO', 'PRACTICANTES',]
-                        , 'dataProvider' => $this->session->userdata('ADMIN') ? $this->proyectos_model->TraeProyectos() : $this->proyectos_model->TraeProyectosAsesor(),
-                        'actions' => $this->session->userdata('ADMIN') ? 'duv' : 'v']) ?>
+                    <?php
+                        if($this->session->userdata('ADMIN'))
+                        {
+                            echo Component::Table(['columns' => ['Nombre', 'Tipo de proyecto', 'Asesor', '#Practicantes'],
+                                'tableName' => 'proyecto', 'autoNumeric' => true, 'id' => 'ID_PROYECTO', 'controller' => 'proyectos',
+                                'fields' => ['NOMBRE_PROYECTO', 'NOMBRE_TIPO_PROYECTO', 'NOMBRE_USUARIO', 'PRACTICANTES',]
+                                , 'dataProvider' => $this->proyectos_model->TraeProyectos(), 'actions' => 'duv']);
+                        }
+                        else
+                        {
+                            echo Component::Table(['columns' => ['Nombre', 'Tipo de proyecto', '#Practicantes'],
+                                'tableName' => 'proyecto', 'autoNumeric' => true, 'id' => 'ID_PROYECTO', 'controller' => 'proyectos',
+                                'fields' => ['NOMBRE_PROYECTO', 'NOMBRE_TIPO_PROYECTO', 'PRACTICANTES',]
+                                , 'dataProvider' => $this->proyectos_model->TraeProyectosAsesor(), 'actions' => 'v']);
+                        }
+                    ?>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -35,9 +47,8 @@
 <script type="text/javascript">
     $(function () {
         $("#tabla").dataTable();
-
-        $('body').on('click', 'a[data-id]', function () {
-            Alert($(this + '[data-id]').data('id'), '<?=site_url('proyectos/eliminarproyecto') ?>');
+        $('a[data-id]').click(function () {
+            Alert($(this).data('id'), '<?=site_url('proyectos/eliminarproyecto') ?>');
         });
 
         function Alert(id, url) {
@@ -45,7 +56,7 @@
                 title: '<span class="ion ion-android-delete" style="font-size: 20pt;font-weight: bold; color: white;"></span>&nbsp;&nbsp;&nbsp; <span  style="font-size: 18pt;">Atención!</span>',
                 type: BootstrapDialog.TYPE_DANGER,
                 draggable: true,
-                message: 'Está seguro que desea eliminar este ' + $('#tabla').data('name') + '?</span>',
+                message: 'Está seguro que desea eliminar este proyecto?</span>',
                 buttons: [{
                     label: 'Aceptar',
                     cssClass: 'btn-danger',

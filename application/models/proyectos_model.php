@@ -70,7 +70,7 @@
 
         public function ActualizarHorarioProyecto()
         {
-            $this->db->update('t_proyectos', $this->input->post(null, 'HORARIO'), ['ID_PROYECTO' => $this->input->post('ID_PROYECTO')]);
+            $this->db->update('t_proyectos', $this->input->post(null, true), ['ID_PROYECTO' => $this->input->post('ID_PROYECTO')]);
         }
 
         public function TraeProyectos()

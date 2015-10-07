@@ -77,6 +77,7 @@
         public function InsertarAsesor()
         {
             $this->db->set('PERIODO', date('m') > 6 ? date('Y-07-01') : date('Y-01-01'));
+            $this->db->set('CLAVE', 'Sdce' . date('Y'));
             $this->db->set('FECHA_REGISTRO', 'NOW()', false);
             $this->db->insert('t_usuarios', $this->input->post(null, true));
         }

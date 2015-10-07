@@ -16,7 +16,7 @@
                 <div class="box-body">
                     <?= Component::Table(['columns' => ['Nombre', 'Correo', 'Dirección', 'Teléfono#1',],
                         'tableName' => 'agencia', 'autoNumeric' => true, 'id' => 'ID_AGENCIA', 'controller' => 'agencias',
-                        'fields' => ['NOMBRE_AGENCIA', 'CORREO_AGENCIA', 'DIRECCION', 'TELEFONO1',]
+                        'fields' => ['NOMBRE_AGENCIA', 'CORREO_AGENCIA', 'DIRECCION', 'TELEFONO1' => 'phone',]
                         , 'dataProvider' => $this->agencias_model->TraeAgencias(), 'actions' => 'duv']) ?>
                 </div>
                 <!-- /.box-body -->
@@ -35,7 +35,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this + '[data-id]').data('id'), '<?=site_url('agencias/eliminaragencia') ?>');
+            Alert($(this).data('id'), '<?=site_url('agencias/eliminaragencia') ?>');
         });
 
         function Alert(id, url) {

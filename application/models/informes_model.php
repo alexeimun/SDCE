@@ -110,7 +110,7 @@
               t_proyectos.ID_PROYECTO,
               t_agencias.NOMBRE_AGENCIA,
               t_agencias.DIRECCION DIRECCION_AGENCIA,
-              CASE t_practicantes.ID_PROGRAMA WHEN 1 THEN 'Ingeniería de Sistemas' WHEN 2 THEN 'Ingeniería de Software' WHEN 3 THEN 'Electromedicina' ELSE 'N/A' END PROGRAMA,
+              CASE t_practicantes.ID_PROGRAMA WHEN 1 THEN 'Ingeniería de Sistemas' WHEN 2 THEN 'Ingeniería de Software' WHEN 3 THEN 'Electromedicina'  WHEN 4 THEN 'Robótica y automatización' ELSE 'N/A' END PROGRAMA,
               t_cooperadores.NOMBRE_COOPERADOR
 
                FROM t_practicantes

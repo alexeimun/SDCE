@@ -23,7 +23,7 @@
         <?= form_input(['readonly' => true, 'label' => ['text' => 'Nombre']], $Info->NOMBRE) ?>
         <?= form_input(['readonly' => true, 'label' => ['text' => 'Correo']], $Info->CORREO) ?>
         <?= form_input(['readonly' => true, 'label' => ['text' => 'Documento']], $Info->DOCUMENTO) ?>
-        <?= form_input(['readonly' => true, 'label' => ['text' => 'Teléfono']], $Info->TELEFONO) ?>
+        <?= form_input(['readonly' => true, 'label' => ['text' => 'Teléfono']], Telefono($Info->TELEFONO)) ?>
         <?= form_input(['readonly' => true, 'label' => ['text' => 'Fecha registro', 'col' => 2], 'input' => ['col' => 10]], Momento($Info->FECHA_REGISTRO)) ?>
 
         <?= br(2) ?>

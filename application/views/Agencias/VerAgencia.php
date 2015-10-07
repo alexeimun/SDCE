@@ -7,7 +7,7 @@
 ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <?= page_title(['ob'=>$this,'class' => 'ios ion-person', 'text' => Uncamelize(__FILE__)]) ?>
+        <?= page_title(['ob' => $this, 'class' => 'ios ion-person', 'text' => Uncamelize(__FILE__)]) ?>
     </section>
     <!-- Main content -->
     <div class="container">
@@ -17,15 +17,20 @@
         <?= form_input(['class' => 'correo', 'readonly' => true, 'label' => ['text' => 'Correo']], $Info->CORREO_AGENCIA) ?>
         <?= select_input(['select' => $Ciudades, 'text' => 'Ciudad']) ?>
         <?= form_input(['class' => 'obligatorio', 'readonly' => true, 'label' => ['text' => 'Dirección']], $Info->DIRECCION) ?>
-        <?= form_input(['readonly' => true, 'label' => ['text' => 'Teléfono']], $Info->TELEFONO1) ?>
-        <?= form_input(['class' => '', 'readonly' => true, 'label' => ['text' => 'Teléfono#2']],$Info->TELEFONO2) ?>
-        <?= form_input(['class' => '', 'readonly' => true, 'label' => ['text' => 'Fax']],$Info->FAX) ?>
-        <?= form_input(['class' => '', 'readonly' => true, 'label' => ['text' => 'Página']],$Info->PAGINA_WEB) ?>
-        <?= form_input(['class' => 'obligatorio', 'readonly' => true, 'label' => ['text' => 'Fecha registro']], $Info->FECHA_REGISTRO) ?>
+        <?= form_input(['readonly' => true, 'label' => ['text' => 'Teléfono']], Telefono($Info->TELEFONO1)) ?>
+        <?= form_input(['class' => '', 'readonly' => true, 'label' => ['text' => 'Teléfono#2']], Telefono($Info->TELEFONO2)) ?>
+        <?= form_input(['class' => '', 'readonly' => true, 'label' => ['text' => 'Fax']], $Info->FAX) ?>
+        <div class='form-group'>
+            <label for='$name' class='col-lg-2 control-label'>Página</label>
+            <div class='col-lg-10'>
+                <a target="_blank" class="btn-link" href="http://<?= str_replace('https', '', str_replace('http', '', str_replace('://', '', $Info->PAGINA_WEB))) ?>"><b><?= $Info->PAGINA_WEB ?></b></a>
+            </div>
+        </div>
+        <?= form_input(['class' => 'obligatorio', 'readonly' => true, 'label' => ['text' => 'Fecha registro']], Momento($Info->FECHA_REGISTRO)) ?>
         <!--Envíar-->
 
         <?= call_spin_div() ?>
-
+        <br>
         <?= form_close() ?>
 
     </div>

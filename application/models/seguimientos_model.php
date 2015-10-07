@@ -72,6 +72,11 @@
             $this->db->update('t_proyectos', $Data, ['ID_PROYECTO' => $this->input->post('ID_PROYECTO')]);
         }
 
+        public function EliminarCalificacion()
+        {
+            $this->db->delete('t_calificacion_practicantes', ['ID_PRACTICANTE' => $this->input->post('ID_PRACTICANTE'), 'MOMENTO' => $this->input->post('MOMENTO')]);
+        }
+
         public function TraeMomento()
         {
             return $this->db->query("SELECT MOMENTO FROM t_proyectos WHERE ID_PROYECTO=" . $this->input->post('ID_PROYECTO'))->result()[0]->MOMENTO;
@@ -179,9 +184,8 @@
             t_calificacion_practicantes.MOMENTO
 
             FROM t_calificacion_practicantes
-            INNER JOIN t_practicantes USING (ID_PRACTICANTE)
 
-            WHERE t_practicantes.ID_PRACTICANTE=$IdPracticante")->result();
+            WHERE ID_PRACTICANTE=$IdPracticante")->result();
             $Notas['Momento1'] = ['saberser' => 0, 'saberhacer' => 0, 'sabersaber' => 0];
             $Notas['Momento2'] = ['saberser' => 0, 'saberhacer' => 0, 'sabersaber' => 0];
 

@@ -16,7 +16,7 @@
                 <div class="box-body">
                     <?= Component::Table(['columns' => ['Nombre', 'Correo', 'Dirección', 'Teléfono'],
                         'tableName' => 'cooperador', 'autoNumeric' => true, 'id' => 'ID_COOPERADOR', 'controller' => 'cooperadores',
-                        'fields' => ['NOMBRE_COOPERADOR', 'CORREO_COOPERADOR', 'DIRECCION_COOPERADOR', 'TELEFONO_COOPERADOR']
+                        'fields' => ['NOMBRE_COOPERADOR', 'CORREO_COOPERADOR', 'DIRECCION_COOPERADOR', 'TELEFONO_COOPERADOR' => 'phone']
                         , 'dataProvider' => $this->cooperadores_model->TraeCooperadores(), 'actions' => 'duv']) ?>
                 </div>
                 <!-- /.box-body -->
@@ -35,7 +35,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this + '[data-id]').data('id'), '<?=site_url('agencias/eliminaragencia') ?>');
+            Alert($(this).data('id'), '<?=site_url('cooperadores/eliminarcooperador') ?>');
         });
 
         function Alert(id, url) {

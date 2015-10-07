@@ -9,7 +9,7 @@
 
             if($this->session->userdata('ASESOR'))
             {
-                if($action == '' || $action == 'horarios' || $action == 'TraeHorarioAjax'||$action == 'verproyecto')
+                if($action == '' || $action == 'horarios' || $action == 'TraeHorarioAjax' || $action == 'verproyecto')
                 {
                 }
             }
@@ -18,7 +18,7 @@
                 redirect(site_url(), 'refresh');
             }
 
-            $this->load->model(['proyectos_model']);
+            $this->load->model(['proyectos_model', 'practicantes_model']);
         }
 
         public function index()
@@ -31,6 +31,16 @@
             if($this->input->is_ajax_request())
             {
                 $this->proyectos_model->ActualizarHorarioProyecto();
+                $correos = '';
+                $practicantes = $this->practicantes_model->TraePracticantesPorProyecto($this->input->post('ID_PROYECTO', true));
+                foreach ($practicantes as $correo)
+                {
+                    $correos .= $correo['CORREO_PRACTICANTE'] . ';';
+                }
+                $correos = trim($correos, ';');
+                mail($correos, 'Horario de asesoría para el proyecto ' . $practicantes[0]['NOMBRE_PROYECTO'],
+                    "Buen día,\n\nEl proyecto " . $practicantes[0]['NOMBRE_PROYECTO'] . ", tiene asesorías los días todos los " .
+                    NombreDia($this->input->post('HORARIO')) . " de cada semana a las " . date('H:i a', strtotime($this->input->post('HORARIO'))),"From: ".$this->session->userdata('CORREO'));
             }
             else
             {

@@ -34,7 +34,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this + '[data-id]').data('id'), '<?=site_url('informe/eliminargastostransporte') ?>');
+            Alert($(this).data('id'), '<?=site_url('informe/eliminargastostransporte') ?>');
         });
 
         function Alert(id, url) {

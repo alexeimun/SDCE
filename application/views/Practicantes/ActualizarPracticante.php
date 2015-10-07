@@ -18,17 +18,18 @@
     <?= form_input(['placeholder' => 'Ingrese el correo electrónico', 'name' => 'CORREO_PRACTICANTE', 'class' => 'obligatorio correo correo_unico', 'label' => ['text' => 'Correo']], $Info->CORREO_PRACTICANTE) ?>
     <?= form_input(['placeholder' => 'Ingrese el número telefónico', 'name' => 'TELEFONO', 'class' => 'obligatorio numero telefono', 'label' => ['text' => 'Teléfono']], $Info->TELEFONO) ?>
     <?= form_input(['placeholder' => 'Ingrese el código del estudiante', 'name' => 'CODIGO', 'class' => 'obligatorio', 'label' => ['text' => 'Código']],$Info->CODIGO) ?>
-    <?= form_dropdown('ID_PROGRAMA', [1 => 'Ingeniería de sistemas', 2 => 'Ingeniería de software','Electromedicina'], ['label' => ['text' => 'Programa']],['selected'=>$Info->ID_PROGRAMA]) ?>
+    <?= form_dropdown('ID_PROGRAMA', [1 => 'Ingeniería de sistemas', 2 => 'Ingeniería de software',3=>'Electromedicina',4=>'Robótica y automatización'], ['label' => ['text' => 'Programa']],['selected'=>$Info->ID_PROGRAMA]) ?>
     <?= form_dropdown('ID_MODALIDAD_PRACTICA', ['1' => 'Validación experiencia profesional', 2 => 'Práctica empresarial'], ['label' => ['text' => 'Modalidad']],['selected'=>$Info->ID_MODALIDAD_PRACTICA]) ?>
+    <?= form_input(['placeholder' => 'Fecha de ingreso del practicante', 'type' => 'date', 'name' => 'FECHA_REGISTRO', 'class' => 'obligatorio', 'required' => 'required', 'label' => ['text' => 'Fecha ingreso']], $Info->FECHA_REGISTRO) ?>
     <?= select_input(['select' => $Asesores, 'text' => 'Asesor']) ?>
     <?= select_input(['select' => $Proyectos, 'text' => 'Proyecto']) ?>
     <?= select_input(['select' => $Agencias, 'text' => 'Agencia']) ?>
-    <?= select_input(['select' => $Cooperadores, 'text' => 'Cooperador']) ?>
+    <div id="flag"><?= select_input(['select' => $Cooperadores, 'text' => 'Cooperador']) ?></div>
     <!--Envíar-->
-    <?= input_submit(['class' => 'col-lg-offset-9 col-lg-10', 'text' => 'Actualizar']) ?>
+    <?= input_submit(['class' => 'col-lg-offset-5 col-lg-10', 'text' => 'Actualizar']) ?>
 
     <?= call_spin_div() ?>
-    <?= br(12) ?>
+    <?= br(3) ?>
     <?= form_close() ?>
 </div>
 <?= $this->Footer() ?>
@@ -38,6 +39,14 @@
     $('form').jValidate({
         persona: 'Practicante', url: '<?=site_url('Validaciones/ValidaCampos')?>',
         docId: '<?= $Info->DOCUMENTO?>', emailUser: '<?= $Info->CORREO_PRACTICANTE?>'
+    });
+
+    $('select[name=ID_AGENCIA]').on('change', function () {
+        console.log($(this).val());
+        if($(this).val()!=0)
+            $.post('<?=site_url('practicantes/traeCooperadoresAgenciaAjax') ?>', {ID_AGENCIA: $(this).val()}, function (data) {
+                $('#flag').html(data);
+            });
     });
 
     (new Spinner({
@@ -68,7 +77,9 @@
                 },
                 success: function () {
                     $('body').removeClass('Wait');
-                    Alerta('El practicante se ha creado correctamente');
+                    Alerta('El practicante se ha creado correctamente',function () {
+                        location.href = '';
+                    });
                     $('#spin').hide();
                 }
             });

@@ -49,7 +49,9 @@
                 },
                 success: function () {
                     $('body').removeClass('Wait');
-                    Alerta('El asesor se ha actualizado correctamente');
+                    Alerta('El asesor se ha actualizado correctamente',function () {
+                        location.href = '';
+                    });
                     $('#spin').hide();
                 }
             });

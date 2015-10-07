@@ -11,13 +11,13 @@
         {
             $Asesor = $this->session->userdata('ASESOR') ? "AND t_practicantes.ID_ASESOR=" . $this->session->userdata('ID_USUARIO') : '';
 
-            $e = @$this->db->query("SELECT
+            return @$this->db->query("SELECT
              t_practicantes.ID_PRACTICANTE,
              t_practicantes.ID_PROYECTO,
              t_practicantes.DOCUMENTO,
              t_practicantes.ID_AGENCIA,
              CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Practica empresarial'  END AS MODALIDAD,
-             CASE t_practicantes.ID_PROGRAMA WHEN 1 THEN 'Ingeniería de sistemas' WHEN 2 THEN 'Ingniería de software' WHEN 3 THEN 'Electromedicina' ELSE 'N/A' END PROGRAMA,
+             CASE t_practicantes.ID_PROGRAMA WHEN 1 THEN 'Ingeniería de Sistemas' WHEN 2 THEN 'Ingeniería de Software' WHEN 3 THEN 'Electromedicina'  WHEN 4 THEN 'Robótica y automatización' ELSE 'N/A' END PROGRAMA,
              t_practicantes.ID_MODALIDAD_PRACTICA,
              t_practicantes.ID_PROGRAMA,
              t_usuarios.NOMBRE NOMBRE_ASESOR,
@@ -34,20 +34,19 @@
              t_agencias.NOMBRE_AGENCIA
 
              FROM t_practicantes
-             INNER JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_practicantes.ID_ASESOR
-             INNER JOIN t_cooperadores USING (ID_COOPERADOR)
-             INNER JOIN t_proyectos USING (ID_PROYECTO)
-             INNER JOIN t_agencias ON t_practicantes.ID_AGENCIA=t_agencias.ID_AGENCIA
+             LEFT JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_practicantes.ID_ASESOR
+             LEFT JOIN t_cooperadores USING (ID_COOPERADOR)
+             LEFT JOIN t_proyectos USING (ID_PROYECTO)
+             LEFT JOIN t_agencias ON t_practicantes.ID_AGENCIA=t_agencias.ID_AGENCIA
              WHERE t_practicantes.ID_PRACTICANTE=$IdPracticante " . $Asesor)->result()[0];
-            return $e;
         }
 
         public function ContarPracticantes()
         {
             return $this->db->query("SELECT
-           COUNT(ID_PRACTICANTE) AS PRACTICANTES
+           COUNT(ID_PRACTICANTE) PRACTICANTES
             FROM t_practicantes
-
+            INNER JOIN t_proyectos USING (ID_PROYECTO)
           WHERE t_practicantes.ESTADO=1 AND
           t_practicantes.ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . " AND t_practicantes.FECHA_REGISTRO>='" . $this->session->userdata('PERIODO') . "'
           AND t_practicantes.FECHA_REGISTRO<='" . $this->session->userdata('FPERIODO') . "'")->result()[0];
@@ -63,12 +62,13 @@
         {
             $Idasesor = array_shift($_POST);
             $this->db->update('t_practicantes', $this->input->post(null, true), ['ID_PRACTICANTE' => $Idasesor]);
+            $this->db->update('t_proyectos', ['ID_ASESOR' => $this->input->post('ID_ASESOR', true)], ['ID_PROYECTO' => $this->input->post('ID_PROYECTO', true)]);
         }
 
         public function InsertarPracticante()
         {
-            $this->db->set('FECHA_REGISTRO', 'NOW()', false);
             $this->db->insert('t_practicantes', $this->input->post(null, true));
+            $this->db->update('t_proyectos', ['ID_ASESOR' => $this->input->post('ID_ASESOR', true)], ['ID_PROYECTO' => $this->input->post('ID_PROYECTO', true)]);
         }
 
         public function EliminarPracticante()
@@ -123,9 +123,11 @@
              t_practicantes.ID_PRACTICANTE,
              t_practicantes.NOMBRE_PRACTICANTE,
              t_practicantes.CORREO_PRACTICANTE,
-             t_practicantes.DOCUMENTO
+             t_practicantes.DOCUMENTO,
+             t_proyectos.NOMBRE_PROYECTO
 
              FROM t_practicantes
+             INNER JOIN t_proyectos USING (ID_PROYECTO)
 
              WHERE t_practicantes.ESTADO=1 AND t_practicantes.ID_PROYECTO=$IdProyecto")->result('array');
             }
@@ -145,10 +147,18 @@
 
              FROM t_practicantes
 
-             INNER JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_practicantes.ID_ASESOR
-              INNER JOIN t_cooperadores USING (ID_COOPERADOR)
-             INNER JOIN t_proyectos USING (ID_PROYECTO)
-             INNER JOIN t_agencias ON t_practicantes.ID_AGENCIA=t_agencias.ID_AGENCIA
+             LEFT JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_practicantes.ID_ASESOR
+              LEFT JOIN t_cooperadores USING (ID_COOPERADOR)
+             LEFT JOIN t_proyectos USING (ID_PROYECTO)
+             LEFT JOIN t_agencias ON t_practicantes.ID_AGENCIA=t_agencias.ID_AGENCIA
              WHERE t_practicantes.ESTADO=1")->result('array');
+        }
+
+        public function TraeCooperadoresAgencia()
+        {
+            $this->db->select('ID_COOPERADOR,NOMBRE_COOPERADOR');
+            $this->db->join('t_agencias', 't_agencias.ID_AGENCIA=t_cooperadores.ID_AGENCIA', 'inner');
+            $this->db->where('t_agencias.ID_AGENCIA', $this->input->post('ID_AGENCIA'));
+            return $this->db->get('t_cooperadores')->result('array');
         }
     }

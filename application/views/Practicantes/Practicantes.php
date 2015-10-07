@@ -69,7 +69,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this + '[data-id]').data('id'), '<?=site_url('practicantes/eliminarpracticante') ?>');
+            Alert($(this).data('id'), '<?=site_url('practicantes/eliminarpracticante') ?>');
         });
 
         function Alert(id, url) {

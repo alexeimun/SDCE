@@ -49,7 +49,9 @@
                 },
                 success: function () {
                     $('body').removeClass('Wait');
-                    Alerta('El proyecto se ha creado correctamente');
+                    Alerta('El proyecto se ha creado correctamente',function () {
+                        location.href = '';
+                    });
                     $('#spin').hide();
                 }
             });

@@ -19,7 +19,7 @@
 
     <?= form_input(['placeholder' => 'Ingrese el correo del cooperador', 'name' => 'CORREO_COOPERADOR', 'class' => 'correo', 'label' => ['text' => 'Correo']], $Info->CORREO_COOPERADOR) ?>
     <?= form_input(['placeholder' => 'Ingrese la dirección del cooperador', 'name' => 'DIRECCION_COOPERADOR', 'class' => 'obligatorio', 'label' => ['text' => 'Dirección']], $Info->DIRECCION_COOPERADOR) ?>
-    <?= form_input(['placeholder' => 'Ingrese el teléfono del cooperador', 'name' => 'TELEFONO_COOPERADOR', 'class' => 'obligatorio', 'label' => ['text' => 'Teléfono']], $Info->TELEFONO_COOPERADOR) ?>
+    <?= form_input(['placeholder' => 'Ingrese el teléfono del cooperador', 'name' => 'TELEFONO_COOPERADOR', 'class' => 'numero telefono', 'label' => ['text' => 'Teléfono']], $Info->TELEFONO_COOPERADOR) ?>
     <?= form_input(['placeholder' => 'Ingrese el teléfono del cooperador', 'name' => 'CARGO', 'class' => 'obligatorio', 'label' => ['text' => 'Cargo']], $Info->CARGO) ?>
 
     <!--Envíar-->
@@ -54,7 +54,9 @@
                 },
                 success: function () {
                     $('body').removeClass('Wait');
-                    Alerta('El cooperador se ha actualizado correctamente');
+                    Alerta('El cooperador se ha actualizado correctamente',function () {
+                        location.href = '';
+                    });
                     $('#spin').hide();
                 }
             });

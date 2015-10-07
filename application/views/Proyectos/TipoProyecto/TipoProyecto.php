@@ -36,7 +36,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this + '[data-id]').data('id'), '<?=site_url('proyectos/eliminartipoproyecto') ?>');
+            Alert($(this).data('id'), '<?=site_url('proyectos/eliminartipoproyecto') ?>');
         });
 
         function Alert(id, url) {

@@ -175,6 +175,10 @@
                                 case 'numeric':
                                     $table .= '<td>' . number_format($data[$key], 0, '', ',') . '</td>';
                                     break;
+                                #Represents a phone number
+                                case 'phone':
+                                    $table .= '<td>' . Telefono($data[$key]) . '</td>';
+                                    break;
                             }
                         }
                     }

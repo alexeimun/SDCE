@@ -47,7 +47,7 @@
     |
     |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
     */
-    $autoload['libraries'] = ['database', 'session','component'];
+    $autoload['libraries'] = ['database', 'session','component','rbca'];
     /*
     | -------------------------------------------------------------------
     |  Auto-load Helper Files

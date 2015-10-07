@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'ios ion-paper-airplane', 'text' => 'Enviar formularios Autoevaluación']) ?>
+    <?= page_title(['ob' => $this, 'class' => 'ios ion-paper-airplane', 'text' => 'Enviar formularios Autoevaluación']) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -26,7 +26,7 @@
         <div class="box-body"></div>
     </div>
     <?= form_input(['placeholder' => 'Ingrese el plazo en días a partir de hoy', 'name' => 'DIAS', 'class' => 'obligatorio numero porcentaje',
-        'input' => ['col' => '6'], 'label' => ['text' => 'Plazo (Días)', 'col' => 3]], 2) ?>
+        'input' => ['col' => '6'], 'label' => ['text' => 'Plazo (Días)', 'col' => 3]], 7) ?>
     <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">Plazo para responder el formulario</h3>
@@ -35,9 +35,9 @@
 
         </div>
         <div class="panel-footer">
-            <p ><b>Nota: </b>El segundo memento comienza cuando caduca el plazo del primero</p>
-</div>
+            <p><b>Nota: </b>El segundo memento comienza cuando caduca el plazo del primero</p>
         </div>
+    </div>
     <?= br(1) ?>
     <!--Enviar-->
     <?= input_submit(['class' => 'col-lg-offset-5 col-lg-10', 'text' => 'Enviar formularios']) ?>

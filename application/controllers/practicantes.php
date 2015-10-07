@@ -121,6 +121,19 @@
             }
         }
 
+        public function traeCooperadoresAgenciaAjax()
+        {
+            if($this->input->is_ajax_request())
+            {
+                echo select_input(['select' => Dropdown(['name' => 'ID_COOPERADOR', 'dataProvider' => $this->practicantes_model->TraeCooperadoresAgencia(),
+                    'placeholder' => '-- Seleccione un cooperador--', 'fields' => ['NOMBRE_COOPERADOR']]), 'text' => 'Cooperador']);
+            }
+            else
+            {
+                redirect(site_url(), 'refresh');
+            }
+        }
+
         public function eliminarpracticante()
         {
             if($this->input->is_ajax_request())

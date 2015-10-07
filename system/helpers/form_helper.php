@@ -224,14 +224,12 @@
         $data['text'] = isset($data['text']) ? $data['text'] : 'Guardar';
         $data['type'] = isset($data['type']) ? $data['type'] : 'button';
         $data['icon'] = isset($data['icon']) ? $data['icon'] : 'send';
-        $ajax = 'send-ajax';
-        if($data['type'] == 'submit')
-        {
-            $ajax = 'send-post';
-        }
+        $data['btn'] = isset($data['btn']) ? $data['btn'] : 'success';
+        $ajax = $data['type'] == 'submit' ? 'send-post' : 'send-ajax';
+
         return '<div class="form-group">
             <div class="' . $data['class'] . '">
-                <button id="' . $ajax . '" type="' . $data['type'] . '" class="btn btn-success btn-lg"><span
+                <button id="' . $ajax . '" type="' . $data['type'] . '" class="btn btn-' . $data['btn'] . ' btn-lg"><span
                         class="glyphicon glyphicon-' . $data['icon'] . '"></span>&nbsp; ' . $data['text'] . '
                 </button>
             </div>

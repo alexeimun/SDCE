@@ -17,8 +17,8 @@
     <?= form_input(['placeholder' => 'Ingrese el correo de la agencia', 'name' => 'CORREO_AGENCIA', 'class' => 'correo', 'label' => ['text' => 'Correo']]) ?>
     <?= select_input(['select' => $Ciudades, 'text' => 'Ciudad']) ?>
     <?= form_input(['placeholder' => 'Ingrese la dirección de la agencia', 'name' => 'DIRECCION', 'class' => 'obligatorio', 'label' => ['text' => 'Dirección']]) ?>
-    <?= form_input(['placeholder' => 'Ingrese el teléfono de la agencia', 'name' => 'TELEFONO1', 'class' => 'obligatorio', 'label' => ['text' => 'Teléfono#1']])?>
-    <?= form_input(['placeholder' => 'Ingrese un segundo teléfono de la agencia (opcional)', 'name' => 'TELEFONO2', 'class' => '', 'label' => ['text' => 'Teléfono#2']])?>
+    <?= form_input(['placeholder' => 'Ingrese el teléfono de la agencia', 'name' => 'TELEFONO1', 'class' => 'obligatorio numero telefono', 'label' => ['text' => 'Teléfono#1']])?>
+    <?= form_input(['placeholder' => 'Ingrese un segundo teléfono de la agencia (opcional)', 'name' => 'TELEFONO2', 'class' => 'numero telefono', 'label' => ['text' => 'Teléfono#2']])?>
     <?= form_input(['placeholder' => 'Ingrese el fax de la agencia', 'name' => 'FAX', 'class' => '', 'label' => ['text' => 'Fax']])?>
     <?= form_input(['placeholder' => 'Ingrese la página web de la agencia', 'name' => 'PAGINA_WEB', 'class' => '', 'label' => ['text' => 'Página']])?>
 
@@ -51,7 +51,9 @@
             },
             success: function () {
                 $('body').removeClass('Wait');
-                Alerta('La agencia se ha creado correctamente');
+                Alerta('La agencia se ha creado correctamente',function () {
+                    location.href = '';
+                });
                 $('#spin').hide();
             }
         });

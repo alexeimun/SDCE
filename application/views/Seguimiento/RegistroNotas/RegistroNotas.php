@@ -6,24 +6,25 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'glyphicon glyphicon-pencil', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob' => $this, 'class' => 'glyphicon glyphicon-pencil', 'text' => Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">
-    <?= form_open('seguimiento/registronotas', ['class' => 'form-horizontal col-md-6','target'=>'_blank', 'style' => 'margin-left: 20%']) ?>
+    <?= form_open('seguimiento/registronotas', ['class' => 'form-horizontal col-md-6', 'target' => '_blank', 'style' => 'margin-left: 20%']) ?>
     <hr style="border: 1px solid #099a5b;"/>
     <div class="form-group">
-    	<label for="inputID" class="col-lg-4 col-sm-4 control-label">Periodo:</label>
-    	<div class="col-lg-3 col-sm-3">
+        <label for="inputID" class="col-lg-4 col-sm-4 control-label">Periodo:</label>
+
+        <div class="col-lg-3 col-sm-3">
             <?= $Periodo ?>
-    	</div>
+        </div>
     </div>
-        <?= form_dropdown('PROGRAMA', ['Ingeniería de sistemas' => 'Ingeniería de sistemas', 'Ingeniería de software' => 'Ingeniería de software',
-            'Electromedicina' => 'Electromedicina'], ['input'=>['col'=>5],'label' => ['text' => 'Programa','col'=>4]]) ?>
+    <?= form_dropdown('PROGRAMA', ['Ingeniería de sistemas' => 'Ingeniería de sistemas', 'Ingeniería de software' => 'Ingeniería de software',
+        'Electromedicina' => 'Electromedicina', 'Robótica y automatización' => 'Robótica y automatización'], ['input' => ['col' => 6], 'label' => ['text' => 'Programa', 'col' => 4]]) ?>
 
     <br><br>
     <!--Envíar-->
-        <?= input_submit(['class' => 'col-lg-offset-4 col-lg-10', 'type' => 'submit', 'icon' => 'print', 'text' => 'Imprimir']) ?>
+    <?= input_submit(['class' => 'col-lg-offset-4 col-lg-10', 'type' => 'submit', 'icon' => 'print', 'text' => 'Imprimir']) ?>
     <?= br(2) ?>
 </div>
 

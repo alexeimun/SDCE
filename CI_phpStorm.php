@@ -71,6 +71,7 @@
      * @property CI_Jquery $jquery                    Jquery Class
      * @property CI_Utf8 $utf8                        Provides support for UTF-8 environments
      * @property CI_Security $security                Security Class, xss, csrf, etc...
+     * @property Rbca $rbca                Rbca
      *
      * =========================Here my custom name models to be recognized by the IDE===============================
      *

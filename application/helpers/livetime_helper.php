@@ -221,3 +221,33 @@
         }
         return $momento;
     }
+
+    function NombreDia($date = 'now')
+    {
+        $dia = '';
+        switch ((new DateTime($date))->format('l'))
+        {
+            case 'Monday':
+                $dia = 'Lunes';
+                break;
+            case 'Tuesday':
+                $dia = 'Martes';
+                break;
+            case 'Wednesday':
+                $dia = 'Miércoles';
+                break;
+            case 'Thursday':
+                $dia = 'Jueves';
+                break;
+            case 'Friday':
+                $dia = 'Viernes';
+                break;
+            case 'Saturday':
+                $dia = 'Sábado';
+                break;
+            case 'Sunday':
+                $dia = 'Domingo';
+                break;
+        }
+        return $dia;
+    }

@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'ios ion-person', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob' => $this, 'class' => 'ios ion-person', 'text' => Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -19,7 +19,7 @@
 
     <?= form_input(['placeholder' => 'Ingrese el correo del cooperador', 'name' => 'CORREO_COOPERADOR', 'class' => 'correo', 'label' => ['text' => 'Correo']]) ?>
     <?= form_input(['placeholder' => 'Ingrese la dirección del cooperador', 'name' => 'DIRECCION_COOPERADOR', 'label' => ['text' => 'Dirección']]) ?>
-    <?= form_input(['placeholder' => 'Ingrese el teléfono del cooperador', 'name' => 'TELEFONO_COOPERADOR', 'label' => ['text' => 'Teléfono']]) ?>
+    <?= form_input(['placeholder' => 'Ingrese el teléfono del cooperador', 'name' => 'TELEFONO_COOPERADOR','class'=>'numero telefono', 'label' => ['text' => 'Teléfono']]) ?>
     <?= form_input(['placeholder' => 'Ingrese el teléfono del cooperador', 'name' => 'CARGO', 'label' => ['text' => 'Cargo']]) ?>
 
     <!--Envíar-->
@@ -54,7 +54,9 @@
                 },
                 success: function () {
                     $('body').removeClass('Wait');
-                    Alerta('el cooperador se ha creado correctamente');
+                    Alerta('el cooperador se ha creado correctamente', function () {
+                        location.href = '';
+                    });
                     $('#spin').hide();
                 }
             });

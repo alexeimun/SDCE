@@ -37,6 +37,7 @@
      * My own constatnts
      */
     define('VERSION','0.98.6');
+    define('YEAR_SDCE',2014);
 
 
 

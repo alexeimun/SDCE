@@ -7,21 +7,19 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'ios ion-android-exit', 'text' => 'Seguimientos']) ?>
+    <?= page_title(['ob' => $this, 'class' => 'ion-ios-trash', 'text' => 'Eliminar Calificación']) ?>
 </section>
 <!-- Main content -->
 <div class="container">
     <?= form_open(site_url('seguimiento/seguimientos'), ['target' => '_blank', 'class' => 'form-horizontal col-md-8', 'style' => 'margin-left: 15%']) ?>
     <hr style="border: 1px solid #099a5b;"/>
-    <?= Alert(['title' => '<a href="eliminarcalificacion">¿Necesita desechar una calificación?</a>', 'text' => '', 'icon' => 'ion-ios-trash']) ?>
-    <?= select_input(['text' => 'Proyecto', 'collabel' => 3, 'colinput' => 7, 'select' => Dropdown(['name' => 'ID_PROYECTO', 'dataProvider' => $this->proyectos_model->TraeAsesorProyectosDD(),
+    <?= select_input(['text' => 'Proyecto', 'collabel' => 3, 'colinput' => 5, 'select' => Dropdown(['name' => 'ID_PROYECTO', 'dataProvider' => $this->proyectos_model->TraeAsesorProyectosDD(),
         'placeholder' => '-- Seleccione un proyecto --', 'fields' => ['NOMBRE_PROYECTO']])]) ?>
     <div class="practicantes"></div>
     <div class="momento"></div>
-
     <?= br(1) ?>
     <!--Envíar-->
-    <?= input_submit(['class' => 'col-lg-offset-4 col-lg-10', 'type' => 'submit', 'icon' => 'print', 'text' => 'Imprimir']) ?>
+    <?= input_submit(['class' => 'col-lg-offset-4 col-lg-10', 'icon' => 'trash', 'text' => 'Eliminar', 'btn' => 'danger']) ?>
 
     <?= call_spin_div() ?>
 
@@ -50,7 +48,7 @@
         radius: 6, color: '#000', speed: 1, length: 15, top: '10%'
     })).spin(document.getElementById("spin"));
 
-    function SavePost() {
+    function Save() {
         var practicante = $('select[name=ID_PRACTICANTE]');
         var momento = $('select[name=MOMENTO]');
 
@@ -65,6 +63,22 @@
         else if (momento.length && momento.val() == 0) {
             event.preventDefault();
             Message('No se ha encontrado ningún momento');
+        }
+        else {
+            console.log('s');
+            $.ajax({
+                type: 'post', url: 'eliminarcalificacion', data: $('form').serialize(),
+                beforeSend: function () {
+                    $('body').addClass('Wait');
+                    $('body,html').animate({scrollTop: 0}, 200);
+                    $('#spin').show();
+                },
+                success: function () {
+                    $('body').removeClass('Wait');
+                    Alerta('La calificación se ha eliminado correctamente');
+                    $('#spin').hide();
+                }
+            });
         }
     }
 </script>

@@ -24,7 +24,7 @@
             }
             else if($this->session->userdata('ASESOR'))
             {
-                $this->load->view('Parametros/Parametros', ['Periodo' => $this->parametros_model->CrearPeriodoComponente(2015)]);
+                $this->load->view('Parametros/Parametros', ['Periodo' => $this->parametros_model->CrearPeriodoComponente(YEAR_SDCE)]);
             }
             else if($this->session->userdata('ADMIN'))
             {
