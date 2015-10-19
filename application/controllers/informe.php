@@ -14,7 +14,7 @@
             {
                 redirect(site_url(), 'refresh');
             }
-            $this->load->model(['informes_model', 'practicantes_model', 'consecutivos_model', 'parametros_model', 'proyectos_model', 'seguimientos_model']);
+            $this->load->model(['informes_model', 'practicantes_model', 'consecutivos_model', 'proyectos_model', 'seguimientos_model']);
             $this->load->library('fpdf/pdf');
         }
 
@@ -22,9 +22,9 @@
         {
             if($this->input->is_ajax_request())
             {
-                echo Component::Table(['columns' => ['Nombre', 'Documento'],
+                echo Component::Table(['columns' => ['Nombre', 'Correo','Documento'],
                     'tableName' => 'practicante', 'id' => 'ID_PRACTICANTE', 'controller' => 'practicantes',
-                    'fields' => ['NOMBRE_PRACTICANTE', 'DOCUMENTO' => 'numeric'], 'actions' => 'r'
+                    'fields' => ['NOMBRE_PRACTICANTE','CORREO_PRACTICANTE', 'DOCUMENTO' => 'numeric'], 'actions' => 'r'
                     , 'dataProvider' => $this->practicantes_model->TraePracticantesPorProyecto($this->input->post('ID_PROYECTO'))]);
             }
         }
@@ -74,6 +74,7 @@
                 $this->informes_model->InsertarLink();
                 $cons = $this->consecutivos_model->TraeConsecutivoAsesoria($this->input->post('ID_PROYECTO'));
                 $this->consecutivos_model->ActualizaConsecutivoAsesoria();
+
                 $link = site_url('informe/asesoriapracticas') . '?_link=' . md5(str_replace(',', '', $this->input->post('CC')) . $this->input->post('CORREO') . 'id_proyecto' . $this->input->post('ID_PROYECTO') .
                         'consecutivo' . $cons)
                     . '&_id=' . $this->input->post('ID_PRACTICANTE') . '&_cvo=' . $cons . '&_type=ap';
@@ -234,7 +235,7 @@
             $pdf->Cell(10, 5, $Asesoria->TIPO_ASESORIA == 1 ? 'X' : '', 1, 0, 'C');
             #Fecha y hora
             $pdf->Text(110, 119, 'FECHA Y HORA: ' . $Asesoria->FECHA_HORA);
-            $pdf->Line(168, 120, 138, 120);
+            $pdf->Line(172, 120, 138, 120);
             #Desarrollo de la reunión de asesoría
             $pdf->Text(12, 126, 'Desarrollo de la reunión de asesoría:');
             $pdf->SetFont('Arial', '', 9);
@@ -296,7 +297,6 @@
 
             $pdf->SetFont('Arial', 'B', 10);
             #ENCABEZADO
-            //$pdf->SetXY(10,35);
             $pdf->Text(180, 45, 'D0-69-F');
             $pdf->Text(70, 48, 'FORMATO REPORTE GASTOS DE TRANSPORTE');
             $pdf->Text(75, 55, 'FUNDACIÓN UNIVERSITARIA MARÍA CANO');
@@ -329,7 +329,7 @@
             foreach ($Gastos->result() as $gasto)
             {
                 $pdf->SetX(5);
-                $pdf->Row([$gasto->FECHA_GASTO, utf8_encode($gasto->LUGAR), utf8_encode($gasto->ACTIVIDAD), $gasto->NUMERO_DESPLAZAMIENTOS,
+                $pdf->Row([Fecha($gasto->FECHA_GASTO), utf8_encode($gasto->LUGAR), utf8_encode($gasto->ACTIVIDAD), $gasto->NUMERO_DESPLAZAMIENTOS,
                     number_format($gasto->VALOR_UNITARIO, 0, '', ','), number_format($gasto->VALOR_TOTAL, 0, '', ',')]);
                 $Total += $gasto->VALOR_TOTAL;
             }

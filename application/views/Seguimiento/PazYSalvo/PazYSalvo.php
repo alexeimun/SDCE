@@ -47,7 +47,7 @@
                     <i class="fa fa-calendar"></i>
                 </div>
                 <input type="date" class="form-control fecha" name="FINALIZACION"
-                       value="<?= $this->session->userdata('FPERIODO') ?>"
+                       value="<?= (new DateTime($this->session->userdata('PERIODO')))->add(new DateInterval('P6M'))->format('Y-m-d')?>"
                        required>
             </div>
         </div>

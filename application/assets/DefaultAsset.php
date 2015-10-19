@@ -9,7 +9,7 @@
         #Css styles
         'css' => [
             'bootstrap/css/bootstrap.min.css',
-            //'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+            'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
             'AdminLTE/css/AdminLTE.min.css',
             'AdminLTE/css/skins/_all-skins.min.css',
             'css/styler.css',
@@ -20,5 +20,6 @@
             'js/jquery.min.js',
             'bootstrap/js/bootstrap.min.js',
             'AdminLTE/js/app.min.js',
+            'js/main.js',
         ],
     ];

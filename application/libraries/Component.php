@@ -42,10 +42,11 @@
                 }
                 $item['options']['target'] = isset($item['options']['target']) ? 'target="' . $item['options']['target'] . '"' : '';
                 $item['options']['icon'] = isset($item['options']['icon']) ? $item['options']['icon'] : '';
+                $id = "id='" . strtolower(str_replace(' ', '', $item['label'])) . "'";
 
                 if(isset($item['items']))
                 {
-                    $sidebar .= "<li class='treeview'>
+                    $sidebar .= "<li $id class='treeview'>
                                     <a href='" . (isset($item['url']) ? site_url($item['url']) : '#') . "'>
                                     <i class='" . $item['options']['icon'] . "'></i> <span>&nbsp;&nbsp;" . $item['label'] . "</span>
                                         <i class='fa fa-angle-left pull-right'></i>
@@ -61,7 +62,7 @@
                     }
                     else
                     {
-                        $sidebar .= "<li class='treeview'>
+                        $sidebar .= "<li $id class='treeview'>
                         <a href='" . (isset($item['url']) ? site_url($item['url']) : '#') . "' " . $item['options']['target'] . ">
                         <i class='" . $item['options']['icon'] . "'></i> <span>&nbsp;&nbsp;" . $item['label'] . "</span>
                         </a></li>";
@@ -69,21 +70,6 @@
                 }
             }
             return $sidebar;
-        }
-
-        public static function field($model, $name)
-        {
-            $attr = $model->attributes();
-
-            if(array_key_exists($name, $attr))
-            {
-                $attr = $attr[$name];
-                return form_input(['placeholder' => $attr['placeholder'], 'class' => $attr['class'], 'name' => $name, 'label' => ['text' => $attr['label']]]);
-            }
-            else
-            {
-                echo "<h3 style='color: lightcoral'>(!) Invalid input name $name</h3>";
-            }
         }
 
         public static function Table(array $params)
@@ -179,6 +165,182 @@
                                 case 'phone':
                                     $table .= '<td>' . Telefono($data[$key]) . '</td>';
                                     break;
+                                #Periodo académico (Campo particular)
+                                case 'periodo':
+                                    $table .= '<td>' . date('Y-', strtotime($data[$key])) . (date('m', strtotime($data[$key])) > 6 ? 2 : 1) . '</td>';
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        $table .= '<td>' . ($data[$value] = strlen($data[$value]) > 40 ? substr($data[$value], 0, 40) . '...' : $data[$value]) . '</td>';
+                    }
+                }
+
+                if($action)
+                {
+                    $table .= '<td>';
+
+                    $kview = $controller . '/ver' . $tableName;
+                    $kupdate = $controller . '/actualizar' . $tableName;
+                    $kprint = $controller . '/imprimir' . $tableName;
+                    $keys = '';
+
+                    if(is_array($id))
+                    {
+                        foreach ($id as $ikey => $ids)
+                        {
+                            if(!is_numeric($ids))
+                            {
+                                $keys .= '/' . $data[$ids];
+                            }
+                            else
+                            {
+                                $keys .= '/' . $ids;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        $keys .= '/' . $data[$id];
+                    }
+                    //var_dump($keys);exit;
+
+                    if($view)
+                    {
+                        $table .= '<a href="' . site_url($kview . $keys) . '" style="font-size:20pt;color:  #29a84b" class="ion ion-ios-paper" target="_blank" data-toggle="tooltip" title="Ver m&aacute;s..."></a>&nbsp;&nbsp;';
+                    }
+                    if($print)
+                    {
+                        $table .= '<a href="' . site_url($kprint . $keys) . '" style="font-size:20pt;color: black" target="_blank" class="ion ion-android-print" data-toggle="tooltip" title="Imprimir"></a>&nbsp;&nbsp;';
+                    }
+                    if($update)
+                    {
+                        $table .= '<a href="' . site_url($kupdate . $keys) . '"  target="_blank" style="font-size:20pt;color:  #0065c3" class="ion ion-edit" data-toggle="tooltip" title="Editar"></a>&nbsp;&nbsp;';
+                    }
+                    if($delete)
+                    {
+                        $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='ion ion-trash-b' data-toggle='tooltip' title='Eliminar'></a>";
+                    }
+                    ###Check###
+                    if($check)
+                    {
+                        $table .= "<input type='checkbox' value='" . $data[$id] . "' checked>";
+                    }
+                    ###Radio###
+                    if($radio)
+                    {
+                        $table .= "<input type='radio' name='RADIO' value='" . $data[$id] . "' checked>";
+                    }
+                    $table .= '</td>';
+                }
+                $table .= '</tr>';
+            }
+            $table .= '</tbody></table>';
+
+            return $table;
+        }
+
+        public static function UserTable(array $params)
+        {
+            extract($params);
+            /**
+             * @var array $columns
+             * @var array $fields
+             * @var array $dataProvider
+             * @var string $actions
+             * @var string $align
+             * @var string $tableName
+             * @var bool $autoNumeric
+             * @var string $id
+             * @var string $nivel
+             * @var string $controller
+             */
+
+            $align = isset($align) ? $align : 'left';
+            $actions = isset($actions) ? $actions : '';
+            $controller = isset($controller) ? $controller : '';
+            $autoNumeric = isset($autoNumeric) ? $autoNumeric : false;
+
+            $view = strrchr($actions, 'v');
+            $update = strrchr($actions, 'u');
+            $delete = strrchr($actions, 'd');
+            $print = strrchr($actions, 'p');
+            $check = strrchr($actions, 'c');
+            $radio = strrchr($actions, 'r');
+
+            $action = $delete || $update || $view || $print || $check || $radio;
+
+            $table = '<table id="tabla" style="text-align:' . $align . '" data-name="' . $tableName . '" class="table table-bordered table-striped"><thead><tr>';
+            if($autoNumeric)
+            {
+                $c = 0;
+                $table .= '<th style="width: 20px;">#</th>';
+            }
+            foreach ($columns as $columnName => $value)
+            {
+                if(!is_numeric($columnName))
+                {
+                    $table .= '<th style="' . (isset($value['style']) ? $value['style'] : '') . ';text-align:' . $align . '">' . $columnName . '</th>';
+                }
+                else
+                {
+                    $table .= '<th style="text-align:' . $align . '">' . $value . '</th>';
+                }
+            }
+            if($action)
+            {
+                $table .= '<th style="">Acciones</th>';
+            }
+            $table .= '</tr></thead><tbody>';
+
+            foreach ($dataProvider as $data)
+            {
+                $back = $data['NIVEL'] == 2 ? "style='background: rgba(0, 0, 255, 0.11)'" : '';
+                $table .= "<tr $back>";
+                if($autoNumeric)
+                {
+                    $table .= '<td>' . (++$c) . '</td>';
+                }
+                foreach ($fields as $key => $value)
+                {
+                    if(!is_numeric($key))
+                    {
+                        if(is_array($value))
+                        {
+                            switch ($value['type'])
+                            {
+                                case 'img':
+                                    #Represents a image
+                                    $table .= '<td><img class="img-circle" style="height: 25px;width: 25px;" src="' . $value['path'] . '/' . $data[$key] . '"></td>';
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch ($value)
+                            {
+                                #Represents a moment helper
+                                case 'moment':
+                                    $table .= '<td>' . Momento($data[$key]) . '</td>';
+                                    break;
+                                #Represents a date with the helper
+                                case 'date':
+                                    $table .= '<td>' . date_format(new DateTime($data[$key]), 'd/m/Y') . '</td>';
+                                    break;
+                                #Represents a number format
+                                case 'numeric':
+                                    $table .= '<td>' . number_format($data[$key], 0, '', ',') . '</td>';
+                                    break;
+                                #Represents a phone number
+                                case 'phone':
+                                    $table .= '<td>' . Telefono($data[$key]) . '</td>';
+                                    break;
+                                #Periodo académico (Campo particular)
+                                case 'periodo':
+                                    $table .= '<td>' . date('Y-', strtotime($data[$key])) . (date('m', strtotime($data[$key])) > 6 ? 2 : 1) . '</td>';
+                                    break;
                             }
                         }
                     }
@@ -226,11 +388,11 @@
                     {
                         $table .= '<a href="' . site_url($kprint . $keys) . '" style="font-size:20pt;color: black" target="_blank" class="ion ion-android-print" data-toggle="tooltip" title="Imprimir"></a>&nbsp;&nbsp;';
                     }
-                    if($update)
+                    if($update && ($data['NIVEL'] != 2 || $nivel))
                     {
                         $table .= '<a href="' . site_url($kupdate . $keys) . '"  target="_blank" style="font-size:20pt;color:  #0065c3" class="ion ion-edit" data-toggle="tooltip" title="Editar"></a>&nbsp;&nbsp;';
                     }
-                    if($delete)
+                    if($delete && $nivel && $data['NIVEL'] != 2)
                     {
                         $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='ion ion-trash-b' data-toggle='tooltip' title='Eliminar'></a>";
                     }

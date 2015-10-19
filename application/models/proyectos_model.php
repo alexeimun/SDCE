@@ -9,15 +9,29 @@
 
         public function TraeProyecto($IdProyecto)
         {
+            $query = '';
+            if($this->session->userdata('ASESOR'))
+            {
+                $query = "AND t_proyectos.PERIODO='" . $this->session->userdata('PERIODO') .
+                    "' AND t_usuarios.ID_USUARIO='" . $this->session->userdata('ID_USUARIO') . "'";
+            }
+
             return @$this->db->query("SELECT
-              ID_PROYECTO,
+              t_proyectos.ID_PROYECTO,
+              t_proyectos.ID_ASESOR,
               NOMBRE_PROYECTO,
-              FECHA_REGISTRO,
-              ID_TIPO_PROYECTO
+              t_proyectos.FECHA_REGISTRO,
+              ID_TIPO_PROYECTO,
+              t_proyectos.PERIODO,
+              t_usuarios.NOMBRE NOMBRE_USUARIO,
+              HORARIO,
+              t_tipo_proyectos.NOMBRE_TIPO_PROYECTO
 
                FROM t_proyectos
+               INNER JOIN t_tipo_proyectos USING (ID_TIPO_PROYECTO)
+               INNER JOIN t_usuarios ON t_usuarios.ID_USUARIO = t_proyectos.ID_ASESOR
 
-                WHERE ID_PROYECTO=$IdProyecto AND t_proyectos.FECHA_REGISTRO>='" . $this->session->userdata('PERIODO') . "' LIMIT 1")->result()[0];
+                WHERE ID_PROYECTO=$IdProyecto $query LIMIT 1")->result()[0];
         }
 
         public function TraeTipoProyectos()
@@ -30,8 +44,7 @@
             if($asesor)
             {
                 return $this->db->query("SELECT COUNT(ID_PROYECTO) AS PROYECTOS FROM t_proyectos
-              WHERE ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . " AND FECHA_REGISTRO>='" . $this->session->userdata('PERIODO') . "'
-              AND t_proyectos.FECHA_REGISTRO<='" . $this->session->userdata('FPERIODO') . "'")->result()[0];
+              WHERE ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . " AND PERIODO='" . $this->session->userdata('PERIODO') . "'")->result()[0];
             }
             else
             {
@@ -42,7 +55,6 @@
         public function InsertarProyecto()
         {
             $this->db->set('FECHA_REGISTRO', 'NOW()', false);
-            $this->db->set('ID_ASESOR', $this->session->userdata('ID_USUARIO'));
             $this->db->insert('t_proyectos', $this->input->post(null, true));
         }
 
@@ -82,13 +94,13 @@
              COUNT(t_practicantes.ID_PRACTICANTE) PRACTICANTES,
 			  t_cooperadores.NOMBRE_COOPERADOR,
 			  t_tipo_proyectos.NOMBRE_TIPO_PROYECTO,
-			  t_usuarios.NOMBRE NOMBRE_USUARIO
+			   t_usuarios.NOMBRE NOMBRE_USUARIO
 
              FROM t_proyectos
 			  LEFT JOIN t_practicantes USING (ID_PROYECTO)
-			  LEFT JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_practicantes.ID_ASESOR
+			  LEFT JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_proyectos.ID_ASESOR
 			  LEFT JOIN t_cooperadores USING (ID_COOPERADOR)
-			  INNER JOIN t_tipo_proyectos USING (ID_TIPO_PROYECTO)
+			  LEFT JOIN t_tipo_proyectos USING (ID_TIPO_PROYECTO)
 
               GROUP BY t_proyectos.ID_PROYECTO")->result('array');
         }
@@ -104,7 +116,6 @@
 			  t_tipo_proyectos.NOMBRE_TIPO_PROYECTO,
 			  t_usuarios.NOMBRE NOMBRE_USUARIO
 
-
              FROM t_proyectos
 			  LEFT JOIN t_practicantes USING (ID_PROYECTO)
 			  LEFT JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_practicantes.ID_ASESOR
@@ -112,17 +123,29 @@
 			  INNER JOIN t_tipo_proyectos USING (ID_TIPO_PROYECTO)
 
               WHERE t_proyectos.ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . "
-               AND t_proyectos.FECHA_REGISTRO>='" . $this->session->userdata('PERIODO') . "'
-            AND t_proyectos.FECHA_REGISTRO<='" . $this->session->userdata('FPERIODO') . "' GROUP BY t_proyectos.ID_PROYECTO")->result('array');
+               AND t_proyectos.PERIODO ='" . $this->session->userdata('PERIODO') . "'
+             GROUP BY t_proyectos.ID_PROYECTO")->result('array');
         }
 
-        public function TraeProyectosDD()
+        public function TraeProyectosDD($idproyecto = null)
         {
-            return $this->db->query("SELECT DISTINCT
+            if(is_null($idproyecto))
+            {
+                return $this->db->query("SELECT DISTINCT
               t_proyectos.ID_PROYECTO,
               t_proyectos.NOMBRE_PROYECTO
 
             FROM t_proyectos")->result('array');
+            }
+            else
+            {
+                return $this->db->query("SELECT DISTINCT
+              t_proyectos.ID_PROYECTO,
+              t_proyectos.NOMBRE_PROYECTO
+
+            FROM t_proyectos
+            WHERE ID_PROYECTO=$idproyecto")->result('array');
+            }
         }
 
         public function TraeHorario()
@@ -139,12 +162,11 @@
         {
             return $this->db->query("SELECT DISTINCT
               HORARIO,
+              ID_PROYECTO,
               NOMBRE_PROYECTO
             FROM t_proyectos
-            WHERE HORARIO IS NOT NULL  AND t_proyectos.FECHA_REGISTRO>='" . $this->session->userdata('PERIODO') . "'
-            AND t_proyectos.FECHA_REGISTRO<='" . $this->session->userdata('FPERIODO') . "'
+            WHERE HORARIO IS NOT NULL  AND t_proyectos.PERIODO ='" . $this->session->userdata('PERIODO') . "'
             AND ID_ASESOR=" . $this->session->userdata('ID_USUARIO'))->result();
-
         }
 
         public function TraeAsesorProyectosLinkDD()
@@ -158,7 +180,7 @@
               INNER JOIN t_proyectos USING (ID_PROYECTO)
 
             WHERE (t_proyectos.FECHA_CADUCA_EVALUACION IS NULL OR t_proyectos.FECHA_CADUCA_EVALUACION < '$now') AND
-             t_proyectos.MOMENTO<3 AND t_proyectos.FECHA_REGISTRO>='" . $this->session->userdata('PERIODO') . "'
+             t_proyectos.MOMENTO<3 AND t_proyectos.PERIODO='" . $this->session->userdata('PERIODO') . "'
              AND t_practicantes.ID_ASESOR= " . $this->session->userdata('ID_USUARIO'))->result('array');
         }
 
@@ -171,9 +193,8 @@
               FROM t_practicantes
               INNER JOIN t_proyectos USING (ID_PROYECTO)
 
-            WHERE t_proyectos.MOMENTO<3 AND t_proyectos.FECHA_REGISTRO>='" . $this->session->userdata('PERIODO') . "'
-            AND t_practicantes.FECHA_REGISTRO<='" . $this->session->userdata('FPERIODO') . "'
-            AND t_practicantes.ID_ASESOR= " . $this->session->userdata('ID_USUARIO'))->result('array');
+            WHERE t_proyectos.MOMENTO<3 AND t_proyectos.PERIODO ='" . $this->session->userdata('PERIODO') . "'
+            AND t_practicantes.ID_ASESOR = " . $this->session->userdata('ID_USUARIO'))->result('array');
         }
 
         public function TraeAsesorProyectosDD()
@@ -185,8 +206,7 @@
               FROM t_practicantes
               INNER JOIN t_proyectos USING (ID_PROYECTO)
 
-            WHERE t_proyectos.FECHA_REGISTRO>='" . $this->session->userdata('PERIODO') . "'
-            AND t_proyectos.FECHA_REGISTRO<='" . $this->session->userdata('FPERIODO') . "'
+            WHERE t_proyectos.PERIODO ='" . $this->session->userdata('PERIODO') . "'
             AND t_practicantes.ID_ASESOR= " . $this->session->userdata('ID_USUARIO'))->result('array');
         }
     }

@@ -1,4 +1,7 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if(!defined('BASEPATH'))
+{
+    exit('No direct script access allowed');
+}
     /*
     |--------------------------------------------------------------------------
     | File and Directory Modes
@@ -36,8 +39,8 @@
     /**
      * My own constatnts
      */
-    define('VERSION','0.98.6');
-    define('YEAR_SDCE',2014);
+    define('VERSION', '0.99.0');
+    define('YEAR_SDCE', 2015);
 
 
 

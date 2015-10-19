@@ -33,15 +33,9 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-
-
-                    <li class="dropdown">
-                        <a href="<?= site_url('parametros') ?>"  title="Periodo académico" >
-                            <i class="ion-university"></i> <b><?= date('Y-', strtotime($this->session->userdata('PERIODO'))) . (date('m', strtotime($this->session->userdata('PERIODO'))) > 6 ? 2 : 1) ?></b></a>
-                    </li>
-
+                    <?= $this->parametros_model->PeriodoAcademicoHeader(YEAR_SDCE) ?>
                     <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
+                    <li class="dropdown user user-menu" id="usermenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img
                                 src="<?= base_url('asesorfotos/' . $this->session->userdata('FOTO')) ?>"
@@ -64,11 +58,13 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="<?= site_url('perfil') ?>" class="btn btn-default btn-flat">Perfil</a>
+                                    <a href="<?= site_url('perfil') ?>" class="btn btn-default btn-flat">Perfil <i
+                                            class="ion-ios-color-wand"></i></a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="<?= site_url('app/logout') ?>" style="" id="logout"
-                                       class="btn btn-default btn-flat">Cerrar sesi&oacute;n</a>
+                                       class="btn btn-default btn-flat">Cerrar sesi&oacute;n <i style="color: #b60000"
+                                                                                                class="ion-power"></i></a>
                                 </div>
                             </li>
                         </ul>

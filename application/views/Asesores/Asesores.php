@@ -15,8 +15,8 @@
                         Listado Asesores</h3>
                 </div>
                 <div class="box-body">
-                    <?= Component::Table(['columns' => ['', 'Nombre','Practicantes', 'Correo',], 'tableName' => 'asesor', 'autoNumeric' => true, 'id' => 'ID_USUARIO',
-                        'fields' => ['FOTO' => ['type' => 'img', 'path' => base_url('asesorfotos')], 'NOMBRE', 'PRACTICANTES','CORREO'],
+                    <?= Component::Table(['columns' => ['', 'Nombre del asesor', '#Practicantes', '#Proyectos',], 'tableName' => 'asesor', 'controller' => 'asesores', 'autoNumeric' => true, 'id' => 'ID_USUARIO',
+                        'fields' => ['FOTO' => ['type' => 'img', 'path' => base_url('asesorfotos')], 'NOMBRE', 'PRACTICANTES', 'PROYECTOS'],
                         'dataProvider' => $this->usuarios_model->TraeAsesores(), 'actions' => 'duv']) ?>
                 </div>
                 <!-- /.box-body -->
@@ -35,7 +35,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this).data('id'), '<?=site_url('usuario/EliminarAsesor') ?>');
+            Alert($(this).data('id'), '<?=site_url('usuario/EliminarUsuario') ?>');
         });
 
         function Alert(id, url) {

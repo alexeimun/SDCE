@@ -27,7 +27,6 @@
             }
             else
             {
-                $this->load->model('parametros_model');
                 $this->load->view('Seguimiento/RegistroNotas/RegistroNotas', ['Periodo' => $this->parametros_model->CrearPeriodoComponente(YEAR_SDCE)]);
             }
         }
@@ -267,9 +266,9 @@
         {
             if($this->input->is_ajax_request())
             {
-                echo Component::Table(['columns' => ['Nombre', 'Documento'],
+                echo Component::Table(['columns' => ['Nombre', 'Correo', 'Documento'],
                     'tableName' => 'practicante', 'id' => 'ID_PRACTICANTE', 'controller' => 'practicantes',
-                    'fields' => ['NOMBRE_PRACTICANTE', 'DOCUMENTO' => 'numeric']
+                    'fields' => ['NOMBRE_PRACTICANTE', 'CORREO_PRACTICANTE', 'DOCUMENTO' => 'numeric']
                     , 'dataProvider' => $this->practicantes_model->TraePracticantesPorProyecto($this->input->post('ID_PROYECTO'))]);
             }
         }
@@ -443,7 +442,7 @@
             $pdf->Cell(50, $h, 'INICIO: ' . Fecha($this->input->post('INICIO')), 1, 0, 'L');
 
             $pdf->SetXY(120, 45 + ($f++ * $h));
-            $pdf->Cell(80, $h, 'FINALIZACIÓN: ' . Fecha($this->input->post('FINALIZACIÓN')), 1, 0, 'L');
+            $pdf->Cell(80, $h, 'FINALIZACIÓN: ' . Fecha($this->input->post('FINALIZACION')), 1, 0, 'L');
 
             $pdf->SetXY(10, 45 + ($f++ * $h));
             $pdf->MultiCell(190, $h, 'CONCEPTO DEL ASESOR FRENTE AL CUMPLIMIENTO Y ENTREGA DE TODOS LOS COMPROMISOS DEL ESTUDIANTE EN LA PRÁCTICA:', 1, 'L');

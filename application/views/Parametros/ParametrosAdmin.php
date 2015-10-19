@@ -6,7 +6,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'glyphicon glyphicon-cog', 'text' => 'Parámetros']) ?>
+    <?= page_title(['ob' => $this, 'class' => 'ion-android-options', 'text' => 'Parámetros']) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -63,7 +63,9 @@
             success: function () {
                 console.log();
                 $('body').removeClass('Wait');
-                Alerta('Parámetros establecidos correctamente!!');
+                Alerta('Parámetros establecidos correctamente!!', function () {
+                    location.href = '';
+                });
                 $('#spin').hide();
             }
         });

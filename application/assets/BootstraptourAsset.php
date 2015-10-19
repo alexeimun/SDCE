@@ -8,13 +8,11 @@
     return [
         #Css styles
         'css' => [
-            'js/DropDown/docsupport/prism.css',
-            'js/DropDown/chosen.css',
+            'plugins/Bootstraptour/bootstrap-tour.min.css',
+
         ],
         #Js files
         'js' => [
-            'js/DropDown/chosen.jquery.js',
-            'js/DropDown/docsupport/prism.js',
-            'js/DropDown/docsupport/combo.js',
+            'plugins/Bootstraptour/bootstrap-tour.min.js',
         ],
     ];

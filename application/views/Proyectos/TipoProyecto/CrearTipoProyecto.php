@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'ios ion-person', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob'=>$this,'class' => 'ios ion-plus-round', 'text' => Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -15,7 +15,8 @@
     <hr style="border: 1px solid #3D8EBC;"/>
     <?= form_input(['placeholder' => 'Ingrese el tipo de proyecto', 'name' => 'NOMBRE_TIPO_PROYECTO', 'class' => 'obligatorio', 'label' => ['text' => 'Nombre']]) ?>
     <!--Envíar-->
-    <?= input_submit(['class' => 'col-lg-offset-9 col-lg-10']) ?>
+    <br>
+    <?= input_submit(['class' => 'col-lg-offset-5 col-lg-10']) ?>
 
     <?= call_spin_div() ?>
 

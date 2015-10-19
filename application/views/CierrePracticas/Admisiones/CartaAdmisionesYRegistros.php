@@ -20,8 +20,7 @@
         <div class="col-lg-12">
             <textarea name="ASUNTO" style="height: 80px;margin-top:5px;" class="form-control obligatorio"
                       placeholder="Ingrese aquí el asunto de la carta (máximo 300 caracteres)"
-                      maxlength="300" title="">Entrega Registros de Evaluación y Paz y Salvo de Proyectos de Práctica Programa de Ingeniería de Sistemas - <?= ($sem == 'primer' ? 'I' : 'II') . '-' . date('Y') ?>
-                .</textarea>
+                      maxlength="300" title="">Entrega Registros de Evaluación y Paz y Salvo de Proyectos de Práctica Programa de Ingeniería de Sistemas - <?= ($sem == 'primer' ? 'I' : 'II') . '-' . date('Y') ?>.</textarea>
         </div>
     </div>
 

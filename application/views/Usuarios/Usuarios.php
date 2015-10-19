@@ -3,20 +3,22 @@
      * @var $this CI_Loader
      */
     $this->Header(['assets' => ['datatables', 'dialogs']]);
+
 ?>
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 style="text-align: center;color: #099a5b;"><span style="font-size: 25pt;"
-                                                                         class="ios ion-android-list"></span>&nbsp;
-                        Listado <?= Uncamelize(pathinfo(__FILE__)['filename']) ?></h3>
+                    <h3 style="text-align: center;color: #3D8EBC;"><span style="font-size: 25pt;"
+                                                                         class="ios ion-android-list"></span>&nbsp;Listado
+                        Usuarios Administradores</h3>
                 </div>
                 <div class="box-body">
-                    <?= Component::Table(['columns' => ['Periodo', 'Total gastos', 'Fecha de creación'], 'tableName' => 'gastostransporte', 'autoNumeric' => true, 'id' => 'CONSECUTIVO', 'controller' => 'informe',
-                        'fields' => ['PERIODO' => 'periodo', 'TOTAL' => 'numeric', 'FECHA_REGISTRO' => 'moment'],
-                        'dataProvider' => $this->informes_model->TraeTodoGastosTransporte(), 'actions' => 'pd']) ?>
+                    <?= Component::UserTable(['columns' => ['Nombre del usuario', 'Correo', 'Fecha registro'], 'controller' => 'usuarios',
+                        'tableName' => 'usuario', 'autoNumeric' => true, 'id' => 'ID_USUARIO', 'nivel' => $this->session->userdata('NIVEL') == 2,
+                        'fields' => ['NOMBRE', 'CORREO', 'FECHA_REGISTRO' => 'moment'],
+                        'dataProvider' => $this->usuarios_model->TraeUsuarios(), 'actions' => 'duv']) ?>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -34,7 +36,7 @@
         $("#tabla").dataTable();
 
         $('body').on('click', 'a[data-id]', function () {
-            Alert($(this).data('id'), '<?=site_url('informe/eliminargastostransporte') ?>');
+            Alert($(this).data('id'), '<?=site_url('usuario/EliminarUsuario') ?>');
         });
 
         function Alert(id, url) {
@@ -61,4 +63,6 @@
             });
         }
     });
+
+
 </script>

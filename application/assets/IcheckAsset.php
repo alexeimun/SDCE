@@ -10,6 +10,8 @@
         'css' => [
             'plugins/iCheck/flat/green.css',
             'plugins/iCheck/square/green.css',
+            'plugins/iCheck/square/blue.css',
+            'plugins/iCheck/flat/red.css',
         ],
         #Js files
         'js' => [

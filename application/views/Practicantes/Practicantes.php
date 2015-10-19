@@ -17,7 +17,7 @@
                 <?= input_submit(['class' => 'col-lg-offset-5 col-sm-offset-5 col-lg-2', 'icon' => 'export', 'text' => 'Exportar']) ?>
 
                 <div class="box-body">
-                    <?= Component::Table(['columns' => ['Nombre', 'Proyecto', 'Modalidad de la práctica', 'Agencia'],
+                    <?= Component::Table(['columns' => ['Nombre practicante', 'Proyecto', 'Modalidad de la práctica', 'Agencia'],
                         'tableName' => 'practicante', 'id' => 'ID_PRACTICANTE', 'controller' => 'practicantes',
                         'fields' => ['NOMBRE_PRACTICANTE', 'NOMBRE_PROYECTO', 'MODALIDAD', 'NOMBRE_AGENCIA',]
                         , 'dataProvider' => $this->session->userdata('ASESOR') ? $this->practicantes_model->TraePracticantes() : $this->practicantes_model->TraeTodoPracticantes(),

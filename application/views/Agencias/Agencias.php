@@ -14,7 +14,7 @@
                         Listado <?= pathinfo(__FILE__)['filename'] ?></h3>
                 </div>
                 <div class="box-body">
-                    <?= Component::Table(['columns' => ['Nombre', 'Correo', 'Dirección', 'Teléfono#1',],
+                    <?= Component::Table(['columns' => ['Nombre de la agencia', 'Correo', 'Dirección', 'Teléfono#1',],
                         'tableName' => 'agencia', 'autoNumeric' => true, 'id' => 'ID_AGENCIA', 'controller' => 'agencias',
                         'fields' => ['NOMBRE_AGENCIA', 'CORREO_AGENCIA', 'DIRECCION', 'TELEFONO1' => 'phone',]
                         , 'dataProvider' => $this->agencias_model->TraeAgencias(), 'actions' => 'duv']) ?>

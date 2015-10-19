@@ -2,12 +2,12 @@
     /**
      * @var $this CI_Loader
      */
-    $this->Header(['assets' => ['dialogs', 'spin', 'jvalidator', 'dropdown']]);
+    $this->Header(['assets' => ['dialogs', 'spin', 'jvalidator']]);
 
 ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <?= page_title(['ob'=>$this,'class' => 'ios ion-person', 'text' => Uncamelize(__FILE__)]) ?>
+        <?= page_title(['ob'=>$this,'class' => 'ios ion-ios-eye', 'text' => Uncamelize(__FILE__)]) ?>
     </section>
     <!-- Main content -->
     <div class="container">

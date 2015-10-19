@@ -5,26 +5,17 @@
         function __construct()
         {
             parent::__construct();
-
-            $this->load->model('parametros_model');
+            if($this->session->userdata('ADMIN'))
+            {
+                $this->rbca->can('parámetros');
+            }
         }
 
         public function index()
         {
             if($this->input->is_ajax_request())
             {
-                if($this->session->userdata('ASESOR'))
-                {
-                    $this->parametros_model->InsertaPeriodo();
-                }
-                else if($this->session->userdata('ADMIN'))
-                {
-                    $this->parametros_model->ActualizarDependencias();
-                }
-            }
-            else if($this->session->userdata('ASESOR'))
-            {
-                $this->load->view('Parametros/Parametros', ['Periodo' => $this->parametros_model->CrearPeriodoComponente(YEAR_SDCE)]);
+                $this->parametros_model->ActualizarDependencias();
             }
             else if($this->session->userdata('ADMIN'))
             {
@@ -33,6 +24,14 @@
             else
             {
                 show_404();
+            }
+        }
+
+        public function CambiarPeriodoAcdemicoAjax()
+        {
+            if($this->input->is_ajax_request())
+            {
+                $this->parametros_model->CambiarPeriodoAcdemicoAjax();
             }
         }
     }

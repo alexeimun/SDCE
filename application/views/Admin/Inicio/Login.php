@@ -16,22 +16,27 @@
         <p class="login-box-msg" style="font-size: 18pt;"><img src="../../../../public/images/logo.jpg"
                                                                class="img-responsive"></p>
 
-        <form method="post" action="app/ValidarCredenciales">
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Correo" name="usuario"/>
-                <span class="glyphicon glyphicon-envelope form-control-feedback" style="color:#0085ff; "></span>
+        <?= form_open('app/ValidarCredenciales', ['method' => 'post']) ?>
+        <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="Correo" name="usuario"/>
+            <span class="glyphicon glyphicon-envelope form-control-feedback" style="color:#0085ff; "></span>
+        </div>
+        <div class="form-group has-feedback">
+            <input type="password" class="form-control" placeholder="Clave" name="clave"/>
+            <span class="glyphicon glyphicon-lock form-control-feedback" style="color:#0085ff;"></span>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar <i
+                        class="ion-arrow-right-a"></i></button>
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Clave" name="clave"/>
-                <span class="glyphicon glyphicon-lock form-control-feedback" style="color:#0085ff;"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
-                </div>
-                <!-- /.col -->
-            </div>
-        </form>
+            <!-- /.col -->
+        </div>
+        <?= form_close() ?>
+    </div>
+    <div style="margin:10px;">
+        <p class="login-box-msg"><b><i class="ion ion-leaf" style="color:#0d9155;"></i>SDCE live green! - &copy;
+                2015</b></p>
     </div>
     <br>
     <!-- /.login-box-body -->

@@ -138,6 +138,7 @@
      * @property consecutivos_model $consecutivos_model
      * @property cooperadores_model $cooperadores_model
      * @property practicantes_model $practicantes_model
+     * @property usuarios_model $usuarios_model
      */
 
 

@@ -7,7 +7,7 @@
         'options' => ['img' => ['path' => 'public/images/logo.jpg', 'url' => ''], 'header' => 'MENU PRINCIPAL'],
         'items' =>
             [
-                ['label' => 'Informes', 'url' => 'asesores', 'options' => ['icon' => 'ion-person'],
+                ['label' => 'Informes', 'options' => ['icon' => 'ion-compose'],
                     'items' =>
                         [
                             ['label' => 'Asesoría', 'options' => ['icon' => 'ion-android-list'],
@@ -38,7 +38,7 @@
                         [
                             ['label' => 'Certificado paz y salvo', 'url' => 'seguimiento/pazysalvo', 'options' => ['icon' => 'ion-checkmark']],
                             ['label' => 'Registro de notas', 'url' => 'seguimiento/registronotas', 'options' => ['icon' => 'glyphicon glyphicon-pencil']],
-                            ['label' => 'Seguimiento prácticas',  'options' => ['icon' => 'ion-arrow-graph-up-right'],
+                            ['label' => 'Seguimiento prácticas', 'options' => ['icon' => 'ion-arrow-graph-up-right'],
                                 'items' =>
                                     [
                                         ['label' => 'Seguimiento', 'url' => 'seguimiento/seguimientos', 'options' => ['icon' => 'ion-android-exit']],
@@ -77,10 +77,10 @@
                                     ]],
                         ],
                 ],
-                ['label' => 'Proyectos', 'options' => ['icon' => 'ion-ios-folder'],
+                ['label' => 'Proyectos', 'options' => ['icon' => 'ion-help-buoy'],
                     'items' =>
                         [
-                            ['label' => 'Horario proyectos', 'url' => 'proyectos/horarios', 'options' => ['icon' => 'ion-android-calendar']],
+                            ['label' => 'Horario asesorías', 'url' => 'proyectos/horarios', 'options' => ['icon' => 'ion-android-calendar']],
                             ['label' => 'Proyectos', 'url' => 'proyectos', 'options' => ['icon' => 'ion-android-list']],
                         ],
                 ],
@@ -92,7 +92,6 @@
                         ],
                 ],
                 ['label' => 'Practicantes', 'url' => 'practicantes', 'options' => ['icon' => 'ion-person-stalker']],
-                ['label' => 'Parámetros', 'url' => 'parametros', 'options' => ['icon' => 'glyphicon glyphicon-cog']],
                 ['label' => 'Acerca', 'url' => 'app/acerca', 'options' => ['icon' => 'ion ion-android-contact']],
             ],
     ]);

@@ -10,9 +10,33 @@
             $this->CI =& get_instance();
         }
 
-        public function can($verb)
+        public function can($verb, $redirect = true)
         {
-            return $this->CI->session->userdata($verb) !== false;
+            if($redirect)
+            {
+                if(!isset($this->CI->session->userdata['can'][$verb]))
+                {
+                    redirect(site_url(), 'refresh');
+                }
+            }
+            else
+            {
+                return isset($this->CI->session->userdata['can'][$verb]);
+            }
+        }
+
+        public function load_permissions()
+        {
+            $can = [];
+            $id_user = $this->CI->session->userdata('ID_USUARIO');
+            $this->CI->db->select('item_name');
+            $this->CI->db->where('user_id', $id_user);
+            $permissions = $this->CI->db->get('t_auth_assignment')->result();
+            foreach ($permissions as $permision)
+            {
+                $can[$permision->item_name] = $permision->item_name;
+            }
+            $this->CI->session->set_userdata(['can' => $can]);
         }
 
         public function is_authorized($data)

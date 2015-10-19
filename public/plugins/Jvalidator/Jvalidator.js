@@ -27,8 +27,8 @@ $.fn.jValidate = function (options) {
 
         if (validateForm(options)) {
             if (options.persona != '') {
-                var doc = form.find('input.documento').val();
-                var email = form.find('input.correo_unico').val();
+                var doc = form.find('input.documento').length ? form.find('input.documento').val() : '';
+                var email = form.find('input.correo_unico').val().length ? form.find('input.correo_unico').val() : '';
 
                 if (doc.length && doc != options.docId) {
                     $.post(options.url, {

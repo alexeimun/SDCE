@@ -11,7 +11,7 @@
                 redirect(site_url(), 'refresh');
             }
 
-            $this->load->model(['cierres_model', 'practicantes_model', 'parametros_model']);
+            $this->load->model(['cierres_model', 'practicantes_model']);
             $this->load->helper(['cierre']);
         }
 

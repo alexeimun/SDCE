@@ -12,7 +12,7 @@
     <div class="pull-right hidden-xs">
         <b>Versi&oacute;n</b> <?= VERSION ?>
     </div>
-    <strong>Copyright &copy; 2015 Developed by <a href="mailto:alexis1128@outlook.com"> Wbeimar Alexis Mu&ncaron;oz</a>.</strong>.
+    <strong>Copyright &copy; 2015 Developed by <a href="mailto:alexis1128@outlook.com"> Wbeimar Alexis Mu&ncaron;oz</a></strong>.
 </footer>
 <!--end body-->
 </body>

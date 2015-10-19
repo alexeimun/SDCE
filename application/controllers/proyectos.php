@@ -13,6 +13,10 @@
                 {
                 }
             }
+            else if($this->session->userdata('ADMIN') && !$this->rbca->can('proyectos', false))
+            {
+                redirect(site_url(), 'refresh');
+            }
             else if(!$this->session->userdata('ADMIN'))
             {
                 redirect(site_url(), 'refresh');
@@ -40,7 +44,7 @@
                 $correos = trim($correos, ';');
                 mail($correos, 'Horario de asesoría para el proyecto ' . $practicantes[0]['NOMBRE_PROYECTO'],
                     "Buen día,\n\nEl proyecto " . $practicantes[0]['NOMBRE_PROYECTO'] . ", tiene asesorías los días todos los " .
-                    NombreDia($this->input->post('HORARIO')) . " de cada semana a las " . date('H:i a', strtotime($this->input->post('HORARIO'))),"From: ".$this->session->userdata('CORREO'));
+                    NombreDia($this->input->post('HORARIO')) . " de cada semana a las " . date('H:i a', strtotime($this->input->post('HORARIO'))), "From: " . $this->session->userdata('CORREO'));
             }
             else
             {

@@ -5,6 +5,8 @@
         function __construct()
         {
             parent::__construct();
+            //var_dump($this->session->userdata['can']);exit;
+            log_message('error', 'Some variable did not contain a value.');
         }
 
         public function index()
@@ -25,6 +27,7 @@
 
         public function logout()
         {
+            $this->usuarios_model->Lougout();
             $this->session->sess_destroy();
             redirect(site_url(), 'refresh');
         }
@@ -45,7 +48,6 @@
                         'ID_USUARIO' => $log[0]->ID_USUARIO,
                         'DOCUMENTO' => $log[0]->DOCUMENTO,
                         'PERIODO' => $log[0]->PERIODO,
-                        'FPERIODO' => (new DateTime($log[0]->PERIODO))->add(new DateInterval('P6M'))->format('Y-m-d'),
                         'CORREO' => $log[0]->CORREO,
                         'CLAVE' => $log[0]->CLAVE,
                         'ESTADO' => $log[0]->ESTADO,
@@ -62,6 +64,7 @@
                 }
                 else
                 {
+                    $this->rbca->load_permissions();
                     $this->session->set_userdata(['ADMIN' => true]);
                 }
                 echo 'ok';
@@ -138,7 +141,7 @@
         private function DashboardAsesor()
         {
             $this->load->model(['practicantes_model', 'agencias_model', 'proyectos_model', 'seguimientos_model']);
-            $Dashboard["Practicantes"] = $this->practicantes_model->ContarPracticantes()->PRACTICANTES;
+            $Dashboard["Practicantes"] = $this->parametros_model->ContarPracticantesPeriodo($this->session->userdata('PERIODO'));
             $Dashboard["Proyectos"] = $this->proyectos_model->ContarProyectos(true)->PROYECTOS;
 
             return ['Dashboard' => $this->load->view('Dashboard/DashboardAsesor', $Dashboard, true)];
@@ -147,8 +150,9 @@
         private function DashboarAdmin()
         {
             $this->load->model(['practicantes_model', 'agencias_model', 'proyectos_model', 'seguimientos_model']);
-            $Dashboard["Practicantes"] = $this->practicantes_model->ContarTodoPracticantes()->PRACTICANTES;
+            $Dashboard["Practicantes"] = $this->practicantes_model->ContarTodoPracticantes();
             $Dashboard["Asesores"] = $this->usuarios_model->ContarAsesores();
+            $Dashboard["Usuarios"] = $this->usuarios_model->ContarUsuarios();
             $Dashboard["Proyectos"] = $this->proyectos_model->ContarProyectos()->PROYECTOS;
             $Dashboard["Agencias"] = $this->agencias_model->ContarAgencias()->AGENCIAS;
             return ['Dashboard' => $this->load->view('Dashboard/DashboardAdmin', $Dashboard, true)];

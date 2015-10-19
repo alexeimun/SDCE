@@ -16,7 +16,7 @@
     <div class="login-box-body " id="contenedor" style="opacity: .95;">
         <p class="login-box-msg" style="font-size: 18pt;"><img src= "../../../../public/images/logo.jpg" class="img-responsive"></p>
 
-        <form method="post" action="app/ValidarCredenciales">
+        <?= form_open('app/ValidarCredenciales', ['method' => 'post']) ?>
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="Ingrese su correo universitario" name="CORREO"/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback" style="color:#0d9155; "></span>
@@ -31,7 +31,7 @@
                 </div>
                 <!-- /.col -->
             </div>
-        </form>
+        <?= form_close() ?>
     </div>
     <br>
     <!-- /.login-box-body -->

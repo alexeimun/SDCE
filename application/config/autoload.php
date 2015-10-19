@@ -92,7 +92,7 @@
     |	$autoload['model'] = array('model1', 'model2');
     |
     */
-    $autoload['model'] = ['consecutivos_model','usuarios_model'];
+    $autoload['model'] = ['consecutivos_model','usuarios_model','parametros_model'];
 
 
     /* End of file autoload.php */

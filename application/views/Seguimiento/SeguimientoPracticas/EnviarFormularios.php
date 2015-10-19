@@ -2,7 +2,7 @@
     /**
      * @var $this CI_Loader
      */
-    $this->Header(['assets' => ['dialogs', 'spin', 'jvalidator', 'dropdown']]);
+    $this->Header(['assets' => ['dialogs', 'spin', 'jvalidator']]);
 
 ?>
 <!-- Content Header (Page header) -->
@@ -35,7 +35,7 @@
 
         </div>
         <div class="panel-footer">
-            <p><b>Nota: </b>El segundo memento comienza cuando caduca el plazo del primero</p>
+            <p><b>Nota: </b>El segundo momento comienza cuando caduca el plazo del primero</p>
         </div>
     </div>
     <?= br(1) ?>
@@ -97,8 +97,8 @@
             $('.box-body table tbody tr').each(function (index, ele) {
                 ele = $(ele);
                 Practicantes.push({
-                    correo: ele.find('td:nth-of-type(3)').text(),
-                    cc: ele.find('td:nth-of-type(4)').text()
+                    correo: ele.find('td:nth-of-type(2)').text(),
+                    cc: ele.find('td:nth-of-type(3)').text()
                 });
             });
             $.ajax({

@@ -34,7 +34,7 @@
             in: {
                 effect: 'rollIn',
                 callback: function () {
-                    $('.inte').text('SDCE es un sistema de gestión de procesos internos de prácticas que facilita y mejora la priductiviad del asesor en sus labores de documentación, control, informes y seguimiento de sus practicantes.')
+                    $('.inte').text('SDCE es un sistema de gestión de procesos internos de prácticas que facilita y mejora la productividad del asesor en sus labores de documentación, control, informes y seguimiento de sus practicantes.')
                         .textillate();
                 }
             }

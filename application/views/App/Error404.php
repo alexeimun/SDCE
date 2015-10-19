@@ -22,7 +22,7 @@
         <img src="<?= base_url() ?>public/images/error-img.png" data-toggle="tooltip" title="error"/>
 
         <p><span><label>U</label>pps..... </span> Esta página no se encuentra disponible.</p>
-        <a href="app">Regresar al inicio</a>
+        <a href="<?= site_url() ?>">Regresar al inicio</a>
 
     </div>
     <!--End-Cotent------>

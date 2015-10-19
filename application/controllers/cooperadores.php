@@ -6,10 +6,7 @@
         {
             parent::__construct();
 
-            if(!$this->session->userdata('ADMIN'))
-            {
-                redirect(site_url(), 'refresh');
-            }
+            $this->rbca->can('cooperadores');
 
             $this->load->model(['cooperadores_model', 'agencias_model']);
         }

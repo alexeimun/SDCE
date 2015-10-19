@@ -108,7 +108,7 @@
              INNER JOIN t_proyectos USING (ID_PROYECTO)
              INNER JOIN t_agencias ON t_practicantes.ID_AGENCIA=t_agencias.ID_AGENCIA
 
-             WHERE t_practicantes.ESTADO=1 AND t_practicantes.FECHA_REGISTRO>='$inf' AND t_practicantes.FECHA_REGISTRO<'$sup'
+             WHERE t_practicantes.FECHA_REGISTRO>='$inf' AND t_practicantes.FECHA_REGISTRO<'$sup'
              AND t_practicantes.ID_ASESOR=" . $this->session->userdata('ID_USUARIO'))->result('array');
         }
 
@@ -273,9 +273,9 @@
            WHERE MOMENTO=$Momento AND ID_PRACTICANTE=$IdPracticante")->result();
         }
 
-        public
-        function ExisteLink()
+        public function ExisteLink()
         {
+            CleanSql($_GET);
             return $this->db->query("SELECT DISTINCT
              ID_LINK
 
@@ -295,9 +295,11 @@
             $now = date('Y-m-d H:i:s');
             return $this->db->query("SELECT
             t_practicantes.NOMBRE_PRACTICANTE,
+            t_practicantes.ID_PRACTICANTE,
             t_proyectos.MOMENTO,
             t_links.FECHA_FINALIZA,
             t_links.FECHA_REGISTRO,
+            t_links.CONSECUTIVO,
             t_links.FECHA_CADUCA
 
             FROM t_practicantes
@@ -317,6 +319,7 @@
 
         public function ValidaPracticanteIngreso()
         {
+            CleanSql($_POST);
             $query = $this->db->query("SELECT
              NOMBRE_PRACTICANTE,
              ID_PRACTICANTE,
@@ -324,9 +327,9 @@
 
              FROM t_practicantes
              INNER  JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_practicantes.ID_ASESOR
-             WHERE CORREO_PRACTICANTE='" . $this->Clean($this->input->post('CORREO', true)) . "'
+             WHERE CORREO_PRACTICANTE='" . $this->input->post('CORREO', true) . "'
              AND t_practicantes.ID_PRACTICANTE=" . $this->input->post('ID_PRACTICANTE') . "
-             AND t_practicantes.DOCUMENTO='" . $this->Clean($this->input->post('DOCUMENTO', true)) . "' LIMIT 1");
+             AND t_practicantes.DOCUMENTO='" . $this->input->post('DOCUMENTO', true) . "' LIMIT 1");
             if($query->num_rows() > 0)
             {
                 $query = $query->result()[0];

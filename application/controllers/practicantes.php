@@ -23,6 +23,10 @@
                     redirect(site_url(), 'refresh');
                 }
             }
+            else if($this->session->userdata('ADMIN') && !$this->rbca->can('practicantes',false))
+            {
+                redirect(site_url(), 'refresh');
+            }
             else if(!$this->session->userdata('ADMIN'))
             {
                 redirect(site_url(), 'refresh');
@@ -45,8 +49,6 @@
             else
             {
                 $this->load->view('Practicantes/CrearPracticante', [
-                    'Asesores' => Dropdown(['name' => 'ID_ASESOR', 'dataProvider' => $this->usuarios_model->TraeAsesoresDD(),
-                        'placeholder' => '-- Seleccione un asesor --', 'fields' => ['NOMBRE']]),
                     'Proyectos' => Dropdown(['name' => 'ID_PROYECTO', 'dataProvider' => $this->proyectos_model->TraeProyectosDD(),
                         'placeholder' => '-- Seleccione un proyecto --', 'fields' => ['NOMBRE_PROYECTO']]),
                     'Agencias' => Dropdown(['name' => 'ID_AGENCIA', 'dataProvider' => $this->agencias_model->TraeAgenciasDD(),
@@ -102,8 +104,7 @@
                     $this->load->view('Practicantes/VerPracticante', [
                         'Asesores' => Dropdown(['name' => 'ID_ASESOR', 'readonly' => true, 'index' => $Data->ID_ASESOR, 'dataProvider' => $this->usuarios_model->TraeAsesoresDD(),
                             'placeholder' => '-- Seleccione un asesor --', 'fields' => ['NOMBRE']]),
-                        'Proyectos' => Dropdown(['name' => 'ID_PROYECTO', 'readonly' => true, 'index' => $Data->ID_PROYECTO, 'dataProvider' => $this->proyectos_model->TraeProyectosDD($Id),
-                            'placeholder' => '-- Seleccione un proyecto --', 'fields' => ['NOMBRE_PROYECTO']]),
+                        'Proyecto' => $this->proyectos_model->TraeProyectosDD($Data->ID_PROYECTO),
                         'Agencias' => Dropdown(['name' => 'ID_AGENCIA', 'readonly' => true, 'index' => $Data->ID_AGENCIA, 'dataProvider' => $this->agencias_model->TraeAgenciasDD($Id),
                             'placeholder' => '-- Seleccione una agencia-- ', 'fields' => ['NOMBRE_AGENCIA']]), 'Info' => $Data,
                         'Cooperadores' => Dropdown(['name' => 'ID_COOPERADOR', 'readonly' => true, 'index' => $Data->ID_COOPERADOR, 'dataProvider' => $this->cooperadores_model->TraeCooperadoresDD(),

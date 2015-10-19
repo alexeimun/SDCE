@@ -2,7 +2,7 @@
     /**
      * @var $this CI_Loader
      */
-    $this->Header(['assets' => ['dialogs', 'spin', 'jvalidator', 'icheck', 'ionslider', 'dropdown']]);
+    $this->Header(['assets' => ['dialogs', 'spin', 'jvalidator', 'icheck', 'ionslider']]);
     $r = 0;
 
 ?>

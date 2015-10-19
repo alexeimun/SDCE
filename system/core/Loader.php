@@ -42,6 +42,7 @@
      * @property informes_model $informes_model
      * @property seguimientos_model $seguimientos_model
      * @property cooperadores_model $cooperadores_model
+     * @property Rbca $rbca                Rbca
      */
     class CI_Loader
     {

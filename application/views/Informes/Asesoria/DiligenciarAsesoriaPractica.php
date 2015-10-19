@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'ios ion-person', 'text' => 'Diligenciar Asesoría Práctica']) ?>
+    <?= page_title(['ob'=>$this,'class' => 'ios ion-edit', 'text' => 'Diligenciar Asesoría Práctica']) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -15,7 +15,7 @@
     <hr style="border: 1px solid #099a5b;"/>
 
     <?= Question(['question' => 'Tipo:','name' =>1,  'options' => ['Asesoría: FUMC', 'Visita agencia']]) ?>
-    <?= form_input(['name' => 'FECHA_HORA', 'id'=>'horafecha','class' => 'obligatorio fecha', 'required'=>'required','input'=>['col'=>5],'label' => ['col'=>3,'text' => 'Fecha y hora']]) ?>
+    <?= form_input(['name' => 'FECHA_HORA', 'id'=>'horafecha','class' => 'obligatorio fecha', 'required'=>'required','input'=>['col'=>5],'label' => ['col'=>3,'text' => 'Fecha y hora']], date('d/m/Y h:i a')) ?>
     <div class="form-group">
         <div class="row">
     	<label for="inputID" class="col-sm-9 control-label">Desarrollo de la reunión de la asesoría:</label>
@@ -35,7 +35,7 @@
 <?= $this->Footer() ?>
 
 <script>
-    jQuery('#horafecha').datetimepicker();
+    jQuery('#horafecha').datetimepicker({format:'d/m/Y h:i a'});
 
     $('form').jValidate();
     $('input:radio').iCheck({

@@ -219,6 +219,10 @@
         {
             $momento = 'siete días';
         }
+        else if($diff > 7)
+        {
+            $momento = 'En ' .$diff . ' días';
+        }
         return $momento;
     }
 
@@ -249,5 +253,6 @@
                 $dia = 'Domingo';
                 break;
         }
+
         return $dia;
     }

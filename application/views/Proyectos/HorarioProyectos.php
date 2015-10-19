@@ -2,12 +2,12 @@
     /**
      * @var $this CI_Loader
      */
-    $this->Header(['assets' => ['dialogs', 'spin', 'jvalidator', 'dropdown','datetimepicker']]);
+    $this->Header(['assets' => ['dialogs', 'spin', 'jvalidator', 'datetimepicker']]);
 
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'ios ion-person', 'text' => 'Horario Asesorías']) ?>
+    <?= page_title(['ob' => $this, 'class' => 'ios ion-clock', 'text' => 'Horario Asesorías']) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -31,11 +31,12 @@
 
     $('form').jValidate();
 
-        $('select[name=ID_PROYECTO]').on('change', function () {
+    $('select[name=ID_PROYECTO]').on('change', function () {
         if ($('select[name=ID_PROYECTO] :selected').val() != 0)
             $('.horario').load('<?=site_url('proyectos/TraeHorarioAjax')?>', {ID_PROYECTO: $(this).val()}, function () {
-                        $('input[name=HORARIO]').datetimepicker({format:'Y/m/d h:i a'});
+                $('input[name=HORARIO]').datetimepicker({format: 'Y/m/d h:i a'});
             });
+        else $('.horario').html('');
     });
 
     (new Spinner({

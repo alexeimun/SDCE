@@ -20,15 +20,51 @@
       <column name="PAGINA_WEB" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="ID_AGENCIA"/>
+      <exported-key name="t_cooperadores_ibfk_1" table="t_cooperadores" schema="" catalog="sdce" columns="ID_AGENCIA"/>
+      <exported-key name="t_practicantes_ibfk_4" table="t_practicantes" schema="" catalog="sdce" columns="ID_AGENCIA"/>
     </table>
     <table name="t_asesoria_practicas" schema="" catalog="sdce" type="TABLE">
       <column name="ID_ASESORIA_PRACTICA" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_PRACTICANTE" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <column name="TIPO_ASESORIA" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2"/>
       <column name="FECHA_HORA" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
       <column name="REUNION_ASESORIA" sqlType="VARCHAR" precision="1500" scale="0" nullable="true" jdbcType="12"/>
       <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="ID_ASESORIA_PRACTICA"/>
+      <foreign-key name="t_asesoria_practicas_ibfk_1" columns="ID_PRACTICANTE" ref-table="t_practicantes" ref-schema="" ref-catalog="sdce" ref-columns="ID_PRACTICANTE" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="t_auth_assignment" schema="" catalog="sdce" type="TABLE">
+      <column name="item_name" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="item_name,user_id"/>
+      <foreign-key name="t_auth_assignment_ibfk_2" columns="user_id" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="t_auth_assignment_ibfk_1" columns="item_name" ref-table="t_auth_item" ref-schema="" ref-catalog="sdce" ref-columns="name" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="t_auth_item" schema="" catalog="sdce" type="TABLE">
+      <column name="name" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="type" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="rule_name" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="data" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="name"/>
+      <foreign-key name="t_auth_item_ibfk_1" columns="rule_name" ref-table="t_auth_rule" ref-schema="" ref-catalog="sdce" ref-columns="name" update-rule="0" delete-rule="2" deferrability="2"/>
+      <exported-key name="t_auth_assignment_ibfk_1" table="t_auth_assignment" schema="" catalog="sdce" columns="item_name"/>
+      <exported-key name="t_auth_item_child_ibfk_1" table="t_auth_item_child" schema="" catalog="sdce" columns="parent"/>
+      <exported-key name="t_auth_item_child_ibfk_2" table="t_auth_item_child" schema="" catalog="sdce" columns="child"/>
+      <index name="type" unique="false" columns="type"/>
+    </table>
+    <table name="t_auth_item_child" schema="" catalog="sdce" type="TABLE">
+      <column name="parent" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="child" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="parent,child"/>
+      <foreign-key name="t_auth_item_child_ibfk_1" columns="parent" ref-table="t_auth_item" ref-schema="" ref-catalog="sdce" ref-columns="name" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="t_auth_item_child_ibfk_2" columns="child" ref-table="t_auth_item" ref-schema="" ref-catalog="sdce" ref-columns="name" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="t_auth_rule" schema="" catalog="sdce" type="TABLE">
+      <column name="name" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="data" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="name"/>
+      <exported-key name="t_auth_item_ibfk_1" table="t_auth_item" schema="" catalog="sdce" columns="rule_name"/>
     </table>
     <table name="t_calificacion_practicantes" schema="" catalog="sdce" type="TABLE">
       <column name="ID_CALIFICACION_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -41,6 +77,7 @@
       <column name="OBS_SABERSABER" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="ID_CALIFICACION_PRACTICANTE"/>
+      <foreign-key name="t_calificacion_practicantes_ibfk_1" columns="ID_PRACTICANTE" ref-table="t_practicantes" ref-schema="" ref-catalog="sdce" ref-columns="ID_PRACTICANTE" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="t_ciudades" schema="" catalog="sdce" type="TABLE">
       <column name="ID_CIUDAD" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -64,6 +101,19 @@
       <column name="CARGO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="ID_COOPERADOR"/>
+      <foreign-key name="t_cooperadores_ibfk_1" columns="ID_AGENCIA" ref-table="t_agencias" ref-schema="" ref-catalog="sdce" ref-columns="ID_AGENCIA" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="t_practicantes_ibfk_2" table="t_practicantes" schema="" catalog="sdce" columns="ID_COOPERADOR"/>
+    </table>
+    <table name="t_dependencias" schema="" catalog="sdce" type="TABLE">
+      <column name="DECANATURA_TITULO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="DECANATURA" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CP_TITULO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CP" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CIAD_TITULO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CIAD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ADMISIONES_TITULO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ADMISIONES" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FECHA_REGISTRO" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
     </table>
     <table name="t_evaluacion_estudiante" schema="" catalog="sdce" type="TABLE">
       <column name="ID_EVALUACION_ESTUDIANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -91,6 +141,8 @@
       <column name="METEST" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12"/>
       <column name="FD" sqlType="VARCHAR" precision="380" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="ID_EVALUACION_ESTUDIANTE"/>
+      <foreign-key name="t_evaluacion_estudiante_ibfk_1" columns="ID_PRACTICANTE" ref-table="t_practicantes" ref-schema="" ref-catalog="sdce" ref-columns="ID_PRACTICANTE" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="t_evaluacion_estudiante_ibfk_1" unique="false" columns="ID_PRACTICANTE"/>
     </table>
     <table name="t_gastos_transporte" schema="" catalog="sdce" type="TABLE">
       <column name="ID_GASTOS_TRANSPORTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -102,6 +154,7 @@
       <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="ID_GASTOS_TRANSPORTE"/>
+      <foreign-key name="t_gastos_transporte_ibfk_1" columns="ID_ASESOR" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="0" delete-rule="0" deferrability="2"/>
     </table>
     <table name="t_informes_mensuales" schema="" catalog="sdce" type="TABLE">
       <column name="ID_INFORME_MENSUAL" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -111,6 +164,7 @@
       <column name="OBSERVACIONES" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
       <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="ID_INFORME_MENSUAL"/>
+      <foreign-key name="t_informes_mensuales_ibfk_1" columns="ID_PROYECTO" ref-table="t_proyectos" ref-schema="" ref-catalog="sdce" ref-columns="ID_PROYECTO" update-rule="0" delete-rule="0" deferrability="2"/>
     </table>
     <table name="t_links" schema="" catalog="sdce" type="TABLE">
       <column name="ID_LINK" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -122,11 +176,8 @@
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="FECHA_FINALIZA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="RmVjaGEgZW4gbGEgcXVlIGVsIHByY2F0aWNhbnRlIGV2YWx1YQ=="/>
       <primary-key name="PRIMARY" columns="ID_LINK"/>
-    </table>
-    <table name="t_modalidad_practica" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_MODALIDAD_PRACTICA" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="NOMBRE_MODALIDAD_PRACTICA" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="ID_MODALIDAD_PRACTICA"/>
+      <foreign-key name="t_links_ibfk_1" columns="ID_PRACTICANTE" ref-table="t_practicantes" ref-schema="" ref-catalog="sdce" ref-columns="ID_PRACTICANTE" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="t_links_ibfk_1" unique="false" columns="ID_PRACTICANTE"/>
     </table>
     <table name="t_practicantes" schema="" catalog="sdce" type="TABLE">
       <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -139,11 +190,22 @@
       <column name="NOMBRE_PRACTICANTE" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <column name="CORREO_PRACTICANTE" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
       <column name="DOCUMENTO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CELULAR" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
       <column name="TELEFONO" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
       <column name="CODIGO" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="ESTADO" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MQ=="/>
+      <column name="FECHA_MODIFICA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="ID_USUARIO_MODIFICA" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="ID_PRACTICANTE"/>
+      <foreign-key name="t_practicantes_ibfk_1" columns="ID_ASESOR" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="t_practicantes_ibfk_2" columns="ID_COOPERADOR" ref-table="t_cooperadores" ref-schema="" ref-catalog="sdce" ref-columns="ID_COOPERADOR" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="t_practicantes_ibfk_3" columns="ID_PROYECTO" ref-table="t_proyectos" ref-schema="" ref-catalog="sdce" ref-columns="ID_PROYECTO" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="t_practicantes_ibfk_4" columns="ID_AGENCIA" ref-table="t_agencias" ref-schema="" ref-catalog="sdce" ref-columns="ID_AGENCIA" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="t_asesoria_practicas_ibfk_1" table="t_asesoria_practicas" schema="" catalog="sdce" columns="ID_PRACTICANTE"/>
+      <exported-key name="t_calificacion_practicantes_ibfk_1" table="t_calificacion_practicantes" schema="" catalog="sdce" columns="ID_PRACTICANTE"/>
+      <exported-key name="t_evaluacion_estudiante_ibfk_1" table="t_evaluacion_estudiante" schema="" catalog="sdce" columns="ID_PRACTICANTE"/>
+      <exported-key name="t_links_ibfk_1" table="t_links" schema="" catalog="sdce" columns="ID_PRACTICANTE"/>
+      <index name="ID_MODALIDAD_PRACTICA" unique="false" columns="ID_MODALIDAD_PRACTICA"/>
     </table>
     <table name="t_proyectos" schema="" catalog="sdce" type="TABLE">
       <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -154,7 +216,13 @@
       <column name="MOMENTO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MQ=="/>
       <column name="FECHA_CADUCA_EVALUACION" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="PERIODO" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
       <primary-key name="PRIMARY" columns="ID_PROYECTO"/>
+      <foreign-key name="t_proyectos_ibfk_1" columns="ID_TIPO_PROYECTO" ref-table="t_tipo_proyectos" ref-schema="" ref-catalog="sdce" ref-columns="ID_TIPO_PROYECTO" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="t_proyectos_ibfk_2" columns="ID_ASESOR" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="t_informes_mensuales_ibfk_1" table="t_informes_mensuales" schema="" catalog="sdce" columns="ID_PROYECTO"/>
+      <exported-key name="t_practicantes_ibfk_3" table="t_practicantes" schema="" catalog="sdce" columns="ID_PROYECTO"/>
+      <exported-key name="t_registro_notas_ibfk_1" table="t_registro_notas" schema="" catalog="sdce" columns="ID_PROYECTO"/>
     </table>
     <table name="t_registro_notas" schema="" catalog="sdce" type="TABLE">
       <column name="ID_REGISTRO_NOTA" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -164,6 +232,7 @@
       <column name="NOTA2" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
       <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="ID_REGISTRO_NOTA"/>
+      <foreign-key name="t_registro_notas_ibfk_1" columns="ID_PROYECTO" ref-table="t_proyectos" ref-schema="" ref-catalog="sdce" ref-columns="ID_PROYECTO" update-rule="0" delete-rule="0" deferrability="2"/>
     </table>
     <table name="t_registros" schema="" catalog="sdce" type="TABLE">
       <column name="ID_REGISTRO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -173,14 +242,16 @@
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="TOTAL" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
       <column name="MOMENTO_EVALUATIVO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="SEMESTRE" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="PERIODO" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
       <primary-key name="PRIMARY" columns="ID_REGISTRO"/>
+      <foreign-key name="t_registros_ibfk_1" columns="ID_ASESOR" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="t_tipo_proyectos" schema="" catalog="sdce" type="TABLE">
       <column name="ID_TIPO_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="NOMBRE_TIPO_PROYECTO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="ID_TIPO_PROYECTO"/>
+      <exported-key name="t_proyectos_ibfk_1" table="t_proyectos" schema="" catalog="sdce" columns="ID_TIPO_PROYECTO"/>
     </table>
     <table name="t_usuarios" schema="" catalog="sdce" type="TABLE">
       <column name="ID_USUARIO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
@@ -196,7 +267,15 @@
       <column name="ESTADO" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MQ=="/>
       <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="FACHA_ULTIMO_INICIO_SESION" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="FECHA_MODIFICA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="ID_USUARIO_MODIFICA" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="LOG_IN" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MA=="/>
       <primary-key name="PRIMARY" columns="ID_USUARIO"/>
+      <exported-key name="t_auth_assignment_ibfk_2" table="t_auth_assignment" schema="" catalog="sdce" columns="user_id"/>
+      <exported-key name="t_gastos_transporte_ibfk_1" table="t_gastos_transporte" schema="" catalog="sdce" columns="ID_ASESOR"/>
+      <exported-key name="t_practicantes_ibfk_1" table="t_practicantes" schema="" catalog="sdce" columns="ID_ASESOR"/>
+      <exported-key name="t_proyectos_ibfk_2" table="t_proyectos" schema="" catalog="sdce" columns="ID_ASESOR"/>
+      <exported-key name="t_registros_ibfk_1" table="t_registros" schema="" catalog="sdce" columns="ID_ASESOR"/>
     </table>
   </data-source>
 </component>

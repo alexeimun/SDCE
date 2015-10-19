@@ -19,14 +19,14 @@
                     <?php
                         if($this->session->userdata('ADMIN'))
                         {
-                            echo Component::Table(['columns' => ['Nombre', 'Tipo de proyecto', 'Asesor', '#Practicantes'],
+                            echo Component::Table(['columns' => ['Nombre del proyecto', 'Tipo de proyecto', 'Asesor', '#Practicantes'],
                                 'tableName' => 'proyecto', 'autoNumeric' => true, 'id' => 'ID_PROYECTO', 'controller' => 'proyectos',
                                 'fields' => ['NOMBRE_PROYECTO', 'NOMBRE_TIPO_PROYECTO', 'NOMBRE_USUARIO', 'PRACTICANTES',]
                                 , 'dataProvider' => $this->proyectos_model->TraeProyectos(), 'actions' => 'duv']);
                         }
                         else
                         {
-                            echo Component::Table(['columns' => ['Nombre', 'Tipo de proyecto', '#Practicantes'],
+                            echo Component::Table(['columns' => ['Nombre del proyecto', 'Tipo de proyecto', '#Practicantes'],
                                 'tableName' => 'proyecto', 'autoNumeric' => true, 'id' => 'ID_PROYECTO', 'controller' => 'proyectos',
                                 'fields' => ['NOMBRE_PROYECTO', 'NOMBRE_TIPO_PROYECTO', 'PRACTICANTES',]
                                 , 'dataProvider' => $this->proyectos_model->TraeProyectosAsesor(), 'actions' => 'v']);
