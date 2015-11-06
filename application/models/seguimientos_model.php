@@ -102,7 +102,7 @@
              t_practicantes.NOMBRE_PRACTICANTE,
              t_proyectos.NOMBRE_PROYECTO,
              t_agencias.NOMBRE_AGENCIA,
-             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación profesional' WHEN 2 THEN 'Practica empresarial' ELSE 'Idea de negocio' END AS MODALIDAD
+             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación profesional' WHEN 2 THEN 'Práctica empresarial' ELSE 'Idea de negocio' END AS MODALIDAD
 
              FROM t_practicantes
              INNER JOIN t_proyectos USING (ID_PROYECTO)
@@ -248,7 +248,7 @@
         {
             return $this->db->query("SELECT COUNT(ID_LINK) MOMENTOS
                 FROM t_links
-                WHERE FINALIZADO=1 AND ID_PRACTICANTE=" . $this->input->post('ID_PRACTICANTE'))->result()[0]->MOMENTOS;
+                WHERE FINALIZADO=1 AND TIPO='sp' AND ID_PRACTICANTE=" . $this->input->post('ID_PRACTICANTE'))->result()[0]->MOMENTOS;
         }
 
         public
@@ -309,12 +309,6 @@
              t_links.FINALIZADO=$fin AND
              t_links.TIPO='$tipo'
             AND t_links.FECHA_CADUCA>='$now' ORDER BY t_links.FECHA_FINALIZA DESC ")->result();
-        }
-
-        private
-        function Clean($value)
-        {
-            return str_replace('"', '', str_replace("'", '', str_replace("\\", '', $value)));
         }
 
         public function ValidaPracticanteIngreso()

@@ -159,9 +159,10 @@
                 }
                 else
                 {
-                    $CalificacionMomentos = [0 => 'No hay momentos'];
+                    $CalificacionMomentos = false;
                 }
-                echo form_dropdown('MOMENTO', $CalificacionMomentos, ['input' => ['col' => '7'], 'label' => ['text' => 'Momento', 'col' => 3]]);
+                echo $CalificacionMomentos === false ? "<a target='_blank' class='col-lg-9 col-lg-push-2'  href='".site_url('seguimiento/enviarformularios')."'><b>El practicante no ha realizado la aotoevaluación, ¿desea enviarsela?</b></a><br>" :
+                    form_dropdown('MOMENTO', $CalificacionMomentos, ['input' => ['col' => '7'], 'label' => ['text' => 'Momento', 'col' => 3]]);
             }
             else
             {
@@ -202,15 +203,6 @@
                 $this->seguimientos_model->InsertarLinkFormularioSeguimiento($Data);
                 var_dump($Links);
                 echo $Practicante['correo'] . str_replace(',', '', $Practicante['cc']) . $Momento;
-
-                #Momento 1
-                #http://sdce/seguimiento/evaluarestudiante?_link=9562fa03e17d4f52db4c489d8b7c4a78&_id=1&_type=sp
-                #http://sdce/seguimiento/evaluarestudiante?_link=f1576b2c0f63e3721ca2858f1f866191&_id=3&_type=sp
-                #http://sdce/seguimiento/evaluarestudiante?_link=a3eb890ed6629ceff27fe77e9d86deac&_id=4&_type=sp
-                #Momento 2
-                #http://sdce/seguimiento/evaluarestudiante?_link=5cfa67250e850abd166d53b879e7b269&_id=1&_type=sp
-                #http://sdce/seguimiento/evaluarestudiante?_link=ad22509c668caec61a62b4d4e023a81a&_id=3&_type=sp
-                #http://sdce/seguimiento/evaluarestudiante?_link=34795dbbd2865f7887bda9eaf8a05481&_id=4&_type=sp
             }
             else
             {

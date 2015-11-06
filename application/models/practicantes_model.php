@@ -16,7 +16,7 @@
              t_practicantes.ID_PROYECTO,
              t_practicantes.DOCUMENTO,
              t_practicantes.ID_AGENCIA,
-             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Practica empresarial'  END AS MODALIDAD,
+             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Práctica empresarial'  END AS MODALIDAD,
              CASE t_practicantes.ID_PROGRAMA WHEN 1 THEN 'Ingeniería de Sistemas' WHEN 2 THEN 'Ingeniería de Software' WHEN 3 THEN 'Electromedicina'  WHEN 4 THEN 'Robótica y automatización' ELSE 'N/A' END PROGRAMA,
              t_practicantes.ID_MODALIDAD_PRACTICA,
              t_practicantes.ID_PROGRAMA,
@@ -90,7 +90,7 @@
              t_practicantes.CORREO_PRACTICANTE,
              t_cooperadores.NOMBRE_COOPERADOR,
              t_agencias.NOMBRE_AGENCIA,
-            CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Practica empresarial'  END AS MODALIDAD
+            CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Práctica empresarial'  END AS MODALIDAD
 
 
              FROM t_practicantes
@@ -109,7 +109,7 @@
              t_practicantes.CORREO_PRACTICANTE,
              t_cooperadores.NOMBRE_COOPERADOR,
              t_agencias.NOMBRE_AGENCIA,
-            CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Practica empresarial'  END AS MODALIDAD
+            CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Práctica empresarial'  END AS MODALIDAD
 
 
              FROM t_practicantes
@@ -131,7 +131,7 @@
              t_practicantes.NOMBRE_PRACTICANTE,
              t_practicantes.CORREO_PRACTICANTE,
              t_practicantes.DOCUMENTO,
-             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación profesional' WHEN 2 THEN 'Practica empresarial' END AS MODALIDAD,
+             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación profesional' WHEN 2 THEN 'Práctica empresarial' END AS MODALIDAD,
              t_agencias.NOMBRE_AGENCIA
 
              FROM t_practicantes
@@ -185,7 +185,7 @@
              t_usuarios.NOMBRE NOMBRE_ASESOR,
              t_cooperadores.NOMBRE_COOPERADOR,
              t_agencias.NOMBRE_AGENCIA,
-             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Practica empresarial'  END AS MODALIDAD
+             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Práctica empresarial'  END AS MODALIDAD
 
              FROM t_practicantes
 

@@ -10,7 +10,7 @@
             <div class="box">
                 <div class="box-header">
                     <h3 style="text-align: center;color: #099a5b;"><span style="font-size: 25pt;"
-                                                                         class="ios ion-android-list"></span>&nbsp;
+                                                                         class="fa fa-table"></span>&nbsp;
                         Listado <?= Uncamelize(pathinfo(__FILE__)['filename']) ?></h3>
                 </div>
                 <div class="box-body">
@@ -42,7 +42,7 @@
                 title: '<span class="ion ion-android-delete" style="font-size: 20pt;font-weight: bold; color: white;"></span>&nbsp;&nbsp;&nbsp; <span  style="font-size: 18pt;">Atención!</span>',
                 type: BootstrapDialog.TYPE_DANGER,
                 draggable: true,
-                message: 'Está seguro que desea eliminar este ' + $('#tabla').data('name') + '?</span>',
+                message: '¿Está seguro que desea eliminar este registro?',
                 buttons: [{
                     label: 'Aceptar',
                     cssClass: 'btn-danger',

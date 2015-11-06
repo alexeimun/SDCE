@@ -25,7 +25,7 @@
             else
             {
                 $this->load->view('Agencias/CrearAgencia',
-                    ['Ciudades' => Dropdown(['name' => 'ID_CIUDAD', 'dataProvider' => $this->agencias_model->TraeCiudades(),
+                    ['Ciudades' => Dropdown(['name' => 'ID_CIUDAD', 'index' => 1, 'dataProvider' => $this->agencias_model->TraeCiudades(),
                         'placeholder' => '-- Seleccione una ciudad-- ', 'fields' => ['NOMBRE', 'tag' => ' - ', 'DEPARTAMENTO']])]);
             }
         }
@@ -84,7 +84,13 @@
         {
             if(!empty($_POST))
             {
-                $this->agencias_model->EliminarAgencia();
+                try
+                {
+                    $this->agencias_model->EliminarAgencia();
+                }
+                catch (Exception $e)
+                {
+                }
             }
             else
             {

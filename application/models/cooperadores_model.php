@@ -26,7 +26,7 @@
 
         public function ContarCooperadores()
         {
-            return $this->db->query("SELECT COUNT(ID_COOPERADOR) AS COOPERADORS FROM t_cooperadores")->result()[0];
+            return $this->db->query("SELECT COUNT(ID_COOPERADOR) AS COOPERADORES FROM t_cooperadores")->result()[0]->COOPERADORES;
         }
 
         public function InsertarCooperador()
@@ -57,7 +57,7 @@
               DIRECCION_COOPERADOR,
               CARGO
 
-             FROM t_cooperadores")->result('array');
+             FROM t_cooperadores ORDER BY t_cooperadores.FECHA_REGISTRO DESC")->result('array');
         }
 
         public function TraeCooperadoresDD()

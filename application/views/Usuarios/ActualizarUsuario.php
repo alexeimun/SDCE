@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'ios ion-edit', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-edit', 'text' => Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -18,8 +18,8 @@
     <hr style="border: 1px solid #3D8EBC;"/>
     <?= form_input(['placeholder' => 'Ingrese el nombre del usuario', 'name' => 'NOMBRE', 'class' => 'obligatorio', 'label' => ['text' => 'Nombre']], $Info->NOMBRE) ?>
     <?= form_input(['placeholder' => 'Ingrese el correo electrónico del usuario', 'name' => 'CORREO', 'class' => 'obligatorio correo correo_unico', 'label' => ['text' => 'Correo']], $Info->CORREO) ?>
-    <?= form_input(['placeholder' => 'Ingrese una contraseña', 'name' => 'CLAVE', 'type' => 'password', 'class' => 'obligatorio clave claveinicial', 'label' => ['text' => 'Clave']], $Info->CLAVE) ?>
-    <?= form_input(['placeholder' => 'Ingrese de nuevo la contraseña', 'type' => 'password', 'class' => 'obligatorio clave confirmar', 'label' => ['text' => 'Comprobar Clave']], $Info->CLAVE) ?>
+    <?= form_input(['placeholder' => 'Ingrese una contraseña', 'name' => 'CLAVE', 'type' => 'password', 'class' => 'obligatorio clave claveinicial', 'label' => ['text' => 'Clave']]) ?>
+    <?= form_input(['placeholder' => 'Ingrese de nuevo la contraseña', 'type' => 'password', 'class' => 'obligatorio clave confirmar', 'label' => ['text' => 'Comprobar Clave']]) ?>
     <?= br() ?>
     <?php if($Info->NIVEL != 2 && $this->session->userdata('ID_USUARIO') != $Info->ID_USUARIO): ?>
         <h3 style="text-align: center;color: #3D8EBC">El usuario puede administrar</h3>

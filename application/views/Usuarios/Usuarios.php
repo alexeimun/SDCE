@@ -11,7 +11,7 @@
             <div class="box">
                 <div class="box-header">
                     <h3 style="text-align: center;color: #3D8EBC;"><span style="font-size: 25pt;"
-                                                                         class="ios ion-android-list"></span>&nbsp;Listado
+                                                                         class="fa fa-table"></span>&nbsp;Listado
                         Usuarios Administradores</h3>
                 </div>
                 <div class="box-body">
@@ -49,8 +49,16 @@
                     label: 'Aceptar',
                     cssClass: 'btn-danger',
                     action: function () {
-                        $.post(url, {Id: id}, function () {
-                            location.href = '';
+                        $.ajax({
+                            type: 'post', url: url, data: {Id: id},
+                            success: function () {
+                                location.href = '';
+                            },
+                            error: function (a) {
+                                if (a.status == 500) {
+                                    $(".bootstrap-dialog-message").html('<br> <span style="color: #8c4646"><b>&nbsp;No se puede eliminar este registro! </b>Asegurese de que no esté siendo utilizado en otros módulos del sistema.</span>')
+                                }
+                            }
                         });
                     }
                 },

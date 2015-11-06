@@ -23,7 +23,7 @@
                     redirect(site_url(), 'refresh');
                 }
             }
-            else if($this->session->userdata('ADMIN') && !$this->rbca->can('practicantes',false))
+            else if($this->session->userdata('ADMIN') && !$this->rbca->can('practicantes', false))
             {
                 redirect(site_url(), 'refresh');
             }

@@ -2,42 +2,34 @@
     /**
      * @var $this CI_Loader
      */
-
     echo Component::Sidebar([
         'options' => ['img' => ['path' => 'public/images/logo.jpg', 'url' => ''], 'header' => 'MENU PRINCIPAL'],
         'items' =>
             [
-                ['label' => 'Informes', 'options' => ['icon' => 'ion-compose'],
+                ['label' => 'Informes', 'options' => ['icon' => 'fa fa-clipboard'],
                     'items' =>
                         [
-                            ['label' => 'Asesoría', 'options' => ['icon' => 'ion-android-list'],
+                            ['label' => 'Asesoría', 'options' => ['icon' => 'fa fa-th-list'],
                                 'items' =>
                                     [
                                         ['label' => 'Enviar formulario', 'url' => 'informe/enviarasesoriaspractica', 'options' => ['icon' => 'ion-paper-airplane']],
-                                        ['label' => 'Asesorías prácticas', 'url' => 'informe/asesoriapracticas', 'options' => ['icon' => 'ion-clipboard']],
+                                        ['label' => 'Asesorías prácticas', 'url' => 'informe/asesoriapracticas', 'options' => ['icon' => 'fa fa-list-alt']],
                                     ],
                             ],
-                            ['label' => 'Gastos de transporte', 'options' => ['icon' => 'ion-model-s'],
+                            ['label' => 'Gastos de transporte', 'options' => ['icon' => 'fa fa-bus'],
                                 'items' =>
                                     [
                                         ['label' => 'Crear Gasto transporte', 'url' => 'informe/creargastostransporte', 'options' => ['icon' => 'ion-android-add']],
-                                        ['label' => 'Gastos transporte', 'url' => 'informe/gastostransporte', 'options' => ['icon' => 'ion-clipboard']],
-                                    ],
-                            ],
-                            ['label' => 'Informe mensual', 'visible' => false, 'options' => ['icon' => 'ion-android-list'],
-                                'items' =>
-                                    [
-                                        ['label' => 'Crear informe mensual', 'url' => 'informe/crearinformemensual', 'options' => ['icon' => 'ion-android-add']],
-                                        ['label' => 'Informes mensuales', 'url' => 'informe/informesmensuales', 'options' => ['icon' => 'ion-clipboard']],
+                                        ['label' => 'Gastos transporte', 'url' => 'informe/gastostransporte', 'options' => ['icon' => 'fa fa-list-alt']],
                                     ],
                             ],
                         ],
                 ],
-                ['label' => 'Seguimiento', 'options' => ['icon' => 'ion-arrow-graph-up-right'],
+                ['label' => 'Seguimiento', 'options' => ['icon' => 'fa fa-location-arrow'],
                     'items' =>
                         [
-                            ['label' => 'Certificado paz y salvo', 'url' => 'seguimiento/pazysalvo', 'options' => ['icon' => 'ion-checkmark']],
-                            ['label' => 'Registro de notas', 'url' => 'seguimiento/registronotas', 'options' => ['icon' => 'glyphicon glyphicon-pencil']],
+                            ['label' => 'Certificado paz y salvo', 'url' => 'seguimiento/pazysalvo', 'options' => ['icon' => 'fa fa-check']],
+                            ['label' => 'Registro de notas', 'url' => 'seguimiento/registronotas', 'options' => ['icon' => 'fa fa-pencil']],
                             ['label' => 'Seguimiento prácticas', 'options' => ['icon' => 'ion-arrow-graph-up-right'],
                                 'items' =>
                                     [
@@ -48,28 +40,28 @@
                                     ]],
                         ],
                 ],
-                ['label' => 'Cierre prácticas', 'options' => ['icon' => 'ion-android-time'],
+                ['label' => 'Cierre prácticas', 'options' => ['icon' => 'fa fa-clock-o'],
                     'items' =>
                         [
-                            ['label' => 'Admisiones y registros', 'options' => ['icon' => 'ion-filing'],
+                            ['label' => 'Admisiones y registros', 'options' => ['icon' => 'fa fa-folder-open'],
                                 'items' =>
                                     [
                                         ['label' => 'Cierre admisiones y registros', 'url' => 'cierres/admisiones', 'options' => ['icon' => 'ion-plus-round']],
                                         ['label' => 'Carta admisiones y registros', 'url' => 'cierres/cartaadmisiones', 'options' => ['icon' => 'ion-compose']],
                                     ]],
-                            ['label' => 'CIAD', 'options' => ['icon' => 'ion-filing'],
+                            ['label' => 'CIAD', 'options' => ['icon' => 'fa fa-folder-open'],
                                 'items' =>
                                     [
                                         ['label' => 'Cierre CIAD', 'url' => 'cierres/ciad', 'options' => ['icon' => 'ion-plus-round']],
                                         ['label' => 'Carta CIAD', 'url' => 'cierres/cartaciad', 'options' => ['icon' => 'ion-compose']],
                                     ]],
-                            ['label' => 'Centro prácticas', 'options' => ['icon' => 'ion-filing'],
+                            ['label' => 'Centro prácticas', 'options' => ['icon' => 'fa fa-folder-open'],
                                 'items' =>
                                     [
                                         ['label' => 'Cierre centro prácticas', 'url' => 'cierres/centropracticas', 'options' => ['icon' => 'ion-plus-round']],
                                         ['label' => 'Carta centro prácticas', 'url' => 'cierres/cartacentropracticas', 'options' => ['icon' => 'ion-compose']],
                                     ]],
-                            ['label' => 'Decanatura', 'options' => ['icon' => 'ion-filing'],
+                            ['label' => 'Decanatura', 'options' => ['icon' => 'fa fa-folder-open'],
                                 'items' =>
                                     [
                                         ['label' => 'Cierre decanatura', 'url' => 'cierres/decanatura', 'options' => ['icon' => 'ion-plus-round']],
@@ -77,22 +69,23 @@
                                     ]],
                         ],
                 ],
-                ['label' => 'Proyectos', 'options' => ['icon' => 'ion-help-buoy'],
+                ['label' => 'Proyectos', 'options' => ['icon' => 'fa fa fa-rocket'],
                     'items' =>
                         [
-                            ['label' => 'Horario asesorías', 'url' => 'proyectos/horarios', 'options' => ['icon' => 'ion-android-calendar']],
-                            ['label' => 'Proyectos', 'url' => 'proyectos', 'options' => ['icon' => 'ion-android-list']],
+                            ['label' => 'Horario asesorías', 'url' => 'proyectos/horarios', 'options' => ['icon' => 'ios ion-clock']],
+                            ['label' => 'Proyectos', 'url' => 'proyectos', 'options' => ['icon' => 'fa fa-list-alt']],
                         ],
                 ],
-                ['label' => 'Documentación', 'options' => ['icon' => 'ion-document'],
+                ['label' => 'Practicantes', 'url' => 'practicantes', 'options' => ['icon' => 'fa fa-group']],
+                ['label' => 'Documentación', 'options' => ['icon' => 'fa fa-book'],
                     'items' =>
                         [
-                            ['label' => 'Estructura administrativa', 'url' => 'public/Documentacion/eap.pdf', 'options' => ['icon' => 'ion-document', 'target' => '_blank']],
-                            ['label' => 'Instructivo seguimiento', 'url' => 'public/Documentacion/instructivo.pdf', 'options' => ['icon' => 'ion-document', 'target' => '_blank']],
+                            ['label' => 'Estructura administrativa', 'url' => 'public/documentacion/eap.pdf', 'options' => ['icon' => 'fa fa-file-pdf-o', 'target' => '_blank']],
+                            ['label' => 'Instructivo seguimiento', 'url' => 'public/documentacion/instructivo.pdf', 'options' => ['icon' => 'fa fa-file-pdf-o', 'target' => '_blank']],
+                            ['label' => 'Manual de SDCE', 'url' => 'public/documentacion/manualasesor.pdf', 'options' => ['icon' => 'fa fa-file-pdf-o', 'target' => '_blank']],
                         ],
                 ],
-                ['label' => 'Practicantes', 'url' => 'practicantes', 'options' => ['icon' => 'ion-person-stalker']],
-                ['label' => 'Acerca', 'url' => 'app/acerca', 'options' => ['icon' => 'ion ion-android-contact']],
+                ['label' => 'Acerca', 'url' => 'app/acerca', 'options' => ['icon' => 'fa fa-leaf']],
             ],
     ]);
 ?>

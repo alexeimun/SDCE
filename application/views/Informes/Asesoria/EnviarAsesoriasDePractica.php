@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'ios ion-paper-airplane', 'text' => 'Enviar Asesorías de Práctica']) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-paper-plane-o', 'text' => 'Enviar Asesorías de Práctica']) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -19,7 +19,7 @@
     <div class="col-lg-offset-5"><span style="text-align: center;" class="font1" id="consecutivo"></span></div>
     <div class="box">
         <div class="box-header bg-gray">
-            <h3 style="color:#7d7d80;text-align: center"><span class="ion ion-person-stalker"></span> Practicantes
+            <h3 style="color:#7d7d80;text-align: center"><span class="fa fa-group"></span> Practicantes
             </h3>
         </div>
         <div class="box-body"></div>

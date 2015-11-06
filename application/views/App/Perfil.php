@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'ios ion-edit', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-edit', 'text' => Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -28,8 +28,8 @@
     <?= form_input(['placeholder' => 'Ingrese el número telefónico del asesor', 'name' => 'TELEFONO', 'class' => 'obligatorio numero telefono', 'label' => ['text' => 'Telefono']], $Info->TELEFONO) ?>
     <?= form_input(['placeholder' => 'Ingrese el número celular del asesor', 'name' => 'CELULAR', 'class' => 'numero telefono', 'label' => ['text' => 'Celular']], $Info->CELULAR) ?>
 
-    <?= form_input(['placeholder' => 'Ingrese una contraseña', 'name' => 'CLAVE', 'type' => 'password', 'class' => 'obligatorio clave claveinicial', 'label' => ['text' => 'Clave']], $Info->CLAVE) ?>
-    <?= form_input(['placeholder' => 'Ingrese de nuevo la contraseña', 'type' => 'password', 'class' => 'obligatorio clave confirmar', 'label' => ['text' => 'Comprobar Clave']], $Info->CLAVE) ?>
+    <?= form_input(['placeholder' => 'Ingrese una contraseña', 'name' => 'CLAVE', 'type' => 'password', 'class' => 'obligatorio clave claveinicial', 'label' => ['text' => 'Clave']]) ?>
+    <?= form_input(['placeholder' => 'Ingrese de nuevo la contraseña', 'type' => 'password', 'class' => 'obligatorio clave confirmar', 'label' => ['text' => 'Comprobar Clave']]) ?>
 
     <!--Envíar-->
     <?= input_submit(['class' => 'col-lg-offset-5 col-lg-10', 'text' => 'Actualizar']) ?>

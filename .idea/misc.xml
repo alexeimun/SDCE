@@ -24,7 +24,6 @@
     <file url="file://$PROJECT_DIR$/system/core/Controller.php" />
     <file url="file://$PROJECT_DIR$/system/core/Model.php" />
   </component>
-  <component name="ProjectRootManager" version="2" />
   <component name="masterDetails">
     <states>
       <state key="ScopeChooserConfigurable.UI">

@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-xs-4">
                 <button type="submit" class="btn btn-success btn-block btn-flat">Ingresar <i
-                        class="ion-arrow-right-a"></i></button>
+                        class="fa fa-sign-in"></i></button>
             </div>
             <!-- /.col -->
         </div>

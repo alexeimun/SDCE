@@ -11,7 +11,7 @@
             <div class="box">
                 <div class="box-header">
                     <h3 style="text-align: center;color: #099a5b;"><span style="font-size: 25pt;"
-                                                                         class="ios ion-android-list"></span>&nbsp;
+                                                                         class="fa fa-table"></span>&nbsp;
                         Cierre Admsiones Y Registros</h3>
                 </div>
                 <?= input_submit(['class' => 'col-lg-offset-5 col-sm-offset-5 col-lg-2', 'icon' => 'export', 'text' => 'Exportar']) ?>

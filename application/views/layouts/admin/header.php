@@ -18,7 +18,7 @@
         <!-- Logo -->
         <a href="<?= site_url() ?>" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><i class="ion ion-android-home"></i></span>
+            <span class="logo-mini"><i class="ion-waterdrop"></i></span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><span class="ion-waterdrop"></span> <b>SDCE</b> <span style="font-size: 8pt;">admin blue!</span></span>
         </a>

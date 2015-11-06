@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'glyphicon glyphicon-pencil', 'text' => 'Carta CIAD']) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-pencil', 'text' => 'Carta CIAD']) ?>
 </section>
 <!-- Main content -->
 <div class="container">

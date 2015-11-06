@@ -21,7 +21,7 @@
 
     <?= br(1) ?>
     <!--Envíar-->
-    <?= input_submit(['class' => 'col-lg-offset-4 col-lg-10', 'type' => 'submit', 'icon' => 'print', 'text' => 'Imprimir']) ?>
+    <?= input_submit(['class' => 'col-lg-offset-5 col-lg-10', 'type' => 'submit', 'icon' => 'print', 'text' => 'Imprimir']) ?>
 
     <?= call_spin_div() ?>
 

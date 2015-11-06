@@ -8,7 +8,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'ios ion-edit', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-edit', 'text' => Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -18,9 +18,9 @@
     <?= Alert(['icon' => 'ion-ios-chatboxes', 'title' => 'Nota:', 'text' => 'Recuerde que sí no se califica como <b>Ambos</b>, el sistema esperará la calificación individual del <b>Asesor</b> y el <b>Cooperador</b>']) ?>
 
     <?= form_dropdown('PERSONA', ['A' => 'Asesor', 'C' => 'Cooperador', 'M' => 'Ambos'],
-        ['input' => ['col' => '5'], 'label' => ['text' => 'Calificar como', 'col' => '3', 'title' => 'Puede evaluar como asesor, cooperador o como ambos']]) ?>
+        ['input' => ['col' => '8'], 'label' => ['text' => 'Calificar como', 'col' => '3', 'title' => 'Puede evaluar como asesor, cooperador o como ambos']]) ?>
 
-    <?= select_input(['text' => 'Proyecto', 'collabel' => 3, 'colinput' => 5, 'select' => Dropdown(['name' => 'ID_PROYECTO', 'dataProvider' => $this->proyectos_model->TraeAsesorProyectosCalificarDD(),
+    <?= select_input(['text' => 'Proyecto', 'collabel' => 3, 'colinput' => 8, 'select' => Dropdown(['name' => 'ID_PROYECTO', 'dataProvider' => $this->proyectos_model->TraeAsesorProyectosCalificarDD(),
         'placeholder' => '-- Seleccione un proyecto --', 'fields' => ['NOMBRE_PROYECTO']])]) ?>
     <div class="practicantes"></div>
     <br>
@@ -51,7 +51,9 @@
         <div class="row"><label class="col-sm-7 control-label">Observaciones:</label>
         </div>
         <div class="col-lg-12">
-            <textarea name="OBS_SABERSER" style="height: 120px;margin-top:5px;"  placeholder="Ingrese la observación del saber ser (opcional)" class="form-control" maxlength="255"></textarea>
+            <textarea name="OBS_SABERSER" style="height: 120px;margin-top:5px;"
+                      placeholder="Ingrese la observación del saber ser (opcional)" class="form-control"
+                      maxlength="255"></textarea>
         </div>
     </div>
     <p style="text-align: center;color: #06674e;font-size: 25px;">SABER HACER (34%)</p>
@@ -80,7 +82,9 @@
         <div class="row"><label class="col-sm-7 control-label">Observaciones:</label>
         </div>
         <div class="col-lg-12">
-            <textarea name="OBS_SABERHACER" style="height: 120px;margin-top:5px;"  placeholder="Ingrese la observación del saber hacer (opcional)" class="form-control" maxlength="255"></textarea>
+            <textarea name="OBS_SABERHACER" style="height: 120px;margin-top:5px;"
+                      placeholder="Ingrese la observación del saber hacer (opcional)" class="form-control"
+                      maxlength="255"></textarea>
         </div>
     </div>
 
@@ -109,7 +113,9 @@
         <div class="row"><label class="col-sm-7 control-label">Observaciones:</label>
         </div>
         <div class="col-lg-12">
-            <textarea name="OBS_SABERSABER" style="height: 120px;margin-top:5px;"  placeholder="Ingrese la observación del saber saber (opcional)" class="form-control" maxlength="255"></textarea>
+            <textarea name="OBS_SABERSABER" style="height: 120px;margin-top:5px;"
+                      placeholder="Ingrese la observación del saber saber (opcional)" class="form-control"
+                      maxlength="255"></textarea>
         </div>
     </div>
 
@@ -126,13 +132,16 @@
 <script>
     $('form').jValidate();
 
-    $('select[name=ID_PROYECTO]').on('change', function () {
+    $('select[name=ID_PROYECTO]').on('change', function ()
+    {
         if ($('select[name=ID_PROYECTO] :selected').val() != 0)
             $('.practicantes').load('<?=site_url('seguimiento/traepracticantesMomentoActualDDAjax')?>', {ID_PROYECTO: $(this).val()});
     });
 
-    $(function () {
-        for (var j = 1; j <= <?=$r?>; j++) {
+    $(function ()
+    {
+        for (var j = 1; j <= <?=$r?>; j++)
+        {
             $("#range" + j).ionRangeSlider({
                 min: 0,
                 max: 3.4,
@@ -161,8 +170,10 @@
 
     });
 
-    function UpdateRate(val) {
-        switch (val) {
+    function UpdateRate(val)
+    {
+        switch (val)
+        {
             case 'd':
                 return {min: 0, max: 3.4,}
                 break;
@@ -183,26 +194,33 @@
         radius: 6, color: '#000', speed: 1, length: 15, top: '10%'
     })).spin(document.getElementById("spin"));
 
-    function validateRadios() {
+    function validateRadios()
+    {
         Clear();
         var free = {pass: true, id: null};
-        for (var i = 1; i <= <?=$r?>; i++) {
+        for (var i = 1; i <= <?=$r?>; i++)
+        {
             var radio = $("form:first input:radio[name=R" + i + "]");
 
-            if (!radio.is(':checked')) {
+            if (!radio.is(':checked'))
+            {
                 free = {pass: false, id: 'st' + i}
                 break;
             }
         }
-        if (!free.pass) {
-            $('body').animate({scrollTop: $('#' + free.id).offset().top}, function () {
+        if (!free.pass)
+        {
+            $('body').animate({scrollTop: $('#' + free.id).offset().top}, function ()
+            {
                 $('#' + free.id).closest('div').find('.font1').hide().css({'color': 'red'}).fadeIn(900);
             });
         }
         return free.pass;
     }
-    function Save() {
-        if (validateRadios()) {
+    function Save()
+    {
+        if (validateRadios())
+        {
             var practicante = $('select[name=ID_PRACTICANTE]');
 
             if ($('select[name=ID_PROYECTO]').val() == 0)
@@ -210,27 +228,32 @@
 
             else if (!practicante.length || practicante.val() == 0)
                 Message('Debe seleccionar un practicante para continuar.');
-            else {
+            else
+            {
                 $.ajax({
                     type: 'post', url: '<?=site_url('seguimiento/calificarpracticante')?>',
                     data: $('form').serialize(),
-                    beforeSend: function () {
+                    beforeSend: function ()
+                    {
                         $('body').addClass('Wait');
                         $('body,html').animate({scrollTop: 0}, 200);
                         $('#spin').show();
                     },
-                    success: function (response) {
+                    success: function (response)
+                    {
                         console.log(response);
                         var message = 'La calificación se ha realizado correctamente...';
                         var type = BootstrapDialog.TYPE_SUCCESS;
                         var title = true;
-                        if (response != '') {
+                        if (response != '')
+                        {
                             message = response;
                             type = BootstrapDialog.TYPE_DANGER;
                             title = '<span style="color: #ffffff;font-size: 20pt;"class="ion ion-close-circled"></span>&nbsp;&nbsp; <span style="font-size: 18pt;">No se puede envíar la calificación...</span>';
                         }
                         $('body').removeClass('Wait');
-                        Alerta(message, function () {
+                        Alerta(message, function ()
+                        {
                             self.location = '';
                         }, type, title);
                         $('#spin').hide();
@@ -240,8 +263,10 @@
         }
     }
 
-    function Clear() {
-        $('form > div > div').each(function (index, element) {
+    function Clear()
+    {
+        $('form > div > div').each(function (index, element)
+        {
             $(element).css({'color': '#06674e'});
         })
     }

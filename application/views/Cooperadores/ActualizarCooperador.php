@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'ios ion-edit', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-edit', 'text' => Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">

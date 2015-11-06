@@ -26,7 +26,7 @@
 
 			 FROM t_usuarios user1
 			 INNER JOIN t_usuarios ON t_usuarios.ID_USUARIO= user1.ID_USUARIO_MODIFICA
-				WHERE user1.ESTADO=1 AND user1.NIVEL = 0 AND user1.ID_USUARIO=$IdAsesor LIMIT 1")->result()[0];
+				WHERE user1.NIVEL = 0 AND user1.ID_USUARIO=$IdAsesor LIMIT 1")->result()[0];
         }
 
         public function TraeUsuario($IdUsuario)
@@ -44,14 +44,14 @@
 
 			 FROM t_usuarios user1
 			 INNER JOIN t_usuarios ON t_usuarios.ID_USUARIO= user1.ID_USUARIO_MODIFICA
-				WHERE user1.ESTADO=1 AND user1.NIVEL > 0 AND user1.ID_USUARIO=$IdUsuario LIMIT 1")->result()[0];
+				WHERE user1.NIVEL > 0 AND user1.ID_USUARIO=$IdUsuario LIMIT 1")->result()[0];
         }
 
         public function ValidarCredenciales($usuario, $clave, $nivel)
         {
             $super = $nivel == 1 ? 2 : 0;
             $query = $this->db->query("SELECT * FROM t_usuarios WHERE CORREO='" . CleanSql($usuario) . "'
-            AND (NIVEL=" . CleanSql($nivel) . " OR NIVEL=$super) AND CLAVE = '" . CleanSql($clave) . "' LIMIT 1");
+            AND (NIVEL=" . CleanSql($nivel) . " OR NIVEL=$super) AND CLAVE = '" . md5(CleanSql($clave)) . "' LIMIT 1");
 
             if($query->num_rows() == 1)
             {
@@ -65,6 +65,11 @@
 
         public function ActualizarAsesor()
         {
+            if($this->session->userdata('ASESOR'))
+            {
+                $this->db->set('CLAVE', md5($this->input->post('CLAVE')));
+                unset($_POST['CLAVE']);
+            }
             $Idasesor = array_shift($_POST);
             $this->db->set('FECHA_MODIFICA', 'NOW()', false);
             $this->db->set('ID_USUARIO_MODIFICA', $this->session->userdata('ID_USUARIO'));
@@ -74,13 +79,18 @@
 
         public function ActualizarUsuario()
         {
-            $permisos = $_POST['PERMISOS'];
+            $permisos = isset($_POST['PERMISOS']) ? $_POST['PERMISOS'] : null;
             unset($_POST['PERMISOS']);
             $IdUsuario = array_shift($_POST);
+            $this->db->set('CLAVE', md5($this->input->post('CLAVE')));
+            unset($_POST['CLAVE']);
             $this->db->set('FECHA_MODIFICA', 'NOW()', false);
             $this->db->set('ID_USUARIO_MODIFICA', $this->session->userdata('ID_USUARIO'));
             $this->db->update('t_usuarios', $this->input->post(null, true), ['ID_USUARIO' => $IdUsuario]);
-            $this->InsertarPermisos($permisos, $IdUsuario);
+            if(!is_null($permisos))
+            {
+                $this->InsertarPermisos($permisos, $IdUsuario);
+            }
         }
 
         public function ActualizarFotoAsesor($Foto)
@@ -92,7 +102,7 @@
         {
             $Foto = $this->db->query("SELECT
             FOTO
-             FROM t_usuarios WHERE ESTADO=1 AND ID_USUARIO=" . $this->session->userdata('ID_USUARIO') . " LIMIT 1")->result()[0]->FOTO;
+             FROM t_usuarios WHERE ID_USUARIO=" . $this->session->userdata('ID_USUARIO') . " LIMIT 1")->result()[0]->FOTO;
             if(!is_null($Foto))
             {
                 unlink(APPPATH . '../asesorfotos/' . $Foto);
@@ -101,12 +111,12 @@
 
         public function ContarAsesores()
         {
-            return $this->db->query('SELECT COUNT(ID_USUARIO) ASESORES FROM t_usuarios WHERE ESTADO=1 AND NIVEL=0 LIMIT  1')->result()[0]->ASESORES;
+            return $this->db->query('SELECT COUNT(ID_USUARIO) ASESORES FROM t_usuarios WHERE  NIVEL=0 LIMIT  1')->result()[0]->ASESORES;
         }
 
         public function ContarUsuarios()
         {
-            return $this->db->query('SELECT COUNT(ID_USUARIO) USUARIOS FROM t_usuarios WHERE ESTADO=1 AND NIVEL>0 LIMIT  1')->result()[0]->USUARIOS;
+            return $this->db->query('SELECT COUNT(ID_USUARIO) USUARIOS FROM t_usuarios WHERE  NIVEL> 0 LIMIT  1')->result()[0]->USUARIOS;
         }
 
         public function InsertarAsesor()
@@ -114,7 +124,7 @@
             $this->db->set('FECHA_MODIFICA', 'NOW()', false);
             $this->db->set('ID_USUARIO_MODIFICA', $this->session->userdata('ID_USUARIO'));
             $this->db->set('PERIODO', date('m') > 6 ? date('Y-07-01') : date('Y-01-01'));
-            $this->db->set('CLAVE', 'Sdce' . date('Y'));
+            $this->db->set('CLAVE', md5('Sdce' . date('Y')));
             $this->db->set('FECHA_REGISTRO', 'NOW()', false);
             $this->db->insert('t_usuarios', $this->input->post(null, true));
         }
@@ -127,6 +137,8 @@
             $this->db->set('FECHA_MODIFICA', 'NOW()', false);
             $this->db->set('ID_USUARIO_MODIFICA', $this->session->userdata('ID_USUARIO'));
             $this->db->set('FECHA_REGISTRO', 'NOW()', false);
+            $this->db->set('CLAVE', md5($this->input->post('CLAVE')));
+            unset($_POST['CLAVE']);
             $this->db->insert('t_usuarios', $this->input->post(null, true));
             $this->db->select_max('ID_USUARIO');
             $id = $this->db->get('t_usuarios')->result()[0]->ID_USUARIO;
@@ -158,7 +170,7 @@
 
         public function EliminarUsuario()
         {
-            $this->db->update('t_usuarios', ['ESTADO' => 0], ['ID_USUARIO' => $this->input->post('Id')]);
+            $this->db->delete('t_usuarios', ['ID_USUARIO' => $this->input->post('Id')]);
         }
 
         public function ActualizarInicioSesion()
@@ -183,13 +195,11 @@
 		    t_usuarios.NIVEL,
 		    t_usuarios.FACHA_ULTIMO_INICIO_SESION,
 		    t_usuarios.FECHA_REGISTRO,
-            count(t_practicantes.ID_PRACTICANTE) PRACTICANTES,
             count(t_proyectos.ID_PROYECTO) PROYECTOS
 			FROM t_usuarios
 			LEFT JOIN t_proyectos ON t_proyectos.ID_ASESOR=t_usuarios.ID_USUARIO
-			LEFT JOIN t_practicantes ON t_practicantes.ID_PROYECTO=t_proyectos.ID_PROYECTO
 
-			WHERE t_usuarios.ESTADO=1 AND NIVEL=0 GROUP BY t_usuarios.ID_USUARIO ORDER BY ID_USUARIO DESC')->result('array');
+			WHERE  NIVEL=0 GROUP BY t_usuarios.ID_USUARIO ORDER BY ID_USUARIO DESC')->result('array');
         }
 
         public function TraeTodoUsuarios()
@@ -203,7 +213,7 @@
 		    t_usuarios.FECHA_REGISTRO
 
 			FROM t_usuarios
-			WHERE t_usuarios.ESTADO=1 AND NIVEL!=2 GROUP BY t_usuarios.ID_USUARIO ORDER BY ID_USUARIO DESC')->result('array');
+			WHERE NIVEL!=2 GROUP BY t_usuarios.ID_USUARIO ORDER BY ID_USUARIO DESC')->result('array');
         }
 
         public function TraeTodoUsuariosLogin()
@@ -219,7 +229,7 @@
 		    t_usuarios.LOG_IN
 
 			FROM t_usuarios
-			WHERE t_usuarios.ESTADO=1 GROUP BY t_usuarios.ID_USUARIO ORDER BY ID_USUARIO DESC ')->result('array');
+			 GROUP BY t_usuarios.ID_USUARIO ORDER BY ID_USUARIO DESC ')->result('array');
         }
 
         public function TraeUsuarios()
@@ -234,7 +244,7 @@
 		    t_usuarios.FECHA_REGISTRO
 
 			FROM t_usuarios
-			WHERE t_usuarios.ESTADO=1 AND NIVEL>0 ORDER BY ID_USUARIO DESC ')->result('array');
+			WHERE NIVEL>0 ORDER BY ID_USUARIO DESC')->result('array');
         }
 
         public function TraeUltimoInicioSesionAdmin()

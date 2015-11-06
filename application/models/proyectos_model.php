@@ -91,6 +91,7 @@
              t_proyectos.ID_PROYECTO,
              t_proyectos.NOMBRE_PROYECTO,
              t_proyectos.FECHA_REGISTRO,
+             t_proyectos.PERIODO,
              COUNT(t_practicantes.ID_PRACTICANTE) PRACTICANTES,
 			  t_cooperadores.NOMBRE_COOPERADOR,
 			  t_tipo_proyectos.NOMBRE_TIPO_PROYECTO,
@@ -102,7 +103,7 @@
 			  LEFT JOIN t_cooperadores USING (ID_COOPERADOR)
 			  LEFT JOIN t_tipo_proyectos USING (ID_TIPO_PROYECTO)
 
-              GROUP BY t_proyectos.ID_PROYECTO")->result('array');
+              GROUP BY t_proyectos.ID_PROYECTO ORDER BY t_proyectos.FECHA_REGISTRO DESC")->result('array');
         }
 
         public function TraeProyectosAsesor()
@@ -124,7 +125,7 @@
 
               WHERE t_proyectos.ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . "
                AND t_proyectos.PERIODO ='" . $this->session->userdata('PERIODO') . "'
-             GROUP BY t_proyectos.ID_PROYECTO")->result('array');
+             GROUP BY t_proyectos.ID_PROYECTO ORDER BY t_proyectos.FECHA_REGISTRO DESC")->result('array');
         }
 
         public function TraeProyectosDD($idproyecto = null)

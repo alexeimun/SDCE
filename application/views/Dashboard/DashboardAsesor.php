@@ -17,7 +17,7 @@
                 </div>
                 <div class="icon">
                     <i style="cursor: pointer;" onclick="location.href='practicantes'"
-                       class="ion ion-person-stalker"></i>
+                       class="fa fa-group"></i>
                 </div>
                 <a href="practicantes" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="icon">
                     <i style="cursor: pointer;" onclick="location.href='proyectos'"
-                       class="ion ion-help-buoy"></i>
+                       class="fa fa-rocket"></i>
                 </div>
                 <a href="proyectos" class="small-box-footer">Más información <i
                         class="fa fa-arrow-circle-right"></i></a>
@@ -85,7 +85,7 @@
         <?php foreach ($this->seguimientos_model->TraeEvaluacionEstudianteNotificacion(0) as $i => $note): ?>
             <div class="col-lg-10">
                 <?= Alert(['title' => '¡En espera!', 'icon' => 'ion-clock', 'type' => 'danger', 'text' => 'El estudiante <a target="_blank" data-toggle="tooltip" title="Ver practicante" href="practicantes/verpracticante/' . $note->ID_PRACTICANTE . '"><b>' . $note->NOMBRE_PRACTICANTE . '</b></a> aún no ha evaluado el momento ' .
-                    $note->MOMENTO . ' enviado <b>' . Momento($note->FECHA_REGISTRO) . '</b> y caduca el <b>' . FechaFormal($note->FECHA_CADUCA, false) . '</b>']) ?>
+                    $note->MOMENTO . ' enviado <b>' . Momento($note->FECHA_REGISTRO) . '</b> y finaliza el <b>' . FechaFormal($note->FECHA_CADUCA, false) . '</b>']) ?>
             </div>
         <?php endforeach; ?>
     </div>
@@ -93,7 +93,7 @@
     <div class="row">
         <?php foreach ($this->seguimientos_model->TraeEvaluacionEstudianteNotificacion(1, 'ap') as $i => $note): ?>
             <div class="col-lg-10">
-                <?= Alert(['title' => '<a data-toggle="tooltip" title="Ver acta de asesoría"  href="informe/imprimirasesoriapracticas/' . $note->CONSECUTIVO . '" target="_blank" >¡Acta de asesoría recibida!</a>', 'text' => 'El estudainte <a target="_blank" data-toggle="tooltip" title="Ver practicante" href="practicantes/verpracticante/' . $note->ID_PRACTICANTE . '"><b>' . $note->NOMBRE_PRACTICANTE . '</b></a> ha diligenciado la asesoria de práctica #' . $note->CONSECUTIVO . ' &nbsp&nbsp;' . Momento($note->FECHA_FINALIZA) . '</b>']) ?>
+                <?= Alert(['title' => '¡Acta de asesoría recibida!', 'text' => 'El estudainte <a target="_blank" data-toggle="tooltip" title="Ver practicante" href="practicantes/verpracticante/' . $note->ID_PRACTICANTE . '"><b>' . $note->NOMBRE_PRACTICANTE . '</b></a> ha diligenciado la asesoria de práctica #' . $note->CONSECUTIVO . ' &nbsp&nbsp;' . Momento($note->FECHA_FINALIZA) . '</b>']) ?>
             </div>
         <?php endforeach; ?>
     </div>

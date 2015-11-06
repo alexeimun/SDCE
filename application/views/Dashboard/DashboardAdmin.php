@@ -33,7 +33,7 @@
                 </div>
                 <div class="icon">
                     <i style="cursor: pointer;" onclick="location.href='practicantes'"
-                       class="ion ion-person-stalker"></i>
+                       class="fa fa-group"></i>
                 </div>
                 <a href="practicantes" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="icon">
                     <i style="cursor: pointer;" onclick="location.href='proyectos'"
-                       class="ion ion-help-buoy"></i>
+                       class="fa fa-rocket"></i>
                 </div>
                 <a href="proyectos" class="small-box-footer">Más información <i
                         class="fa fa-arrow-circle-right"></i></a>
@@ -66,9 +66,24 @@
                     <p>Agencias</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-cube" style="cursor: pointer;" onclick="location.href='agencias'"></i>
+                    <i class="fa fa-cubes" style="cursor: pointer;" onclick="location.href='agencias'"></i>
                 </div>
                 <a href="agencias" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow-gradient">
+                <div class="inner">
+                    <h3><?= $Cooperadores ?></h3>
+
+                    <p>Cooperadores</p>
+                </div>
+                <div class="icon">
+                    <i class="ion-ios-people" style="cursor: pointer;" onclick="location.href='cooperadores'"></i>
+                </div>
+                <a href="cooperadores" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->

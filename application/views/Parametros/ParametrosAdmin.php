@@ -6,7 +6,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'ion-android-options', 'text' => 'Parámetros']) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-sliders', 'text' => 'Parámetros']) ?>
 </section>
 <!-- Main content -->
 <div class="container">

@@ -8,7 +8,6 @@
 
             if($this->input->is_ajax_request())
             {
-
             }
             else if(!$this->session->userdata('ADMIN'))
             {
@@ -36,8 +35,9 @@
             {
                 $this->usuarios_model->InsertarAsesor();
                 mail($this->input->post('CORREO'), "Credenciales de acceso a SDCE FI-FUMC", "Su usuario de de acceso es: " . $this->input->post('CORREO')
-                    . "\nSu clave es: Sdce" . date('Y') . "\n\nNo olvide cambiar su clave en cuanto ingrese al portal\nCulaquier porblema o inquietud, no dude en cosultarlo
-                con la administración del sistema\n\nSDCE FI-FUMC -  2015.");
+                    . "\nSu clave es: Sdce" . date('Y') . "\nLink de ingreso: " . site_url("asesor") .
+                    "\n\nNo olvide cambiar su clave en cuanto ingrese al portal\nCulaquier porblema o inquietud, no dude en cosultarlo
+                con la administración del sistema\n\nSDCE FI-FUMC - " . date('Y'));
             }
             else
             {
@@ -90,12 +90,11 @@
 
         public function actualizarasesor($Id = null)
         {
-            $this->rbca->can('asesores');
             if($this->input->is_ajax_request())
             {
                 $this->usuarios_model->ActualizarAsesor();
             }
-            else if(is_numeric($Id))
+            else if(is_numeric($Id) && $this->rbca->can('asesores', false))
             {
                 $Data = $this->usuarios_model->TraeAsesor($Id);
 

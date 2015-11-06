@@ -6,7 +6,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'ios ion-cash', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob'=>$this,'class' => 'fa fa-bus', 'text' => 'Crear gasto de transporte']) ?>
 </section>
 <!-- Main content -->
 <div class="container">

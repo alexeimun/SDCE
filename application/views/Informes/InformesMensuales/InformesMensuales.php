@@ -10,7 +10,7 @@
             <div class="box">
                 <div class="box-header">
                     <h3 style="text-align: center;color: #099a5b;"><span style="font-size: 25pt;"
-                                                                         class="ios ion-android-list"></span>&nbsp;
+                                                                         class="fa fa-table"></span>&nbsp;
                         Listado <?= Uncamelize(pathinfo(__FILE__)['filename']) ?></h3>
                 </div>
                 <div class="box-body">

@@ -221,7 +221,7 @@
         }
         else if($diff > 7)
         {
-            $momento = 'En ' .$diff . ' días';
+            $momento = 'En ' . $diff . ' días';
         }
         return $momento;
     }
@@ -229,7 +229,7 @@
     function NombreDia($date = 'now')
     {
         $dia = '';
-        switch ((new DateTime($date))->format('l'))
+        switch ((new DateTime(date('Y-m-d', strtotime($date))))->format('l'))
         {
             case 'Monday':
                 $dia = 'Lunes';

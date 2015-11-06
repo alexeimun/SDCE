@@ -233,53 +233,62 @@ function validateForm(options) {
     var pass = true;
 
     $('.obligatorio').each(function (index, element) {
-            element = $(element);
+        element = $(element);
 
-            if (element.val() == '' || element.val() == null) {
-                element.closest('div').addClass('has-error error');
+        if (element.val() == '' || element.val() == null) {
+            element.closest('div').addClass('has-error error');
+            $('body,html').animate({scrollTop: 0}, 200);
+            pass = false;
+        }
+        else if (element.hasClass('claveinicial') && element.val() != $('.confirmar').val()) {
+            element.closest('div').addClass('has-error error_clave');
+            $('body,html').animate({scrollTop: 0}, 200);
+            pass = false;
+        }
+        else if (element.hasClass('correo')) {
+            if (!element.val().match(options.pattern)) {
+                element.closest('div').addClass('has-error error_correo');
                 $('body,html').animate({scrollTop: 0}, 200);
                 pass = false;
             }
-            else if (element.hasClass('claveinicial') && element.val() != $('.confirmar').val()) {
-                element.closest('div').addClass('has-error error_clave');
-                $('body,html').animate({scrollTop: 0}, 200);
-                pass = false;
-            }
-            else if (element.hasClass('correo')) {
-                if (!element.val().match(options.pattern)) {
-                    element.closest('div').addClass('has-error error_correo');
-                    $('body,html').animate({scrollTop: 0}, 200);
-                    pass = false;
-                }
-                else element.closest('div').removeClass('error_correo has-error');
-            }
-            else if (element.hasClass('correo_unico') && element.val() != '') {
-                if (element.val() != '' && options.emailUser != element.val()) {
-                    $.post(url, {'CORREO': element.val(), PERSONA: options.persona}, function (data) {
-                        if (data == 'no') {
-                            pass = false;
-                            element.closest('div').removeClass('has-error error_correo_existe');
-                        }
-                        else element.closest('div').addClass('has-error error_correo_existe');
-                    });
-                }
-            }
-            else if (element.hasClass('documento')) {
-                if (element.val().length < 5 || element.val().length > 15) {
-                    element.closest('div').addClass('error_documento_longitud has-error');
-                    pass = false;
-                    $('body,html').animate({scrollTop: 0}, 200);
-                }
-            }
-            else if (element.hasClass('telefono')) {
-                if (element.val().length < 7 || element.val().length > 10) {
-                    element.closest('div').addClass('error_telefono has-error');
-                    pass = false;
-                    $('body,html').animate({scrollTop: 0}, 200);
-                }
+            else element.closest('div').removeClass('error_correo has-error');
+        }
+        else if (element.hasClass('correo_unico') && element.val() != '') {
+            if (element.val() != '' && options.emailUser != element.val()) {
+                $.post(url, {'CORREO': element.val(), PERSONA: options.persona}, function (data) {
+                    if (data == 'no') {
+                        pass = false;
+                        element.closest('div').removeClass('has-error error_correo_existe');
+                    }
+                    else element.closest('div').addClass('has-error error_correo_existe');
+                });
             }
         }
-    );
+        else if (element.hasClass('documento')) {
+            if (element.val().length < 5 || element.val().length > 15) {
+                element.closest('div').addClass('error_documento_longitud has-error');
+                pass = false;
+                $('body,html').animate({scrollTop: 0}, 200);
+            }
+        }
+        else if (element.hasClass('telefono')) {
+            if (element.val().length < 7 || element.val().length > 10) {
+                element.closest('div').addClass('error_telefono has-error');
+                pass = false;
+                $('body,html').animate({scrollTop: 0}, 200);
+            }
+        }
+    });
+    //Validations without obligorio
+    $('.correo').each(function (index, element) {
+        element = $(element);
+        if (element.val() != '' && !element.val().match(options.pattern)) {
+            element.closest('div').addClass('has-error error_correo');
+            $('body,html').animate({scrollTop: 0}, 200);
+            pass = false;
+        }
+    });
+
     if (!pass)Message();
     else killMessage();
     return pass;
@@ -323,9 +332,14 @@ function Message(Msg, Type, Element, Time) {
  * @Clue Call from Console
  */
 function fakeData() {
-    $('input:radio').iCheck('check');
-    $('.numero').val(12);
-    $('.correo').val('noreplay@hotmail.com');
-    $('input:text, textarea').val(Math.random().toString(36).replace(/[^1-9a-z]+/g, '').substr(0, 9));
+    var rand=Math.random().toString(36).replace(/[^1-9a-z]+/g, '').substr(0, 9);
+    if ($('input:radio').length)
+        $('input:radio').iCheck('check');
+    $('input:text, textarea').val(rand);
+    $('.numero').val(1);
+    $('.telefono').val(2211987);
+    $('.documento').val(112878109);
+    $('select').val(1);
+    $('.correo').val(rand+'@hotmail.com');
     $('#send-ajax').trigger('click');
 }

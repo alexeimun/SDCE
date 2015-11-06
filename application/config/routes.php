@@ -5,6 +5,7 @@
     $route['404_override'] = 'app/error404';
     $route['asesores'] = "usuario/asesores";
     $route['perfil'] = "app/Perfil";
+    $route['asesor'] = "app/asesor";
     $route['asesores/crearasesor'] = "usuario/crearasesor";
     $route['asesores/verasesor/(:num)'] = "usuario/verasesor/$1";
     $route['asesores/actualizarasesor/(:num)'] = "usuario/actualizarasesor/$1";

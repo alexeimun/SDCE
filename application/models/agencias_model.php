@@ -6,6 +6,7 @@
         {
             parent::__construct();
         }
+
         public function TraeCiudades()
         {
             return @$this->db->query('SELECT t_ciudades.ID_CIUDAD,
@@ -71,7 +72,7 @@
               DIRECCION,
               FECHA_REGISTRO
 
-             FROM t_agencias")->result('array');
+             FROM t_agencias ORDER BY t_agencias.FECHA_REGISTRO DESC")->result('array');
         }
 
         public function TraeAgenciasDD()

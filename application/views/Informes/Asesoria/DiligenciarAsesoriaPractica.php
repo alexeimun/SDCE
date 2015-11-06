@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob'=>$this,'class' => 'ios ion-edit', 'text' => 'Diligenciar Asesoría Práctica']) ?>
+    <?= page_title(['ob'=>$this,'class' => 'fa fa-edit', 'text' => 'Diligenciar Asesoría Práctica']) ?>
 </section>
 <!-- Main content -->
 <div class="container">

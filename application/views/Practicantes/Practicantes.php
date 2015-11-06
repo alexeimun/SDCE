@@ -11,7 +11,7 @@
             <div class="box">
                 <div class="box-header">
                     <h3 style="text-align: center;color: <?= $color ?>;"><span style="font-size: 25pt;"
-                                                                               class="ios ion-android-list"></span>&nbsp;
+                                                                               class="fa fa-table"></span>&nbsp;
                         Listado Practicantes</h3>
                 </div>
                 <?= input_submit(['class' => 'col-lg-offset-5 col-sm-offset-5 col-lg-2', 'icon' => 'export', 'text' => 'Exportar']) ?>
@@ -77,13 +77,21 @@
                 title: '<span class="ion ion-android-delete" style="font-size: 20pt;font-weight: bold; color: white;"></span>&nbsp;&nbsp;&nbsp; <span  style="font-size: 18pt;">Atención!</span>',
                 type: BootstrapDialog.TYPE_DANGER,
                 draggable: true,
-                message: 'Está seguro que desea eliminar este ' + $('#tabla').data('name') + '?</span>',
+                message: '¿Está seguro que desea eliminar este registro?',
                 buttons: [{
                     label: 'Aceptar',
                     cssClass: 'btn-danger',
                     action: function () {
-                        $.post(url, {Id: id}, function () {
-                            location.href = '';
+                        $.ajax({
+                            type: 'post', url: url, data: {Id: id},
+                            success: function () {
+                                location.href = '';
+                            },
+                            error: function (a) {
+                                if (a.status == 500) {
+                                    $(".bootstrap-dialog-message").html('<br> <span style="color: #8c4646"><b>&nbsp;No se puede eliminar este registro! </b>Asegurese de que no esté siendo utilizado en otros módulos del sistema.</span>')
+                                }
+                            }
                         });
                     }
                 },

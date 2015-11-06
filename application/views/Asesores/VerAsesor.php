@@ -31,9 +31,10 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <h5 class="description-header" style="color: #3878a3"><?= $Data['TPRO'] ?> <i
-                                        class="ion-help-buoy"></i>
+                                        class="fa fa-rocket"></i>
                                 </h5>
-                                <b> Proyectos</b>
+                                <a href="<?= site_url('proyectos#' . $Info->NOMBRE) ?>" target="_blank"> <b>
+                                        Proyectos</b></a>
                             </div>
                             <!-- /.description-block -->
                         </div>
@@ -43,7 +44,7 @@
                                 <h5 class="description-header"><br></h5>
                                 <b>
                                     <?php
-                                        if($Data['ESTADO']->L == 1 &&  (strtotime(date('Y-m-d H:i:s')) - strtotime($Data['ESTADO']->U) < 7200))
+                                        if($Data['ESTADO']->L == 1 && (strtotime(date('Y-m-d H:i:s')) - strtotime($Data['ESTADO']->U) < 7200))
                                         {
                                             echo '<i style="color: rgba(13, 134, 78, 0.83)" class="ion-record"></i> Conectado';
                                         }
@@ -59,8 +60,9 @@
                         <!-- /.col -->
                         <div class="col-sm-4">
                             <div class="description-block">
-                                <h5 class="description-header" style="color: #3878a3"><?= $Data['TPRA'] ?> <i class="ion-person-stalker"></i></h5>
-                                <b> Practicantes</b>
+                                <h5 class="description-header" style="color: #3878a3"><?= $Data['TPRA'] ?> <i
+                                        class="fa fa-group"></i></h5>
+                                <a href="<?= site_url('practicantes#') ?>" target="_blank"><b> Practicantes</b></a>
                             </div>
                             <!-- /.description-block -->
                         </div>
@@ -74,15 +76,15 @@
         <!-- /.col -->
     </div>
     <br>
-    <?= form_input(['readonly' => true, 'label' => ['text' => 'Correo']], $Info->CORREO) ?>
-    <?= form_input(['readonly' => true, 'label' => ['text' => 'Documento']], $Info->DOCUMENTO) ?>
-    <?= form_input(['readonly' => true, 'label' => ['text' => 'Teléfono']], Telefono($Info->TELEFONO)) ?>
-    <?= form_input(['readonly' => true, 'label' => ['text' => 'Celular']], Telefono($Info->CELULAR)) ?>
+    <?= form_input(['readonly' => true, 'input' => ['col' => 7], 'label' => ['text' => 'Correo']], $Info->CORREO) ?>
+    <?= form_input(['readonly' => true, 'input' => ['col' => 7], 'label' => ['text' => 'Documento']], number_format($Info->DOCUMENTO, 0, '', ',')) ?>
+    <?= form_input(['readonly' => true, 'input' => ['col' => 7], 'label' => ['text' => 'Teléfono']], Telefono($Info->TELEFONO)) ?>
+    <?= form_input(['readonly' => true, 'input' => ['col' => 7], 'label' => ['text' => 'Celular']], Telefono($Info->CELULAR)) ?>
     <?= br(2) ?>
 
     <div class="box">
         <div class="box-header bg-gray">
-            <h3 style="color:#7d7d80;text-align: center"><span class="ion ion-person-stalker"></span> Practicantes
+            <h3 style="color:#7d7d80;text-align: center"><span class="fa fa-group"></span> Practicantes
             </h3>
         </div>
         <div class="box-body">
@@ -100,7 +102,8 @@
 </div>
 <?= $this->Footer() ?>
 <script type="text/javascript">
-    $(function () {
+    $(function ()
+    {
         $("#tabla").dataTable();
     });
 </script>

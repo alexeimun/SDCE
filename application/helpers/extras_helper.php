@@ -138,7 +138,7 @@
                 }
                 if($print)
                 {
-                    $table .= '<a href="' . site_url($kprint . $keys) . '" style="font-size:20pt;color: black" target="_blank" class="ion ion-android-print" data-toggle="tooltip" title="Imprimir"></a>&nbsp;&nbsp;';
+                    $table .= '<a href="' . site_url($kprint . $keys) . '" style="font-size:20pt;color: black" target="_blank" class="fa fa-print" data-toggle="tooltip" title="Imprimir"></a>&nbsp;&nbsp;';
                 }
                 if($update)
                 {
@@ -146,7 +146,7 @@
                 }
                 if($delete)
                 {
-                    $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='ion ion-trash-b' data-toggle='tooltip' title='Eliminar'></a>";
+                    $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='fa fa-trash-o' data-toggle='tooltip' title='Eliminar'></a>";
                 }
                 ###Check###
                 if($check)

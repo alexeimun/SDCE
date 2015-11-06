@@ -209,19 +209,19 @@
 
                     if($view)
                     {
-                        $table .= '<a href="' . site_url($kview . $keys) . '" style="font-size:20pt;color:  #29a84b" class="ion ion-ios-paper" target="_blank" data-toggle="tooltip" title="Ver m&aacute;s..."></a>&nbsp;&nbsp;';
+                        $table .= '<a href="' . site_url($kview . $keys) . '" style="font-size:20pt;color:  #29a84b" class="fa fa-eye" target="_blank" data-toggle="tooltip" title="Ver m&aacute;s..."></a>&nbsp;&nbsp;';
                     }
                     if($print)
                     {
-                        $table .= '<a href="' . site_url($kprint . $keys) . '" style="font-size:20pt;color: black" target="_blank" class="ion ion-android-print" data-toggle="tooltip" title="Imprimir"></a>&nbsp;&nbsp;';
+                        $table .= '<a href="' . site_url($kprint . $keys) . '" style="font-size:20pt;color: black" target="_blank" class="fa fa-print" data-toggle="tooltip" title="Imprimir"></a>&nbsp;&nbsp;';
                     }
                     if($update)
                     {
-                        $table .= '<a href="' . site_url($kupdate . $keys) . '"  target="_blank" style="font-size:20pt;color:  #0065c3" class="ion ion-edit" data-toggle="tooltip" title="Editar"></a>&nbsp;&nbsp;';
+                        $table .= '<a href="' . site_url($kupdate . $keys) . '"  target="_blank" style="font-size:20pt;color:  #0065c3" class="fa fa-pencil" data-toggle="tooltip" title="Editar"></a>&nbsp;&nbsp;';
                     }
                     if($delete)
                     {
-                        $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='ion ion-trash-b' data-toggle='tooltip' title='Eliminar'></a>";
+                        $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='fa fa-trash-o' data-toggle='tooltip' title='Eliminar'></a>";
                     }
                     ###Check###
                     if($check)
@@ -382,19 +382,19 @@
 
                     if($view)
                     {
-                        $table .= '<a href="' . site_url($kview . $keys) . '" style="font-size:20pt;color:  #29a84b" class="ion ion-ios-paper" target="_blank" data-toggle="tooltip" title="Ver m&aacute;s..."></a>&nbsp;&nbsp;';
+                        $table .= '<a href="' . site_url($kview . $keys) . '" style="font-size:20pt;color:  #29a84b" class="fa fa-eye" target="_blank" data-toggle="tooltip" title="Ver m&aacute;s..."></a>&nbsp;&nbsp;';
                     }
                     if($print)
                     {
-                        $table .= '<a href="' . site_url($kprint . $keys) . '" style="font-size:20pt;color: black" target="_blank" class="ion ion-android-print" data-toggle="tooltip" title="Imprimir"></a>&nbsp;&nbsp;';
+                        $table .= '<a href="' . site_url($kprint . $keys) . '" style="font-size:20pt;color: black" target="_blank" class="fa fa-print" data-toggle="tooltip" title="Imprimir"></a>&nbsp;&nbsp;';
                     }
                     if($update && ($data['NIVEL'] != 2 || $nivel))
                     {
-                        $table .= '<a href="' . site_url($kupdate . $keys) . '"  target="_blank" style="font-size:20pt;color:  #0065c3" class="ion ion-edit" data-toggle="tooltip" title="Editar"></a>&nbsp;&nbsp;';
+                        $table .= '<a href="' . site_url($kupdate . $keys) . '"  target="_blank" style="font-size:20pt;color:  #0065c3" class="fa fa-pencil" data-toggle="tooltip" title="Editar"></a>&nbsp;&nbsp;';
                     }
                     if($delete && $nivel && $data['NIVEL'] != 2)
                     {
-                        $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='ion ion-trash-b' data-toggle='tooltip' title='Eliminar'></a>";
+                        $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='fa fa-trash-o' data-toggle='tooltip' title='Eliminar'></a>";
                     }
                     ###Check###
                     if($check)
@@ -523,7 +523,7 @@
 
             $type = isset($type) ? $type : 'success';
             $text = isset($text) ? $text : '';
-            $icon = isset($icon) ? $icon : 'ion-checkmark';
+            $icon = isset($icon) ? $icon : 'fa fa-check';
             return "<div class='alert alert-$type'>
               	<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
               	<span class='$icon' style='font-size: 20pt'> </span><strong>$title</strong> $text

@@ -24,16 +24,4 @@
                 redirect(site_url(), 'refresh');
             }
         }
-
-        public function Perfil()
-        {
-            if($this->session->userdata('ID_USUARIO'))
-            {
-                $this->load->view('App/Perfil', $this->Data);
-            }
-            else
-            {
-                redirect(site_url(), 'refresh');
-            }
-        }
     }

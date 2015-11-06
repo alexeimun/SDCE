@@ -21,7 +21,7 @@
 
         public function EliminaAsesoriaPractica()
         {
-            $this->db->delete('t_asesoria_practicas', ['TIPO' => 'AP', 'ID_ASESORIA_PRACTICA' => $this->input->post('Id')]);
+            $this->db->delete('t_asesoria_practicas', ['ID_ASESORIA_PRACTICA' => $this->input->post('Id')]);
         }
 
         public function TraeTodoGastosTransporte()
@@ -287,6 +287,6 @@
             INNER JOIN t_links ON t_asesoria_practicas.ID_PRACTICANTE=t_links.ID_PRACTICANTE
 
             WHERE t_practicantes.ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . "
-            AND t_proyectos.PERIODO='" . $this->session->userdata('PERIODO') . "' ORDER BY t_links.FECHA_FINALIZA")->result('array');
+            AND t_proyectos.PERIODO='" . $this->session->userdata('PERIODO') . "' ORDER BY t_asesoria_practicas.ID_ASESORIA_PRACTICA DESC")->result('array');
         }
     }

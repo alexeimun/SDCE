@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'glyphicon glyphicon-pencil', 'text' => Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-pencil', 'text' => Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">

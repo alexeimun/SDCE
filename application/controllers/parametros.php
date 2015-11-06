@@ -33,5 +33,9 @@
             {
                 $this->parametros_model->CambiarPeriodoAcdemicoAjax();
             }
+            else
+            {
+                show_404();
+            }
         }
     }

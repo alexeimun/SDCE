@@ -12,6 +12,10 @@
                 if($action == '' || $action == 'horarios' || $action == 'TraeHorarioAjax' || $action == 'verproyecto')
                 {
                 }
+                else
+                {
+                    redirect(site_url(), 'refresh');
+                }
             }
             else if($this->session->userdata('ADMIN') && !$this->rbca->can('proyectos', false))
             {

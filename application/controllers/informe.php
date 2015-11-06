@@ -22,9 +22,9 @@
         {
             if($this->input->is_ajax_request())
             {
-                echo Component::Table(['columns' => ['Nombre', 'Correo','Documento'],
+                echo Component::Table(['columns' => ['Nombre', 'Correo', 'Documento'],
                     'tableName' => 'practicante', 'id' => 'ID_PRACTICANTE', 'controller' => 'practicantes',
-                    'fields' => ['NOMBRE_PRACTICANTE','CORREO_PRACTICANTE', 'DOCUMENTO' => 'numeric'], 'actions' => 'r'
+                    'fields' => ['NOMBRE_PRACTICANTE', 'CORREO_PRACTICANTE', 'DOCUMENTO' => 'numeric'], 'actions' => 'r'
                     , 'dataProvider' => $this->practicantes_model->TraePracticantesPorProyecto($this->input->post('ID_PROYECTO'))]);
             }
         }
@@ -79,11 +79,12 @@
                         'consecutivo' . $cons)
                     . '&_id=' . $this->input->post('ID_PRACTICANTE') . '&_cvo=' . $cons . '&_type=ap';
                 #Enviar por correo los links
-                mail($this->input->post('CORREO'), 'Ingreso al portal para el deligenciamiento de la asesoría', 'Buen día, su link de ingreso al portal es: ' . $link);
+                $headers = "From: webmaster@sdceadmin.edu.co";
+                mail($this->input->post('CORREO'), 'Link de ingreso al portal para el deligenciamiento de la asesoría de prácticas', "Buen día.\nSe ha habilitado un link de ingreso al portal\n
+                Recuerde ingresar su correo institucional y la cédula para tener un ingreso limpio y seguro.\nSu link al portal es: " . $link, $headers);
                 echo $link;
                 echo ' ' . str_replace(',', '', $this->input->post('CC'));
                 echo ' ' . $this->input->post('CORREO');
-                #http://sdce/informe/asesoriapracticas?_link=781eacd5a8e0d71649f2ca6ae2b6653f&_id=1&_cvo=1&_type=ap
             }
             else
             {

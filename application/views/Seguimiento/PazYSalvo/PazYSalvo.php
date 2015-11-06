@@ -6,7 +6,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'ion-checkmark', 'text' => 'Certificado ' . Uncamelize(__FILE__)]) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-check', 'text' => 'Certificado ' . Uncamelize(__FILE__)]) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -16,7 +16,7 @@
         'placeholder' => '-- Seleccione un proyecto --', 'fields' => ['NOMBRE_PROYECTO']])]) ?>
     <div class="box">
         <div class="box-header bg-gray">
-            <h3 style="color:#7d7d80;text-align: center"><span class="ion ion-person-stalker"></span> Practicantes
+            <h3 style="color:#7d7d80;text-align: center"><span class="fa fa-group"></span> Practicantes
             </h3>
         </div>
         <div class="box-body"></div>
