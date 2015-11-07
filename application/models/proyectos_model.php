@@ -172,7 +172,6 @@
 
         public function TraeAsesorProyectosLinkDD()
         {
-            $now = date('Y-m-d H:i:s');
             return $this->db->query("SELECT DISTINCT
               t_proyectos.ID_PROYECTO,
               t_proyectos.NOMBRE_PROYECTO
@@ -180,8 +179,7 @@
               FROM t_practicantes
               INNER JOIN t_proyectos USING (ID_PROYECTO)
 
-            WHERE (t_proyectos.FECHA_CADUCA_EVALUACION IS NULL OR t_proyectos.FECHA_CADUCA_EVALUACION < '$now') AND
-             t_proyectos.MOMENTO<3 AND t_proyectos.PERIODO='" . $this->session->userdata('PERIODO') . "'
+            WHERE t_proyectos.PERIODO='" . $this->session->userdata('PERIODO') . "'
              AND t_practicantes.ID_ASESOR= " . $this->session->userdata('ID_USUARIO'))->result('array');
         }
 
@@ -194,7 +192,7 @@
               FROM t_practicantes
               INNER JOIN t_proyectos USING (ID_PROYECTO)
 
-            WHERE t_proyectos.MOMENTO<3 AND t_proyectos.PERIODO ='" . $this->session->userdata('PERIODO') . "'
+            WHERE  t_proyectos.PERIODO ='" . $this->session->userdata('PERIODO') . "'
             AND t_practicantes.ID_ASESOR = " . $this->session->userdata('ID_USUARIO'))->result('array');
         }
 

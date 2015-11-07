@@ -20,7 +20,7 @@
          */
 
         $align = isset($align) ? $align : 'left';
-        $autoNumeric=isset($autoNumeric)?$autoNumeric:false;
+        $autoNumeric = isset($autoNumeric) ? $autoNumeric : false;
         $table = '<table id="tabla" style="text-align:' . $align . '" data-name="' . $tableName . '" class="table table-bordered table-striped"><thead><tr>';
         if($autoNumeric)
         {
@@ -51,33 +51,20 @@
             {
                 if(!is_numeric($key))
                 {
-                    if(is_array($value))
+                    switch ($value)
                     {
-                        switch ($value['type'])
-                        {
-                            case 'img':
-                                #Represents a image
-                                $table .= '<td><img class="img-circle" style="height: 25px;width: 25px;" src="' . $value['path'] . '/' . $data[$key] . '"></td>';
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        switch ($value)
-                        {
-                            #Represents a moment helper
-                            case 'moment':
-                                $table .= '<td>' . Momento($data[$key]) . '</td>';
-                                break;
-                            #Represents a date with the helper
-                            case 'date':
-                                $table .= '<td>' . date_format(new DateTime($data[$key]), 'd/m/Y') . '</td>';
-                                break;
-                            #Represents a number format
-                            case 'numeric':
-                                $table .= '<td>' . number_format($data[$key], 0, '', ',') . '</td>';
-                                break;
-                        }
+                        #Represents a moment helper
+                        case 'moment':
+                            $table .= '<td>' . Momento($data[$key]) . '</td>';
+                            break;
+                        #Represents a date with the helper
+                        case 'date':
+                            $table .= '<td>' . date_format(new DateTime($data[$key]), 'd/m/Y') . '</td>';
+                            break;
+                        #Represents a number format
+                        case 'numeric':
+                            $table .= '<td>' . number_format($data[$key], 0, '', ',') . '</td>';
+                            break;
                     }
                 }
                 else

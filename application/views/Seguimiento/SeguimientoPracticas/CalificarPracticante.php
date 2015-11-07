@@ -53,7 +53,7 @@
         <div class="col-lg-12">
             <textarea name="OBS_SABERSER" style="height: 120px;margin-top:5px;"
                       placeholder="Ingrese la observación del saber ser (opcional)" class="form-control"
-                      maxlength="255"></textarea>
+                      maxlength="750"></textarea>
         </div>
     </div>
     <p style="text-align: center;color: #06674e;font-size: 25px;">SABER HACER (34%)</p>
@@ -84,7 +84,7 @@
         <div class="col-lg-12">
             <textarea name="OBS_SABERHACER" style="height: 120px;margin-top:5px;"
                       placeholder="Ingrese la observación del saber hacer (opcional)" class="form-control"
-                      maxlength="255"></textarea>
+                      maxlength="750"></textarea>
         </div>
     </div>
 
@@ -115,7 +115,7 @@
         <div class="col-lg-12">
             <textarea name="OBS_SABERSABER" style="height: 120px;margin-top:5px;"
                       placeholder="Ingrese la observación del saber saber (opcional)" class="form-control"
-                      maxlength="255"></textarea>
+                      maxlength="750"></textarea>
         </div>
     </div>
 
@@ -135,7 +135,26 @@
     $('select[name=ID_PROYECTO]').on('change', function ()
     {
         if ($('select[name=ID_PROYECTO] :selected').val() != 0)
-            $('.practicantes').load('<?=site_url('seguimiento/traepracticantesMomentoActualDDAjax')?>', {ID_PROYECTO: $(this).val()});
+        {
+            $('.practicantes').load('<?=site_url('seguimiento/traepracticantesMomentoActualDDAjax')?>', {ID_PROYECTO: $(this).val()}, function ()
+            {
+                $('select[name=ID_PRACTICANTE]').on('change', function ()
+                {
+                    if ($('select[name=ID_PRACTICANTE] :selected').val() != 0)
+                    {
+                        $('.momento').load('<?=site_url('seguimiento/traepracticantesMomentoAjax')?>', {ID_PRACTICANTE: $(this).val()});
+                    }
+                    else
+                    {
+                        $('.momento').html('');
+                    }
+                });
+            });
+        }
+        else
+        {
+            $('.practicantes').html('');
+        }
     });
 
     $(function ()
@@ -224,10 +243,13 @@
             var practicante = $('select[name=ID_PRACTICANTE]');
 
             if ($('select[name=ID_PROYECTO]').val() == 0)
+            {
                 Message('Debe seleccionar un proyecto para continuar.');
-
+            }
             else if (!practicante.length || practicante.val() == 0)
+            {
                 Message('Debe seleccionar un practicante para continuar.');
+            }
             else
             {
                 $.ajax({

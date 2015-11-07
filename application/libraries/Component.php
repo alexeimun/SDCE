@@ -85,8 +85,10 @@
              * @var bool $autoNumeric
              * @var string $id
              * @var string $controller
+             * @var integer $limitCell
              */
 
+            $limitCell = isset($limitCell) ? $limitCell : 40;
             $align = isset($align) ? $align : 'left';
             $actions = isset($actions) ? $actions : '';
             $controller = isset($controller) ? $controller : '';
@@ -174,7 +176,7 @@
                     }
                     else
                     {
-                        $table .= '<td>' . ($data[$value] = strlen($data[$value]) > 40 ? substr($data[$value], 0, 40) . '...' : $data[$value]) . '</td>';
+                        $table .= '<td>' . ($data[$value] = strlen($data[$value]) > $limitCell ? substr($data[$value], 0, $limitCell) . '...' : $data[$value]) . '</td>';
                     }
                 }
 

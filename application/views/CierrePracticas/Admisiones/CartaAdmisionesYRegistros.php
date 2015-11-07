@@ -50,9 +50,7 @@ Se anexa el listado de estudiantes para los cuales se está haciendo entrega de 
 
 <script>
     $('form').jValidate();
-navigator.geolocation.getCurrentPosition(function (geo) {
-    console.log(geo);
-})
+
     function SavePost() {
     }
 </script>

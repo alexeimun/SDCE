@@ -222,7 +222,8 @@
         public function InsertarAsesoriaPractica()
         {
             $this->db->trans_start();
-            $_POST['FECHA_HORA'] = @date('d/m/Y h:i a', strtotime($_POST['FECHA_HORA']));
+            $_POST['FECHA_HORA'] =  $_POST['FECHA_HORA'];
+            $this->db->set('FECHA_FINALIZA', 'NOW()', false);
             $this->db->set('ID_PRACTICANTE', $this->session->userdata('ID_PRACTICANTE'));
             $this->db->set('CONSECUTIVO', $this->session->userdata('CONSECUTIVO'));
             //Inserta en t_asesoria_practicas
@@ -277,14 +278,13 @@
             t_asesoria_practicas.FECHA_HORA,
             t_asesoria_practicas.TIPO_ASESORIA,
             t_asesoria_practicas.REUNION_ASESORIA,
+            t_asesoria_practicas.FECHA_FINALIZA,
             t_practicantes.NOMBRE_PRACTICANTE,
-            t_proyectos.NOMBRE_PROYECTO,
-            t_links.FECHA_FINALIZA
+            t_proyectos.NOMBRE_PROYECTO
 
             FROM t_asesoria_practicas
             INNER JOIN t_practicantes USING(ID_PRACTICANTE)
             INNER JOIN t_proyectos ON t_practicantes.ID_PROYECTO=t_proyectos.ID_PROYECTO
-            INNER JOIN t_links ON t_asesoria_practicas.ID_PRACTICANTE=t_links.ID_PRACTICANTE
 
             WHERE t_practicantes.ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . "
             AND t_proyectos.PERIODO='" . $this->session->userdata('PERIODO') . "' ORDER BY t_asesoria_practicas.ID_ASESORIA_PRACTICA DESC")->result('array');

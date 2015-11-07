@@ -18,15 +18,16 @@
     <?= form_input(['name' => 'FECHA_HORA', 'id'=>'horafecha','class' => 'obligatorio fecha', 'required'=>'required','input'=>['col'=>5],'label' => ['col'=>3,'text' => 'Fecha y hora']], date('d/m/Y h:i a')) ?>
     <div class="form-group">
         <div class="row">
-    	<label for="inputID" class="col-sm-9 control-label">Desarrollo de la reunión de la asesoría:</label>
+    	<label for="inputID" class="col-sm-9 control-label">Desarrollo de la reunión de asesoría de prácticas:</label>
         </div>
     	<div class="col-lg-12">
-    		<textarea name="REUNION_ASESORIA" id="inputID" style="height: 400px;margin-top:5px;" class="form-control obligatorio" maxlength="1500" title="" ></textarea>
+    		<textarea placeholder="Digite el desarrollo de la reunión de asesoría de prácticas (1500 máximos permitidos)" name="REUNION_ASESORIA" id="inputID" style="height: 400px;margin-top:5px;" class="form-control obligatorio" maxlength="1500" ></textarea>
     	</div>
     </div>
 
     <!--Envíar-->
-    <?= input_submit(['class' => 'col-lg-offset-9 col-lg-10','text'=>'Envíar']) ?>
+    <?= input_submit(['class' => 'col-lg-offset-4 col-lg-10','text'=>'Envíar Asesoría']) ?>
+    <br>
     <?= call_spin_div() ?>
 
     <?= form_close() ?>

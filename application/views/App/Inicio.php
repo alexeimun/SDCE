@@ -89,7 +89,7 @@
             {
                 element: "#acerca",
                 title: "<i class='green ion-android-contact'></i> <b>Acerca de SDCE</b>",
-                content: "Nuestro proposito con proposito de SDCE."
+                content: "¿Cuál es nuestro propósito con SDCE?"
             },
         ]
     });
@@ -100,6 +100,7 @@
     // Start the tour
     tour.start();
 </script>
+
 <style>
     .green
     {

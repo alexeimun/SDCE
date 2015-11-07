@@ -7,7 +7,7 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'fa fa-paper-plane-o', 'text' => 'Enviar formularios Autoevaluación']) ?>
+    <?= page_title(['ob' => $this, 'class' => 'fa fa-paper-plane-o', 'text' => 'Enviar Autoevaluación']) ?>
 </section>
 <!-- Main content -->
 <div class="container">
@@ -19,9 +19,7 @@
 
     <div class="box">
         <div class="box-header bg-gray">
-            <h3 style="color:#7d7d80;text-align: center"><span class="fa fa-group"></span> Practicantes <span
-                    id="momento"></span>
-            </h3>
+            <h3 style="color:#7d7d80;text-align: center"><span class="fa fa-group"></span> Practicantes</h3>
         </div>
         <div class="box-body"></div>
     </div>
@@ -33,9 +31,6 @@
         </div>
         <div class="panel-body">
 
-        </div>
-        <div class="panel-footer">
-            <p><b>Nota: </b>El segundo momento comienza cuando caduca el plazo del primero</p>
         </div>
     </div>
     <?= br(1) ?>
@@ -53,31 +48,36 @@
     $('form').jValidate();
 
 
-    $(function () {
-        function Periodo(Dias) {
+    $(function ()
+    {
+        function Periodo(Dias)
+        {
             $('.panel-body').load('<?=site_url('seguimiento/periodoAjax')?>', {DIAS: Dias});
         }
 
-        $('input[name=DIAS]').on('keyup', function () {
+        $('input[name=DIAS]').on('keyup', function ()
+        {
             Periodo($(this).val().replace('.', ''));
         });
 
         Periodo($('input[name=DIAS]').val());
 
-        $('select[name=ID_PROYECTO]').on('change', function () {
-            if ($('select[name=ID_PROYECTO] :selected').val() != 0) {
+        $('select[name=ID_PROYECTO]').on('change', function ()
+        {
+            if ($('select[name=ID_PROYECTO] :selected').val() != 0)
+            {
                 $('.box-body').load('<?=site_url('seguimiento/changetableAjax')?>', {ID_PROYECTO: $('select[name=ID_PROYECTO] :selected').val()});
-                $('#momento').load('<?=site_url('seguimiento/traemomentoAjax')?>', {ID_PROYECTO: $('select[name=ID_PROYECTO] :selected').val()});
             }
-            else {
-                $('#momento').html('');
+            else
+            {
                 $('.box-body').html('');
             }
         });
     });
 
 
-    $('body').on('click', '.box-body table tbody tr', function () {
+    $('body').on('click', '.box-body table tbody tr', function ()
+    {
         $(this).iCheck('toggle');
     });
 
@@ -86,15 +86,21 @@
         radius: 6, color: '#000', speed: 1, length: 15, top: '10%'
     })).spin(document.getElementById("spin"));
 
-    function Save() {
+    function Save()
+    {
         if ($('select[name=ID_PROYECTO]').val() == 0)
+        {
             Message('Debe seleccionar un proyecto');
+        }
         else if (!$('.box-body table tbody tr td:first').length)
+        {
             Message('El proyecto no tiene practicantes.');
-
-        else {
+        }
+        else
+        {
             var Practicantes = [];
-            $('.box-body table tbody tr').each(function (index, ele) {
+            $('.box-body table tbody tr').each(function (index, ele)
+            {
                 ele = $(ele);
                 Practicantes.push({
                     correo: ele.find('td:nth-of-type(2)').text(),
@@ -102,20 +108,23 @@
                 });
             });
             $.ajax({
-                type: 'post', url: '<?=site_url('seguimiento/enviarformularios')?>',
+                type: 'post', url: '<?=site_url('seguimiento/enviarautoevaluacion')?>',
                 data: {
                     Practicantes: Practicantes,
                     Dias: $('input[name=DIAS]').val(),
                     ID_PROYECTO: $('select[name=ID_PROYECTO] :selected').val()
                 },
-                beforeSend: function () {
+                beforeSend: function ()
+                {
                     $('body').addClass('Wait');
                     $('body,html').animate({scrollTop: 0}, 200);
                     $('#spin').show();
                 },
-                success: function () {
+                success: function ()
+                {
                     $('body').removeClass('Wait');
-                    Alerta('Los formularios se han enviado correctamente... Espere la respueta de los mismos.', function () {
+                    Alerta('Los formularios se han enviado correctamente... Espere la respueta de los mismos.', function ()
+                    {
                         self.location = '';
                     });
                     $('#spin').hide();

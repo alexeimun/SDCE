@@ -27,7 +27,7 @@
 
     <?= br(1) ?>
     <!--Enviar-->
-    <?= input_submit(['class' => 'col-lg-offset-5 col-lg-10', 'text' => 'Enviar ']) ?>
+    <?= input_submit(['class' => 'col-lg-offset-5 col-lg-10', 'text' => 'Enviar asesoría']) ?>
 
     <?= call_spin_div() ?>
 

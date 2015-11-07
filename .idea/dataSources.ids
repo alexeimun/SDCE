@@ -6,276 +6,761 @@
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
-    <schema name="" catalog="sdce"/>
-    <table name="t_agencias" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_AGENCIA" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_CIUDAD" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="NOMBRE_AGENCIA" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CORREO_AGENCIA" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
-      <column name="DIRECCION" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
-      <column name="TELEFONO1" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="TELEFONO2" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FAX" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12"/>
-      <column name="PAGINA_WEB" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="ID_AGENCIA"/>
-      <exported-key name="t_cooperadores_ibfk_1" table="t_cooperadores" schema="" catalog="sdce" columns="ID_AGENCIA"/>
-      <exported-key name="t_practicantes_ibfk_4" table="t_practicantes" schema="" catalog="sdce" columns="ID_AGENCIA"/>
-    </table>
-    <table name="t_asesoria_practicas" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_ASESORIA_PRACTICA" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="TIPO_ASESORIA" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2"/>
-      <column name="FECHA_HORA" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
-      <column name="REUNION_ASESORIA" sqlType="VARCHAR" precision="1500" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="ID_ASESORIA_PRACTICA"/>
-      <foreign-key name="t_asesoria_practicas_ibfk_1" columns="ID_PRACTICANTE" ref-table="t_practicantes" ref-schema="" ref-catalog="sdce" ref-columns="ID_PRACTICANTE" update-rule="0" delete-rule="0" deferrability="2"/>
-    </table>
-    <table name="t_auth_assignment" schema="" catalog="sdce" type="TABLE">
-      <column name="item_name" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
-      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="item_name,user_id"/>
-      <foreign-key name="t_auth_assignment_ibfk_2" columns="user_id" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="0" delete-rule="0" deferrability="2"/>
-      <foreign-key name="t_auth_assignment_ibfk_1" columns="item_name" ref-table="t_auth_item" ref-schema="" ref-catalog="sdce" ref-columns="name" update-rule="0" delete-rule="0" deferrability="2"/>
-    </table>
-    <table name="t_auth_item" schema="" catalog="sdce" type="TABLE">
-      <column name="name" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
-      <column name="type" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
-      <column name="rule_name" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
-      <column name="data" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
-      <primary-key name="PRIMARY" columns="name"/>
-      <foreign-key name="t_auth_item_ibfk_1" columns="rule_name" ref-table="t_auth_rule" ref-schema="" ref-catalog="sdce" ref-columns="name" update-rule="0" delete-rule="2" deferrability="2"/>
-      <exported-key name="t_auth_assignment_ibfk_1" table="t_auth_assignment" schema="" catalog="sdce" columns="item_name"/>
-      <exported-key name="t_auth_item_child_ibfk_1" table="t_auth_item_child" schema="" catalog="sdce" columns="parent"/>
-      <exported-key name="t_auth_item_child_ibfk_2" table="t_auth_item_child" schema="" catalog="sdce" columns="child"/>
-      <index name="type" unique="false" columns="type"/>
-    </table>
-    <table name="t_auth_item_child" schema="" catalog="sdce" type="TABLE">
-      <column name="parent" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
-      <column name="child" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="parent,child"/>
-      <foreign-key name="t_auth_item_child_ibfk_1" columns="parent" ref-table="t_auth_item" ref-schema="" ref-catalog="sdce" ref-columns="name" update-rule="0" delete-rule="0" deferrability="2"/>
-      <foreign-key name="t_auth_item_child_ibfk_2" columns="child" ref-table="t_auth_item" ref-schema="" ref-catalog="sdce" ref-columns="name" update-rule="0" delete-rule="0" deferrability="2"/>
-    </table>
-    <table name="t_auth_rule" schema="" catalog="sdce" type="TABLE">
-      <column name="name" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
-      <column name="data" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
-      <primary-key name="PRIMARY" columns="name"/>
-      <exported-key name="t_auth_item_ibfk_1" table="t_auth_item" schema="" catalog="sdce" columns="rule_name"/>
-    </table>
-    <table name="t_calificacion_practicantes" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_CALIFICACION_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="PERSONA" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12" remarks="Q2FsaWZpY2Fkb3I="/>
-      <column name="MOMENTO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="NOTA" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
-      <column name="OBS_SABERSER" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="OBS_SABERHACER" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="OBS_SABERSABER" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="ID_CALIFICACION_PRACTICANTE"/>
-      <foreign-key name="t_calificacion_practicantes_ibfk_1" columns="ID_PRACTICANTE" ref-table="t_practicantes" ref-schema="" ref-catalog="sdce" ref-columns="ID_PRACTICANTE" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="t_ciudades" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_CIUDAD" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="NOMBRE" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <column name="DEPARTAMENTO" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="ID_CIUDAD"/>
-    </table>
-    <table name="t_consecutivos" schema="" catalog="sdce" type="TABLE">
-      <column name="NOMBRE" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_USUARIO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-    </table>
-    <table name="t_cooperadores" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_COOPERADOR" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_AGENCIA" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="NOMBRE_COOPERADOR" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
-      <column name="DIRECCION_COOPERADOR" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
-      <column name="TELEFONO_COOPERADOR" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CORREO_COOPERADOR" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CARGO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="ID_COOPERADOR"/>
-      <foreign-key name="t_cooperadores_ibfk_1" columns="ID_AGENCIA" ref-table="t_agencias" ref-schema="" ref-catalog="sdce" ref-columns="ID_AGENCIA" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="t_practicantes_ibfk_2" table="t_practicantes" schema="" catalog="sdce" columns="ID_COOPERADOR"/>
-    </table>
-    <table name="t_dependencias" schema="" catalog="sdce" type="TABLE">
-      <column name="DECANATURA_TITULO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="DECANATURA" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CP_TITULO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="CP" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CIAD_TITULO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="CIAD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="ADMISIONES_TITULO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="ADMISIONES" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FECHA_REGISTRO" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-    </table>
-    <table name="t_evaluacion_estudiante" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_EVALUACION_ESTUDIANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="MOMENTO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="R1" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R2" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FUNCION1" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FUNCION2" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FUNCION3" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FUNCION4" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R3" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="RESP1" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R4" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R5" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R6" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R121" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R7" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="RESP2" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R8" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="RESP3" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R9" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="R10" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
-      <column name="DEBFOR" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12"/>
-      <column name="METEST" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FD" sqlType="VARCHAR" precision="380" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="ID_EVALUACION_ESTUDIANTE"/>
-      <foreign-key name="t_evaluacion_estudiante_ibfk_1" columns="ID_PRACTICANTE" ref-table="t_practicantes" ref-schema="" ref-catalog="sdce" ref-columns="ID_PRACTICANTE" update-rule="0" delete-rule="0" deferrability="2"/>
-      <index name="t_evaluacion_estudiante_ibfk_1" unique="false" columns="ID_PRACTICANTE"/>
-    </table>
-    <table name="t_gastos_transporte" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_GASTOS_TRANSPORTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="FECHA_GASTO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="LUGAR" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
-      <column name="ACTIVIDAD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="NUMERO_DESPLAZAMIENTOS" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="VALOR_UNITARIO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="ID_GASTOS_TRANSPORTE"/>
-      <foreign-key name="t_gastos_transporte_ibfk_1" columns="ID_ASESOR" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="0" delete-rule="0" deferrability="2"/>
-    </table>
-    <table name="t_informes_mensuales" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_INFORME_MENSUAL" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="FECHAS" sqlType="VARCHAR" precision="90" scale="0" nullable="true" jdbcType="12"/>
-      <column name="AVANCES" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
-      <column name="OBSERVACIONES" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="ID_INFORME_MENSUAL"/>
-      <foreign-key name="t_informes_mensuales_ibfk_1" columns="ID_PROYECTO" ref-table="t_proyectos" ref-schema="" ref-catalog="sdce" ref-columns="ID_PROYECTO" update-rule="0" delete-rule="0" deferrability="2"/>
-    </table>
-    <table name="t_links" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_LINK" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="TIPO" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FINALIZADO" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MA=="/>
-      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="FECHA_CADUCA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="FECHA_FINALIZA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93" remarks="RmVjaGEgZW4gbGEgcXVlIGVsIHByY2F0aWNhbnRlIGV2YWx1YQ=="/>
-      <primary-key name="PRIMARY" columns="ID_LINK"/>
-      <foreign-key name="t_links_ibfk_1" columns="ID_PRACTICANTE" ref-table="t_practicantes" ref-schema="" ref-catalog="sdce" ref-columns="ID_PRACTICANTE" update-rule="0" delete-rule="0" deferrability="2"/>
-      <index name="t_links_ibfk_1" unique="false" columns="ID_PRACTICANTE"/>
-    </table>
-    <table name="t_practicantes" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_PRACTICANTE" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_COOPERADOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_AGENCIA" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_PROGRAMA" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="ID_MODALIDAD_PRACTICA" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="NOMBRE_PRACTICANTE" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CORREO_PRACTICANTE" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
-      <column name="DOCUMENTO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CELULAR" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="TELEFONO" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CODIGO" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="FECHA_MODIFICA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="ID_USUARIO_MODIFICA" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="ID_PRACTICANTE"/>
-      <foreign-key name="t_practicantes_ibfk_1" columns="ID_ASESOR" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="t_practicantes_ibfk_2" columns="ID_COOPERADOR" ref-table="t_cooperadores" ref-schema="" ref-catalog="sdce" ref-columns="ID_COOPERADOR" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="t_practicantes_ibfk_3" columns="ID_PROYECTO" ref-table="t_proyectos" ref-schema="" ref-catalog="sdce" ref-columns="ID_PROYECTO" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="t_practicantes_ibfk_4" columns="ID_AGENCIA" ref-table="t_agencias" ref-schema="" ref-catalog="sdce" ref-columns="ID_AGENCIA" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="t_asesoria_practicas_ibfk_1" table="t_asesoria_practicas" schema="" catalog="sdce" columns="ID_PRACTICANTE"/>
-      <exported-key name="t_calificacion_practicantes_ibfk_1" table="t_calificacion_practicantes" schema="" catalog="sdce" columns="ID_PRACTICANTE"/>
-      <exported-key name="t_evaluacion_estudiante_ibfk_1" table="t_evaluacion_estudiante" schema="" catalog="sdce" columns="ID_PRACTICANTE"/>
-      <exported-key name="t_links_ibfk_1" table="t_links" schema="" catalog="sdce" columns="ID_PRACTICANTE"/>
-      <index name="ID_MODALIDAD_PRACTICA" unique="false" columns="ID_MODALIDAD_PRACTICA"/>
-    </table>
-    <table name="t_proyectos" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_TIPO_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="NOMBRE_PROYECTO" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="HORARIO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
-      <column name="MOMENTO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MQ=="/>
-      <column name="FECHA_CADUCA_EVALUACION" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="PERIODO" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-      <primary-key name="PRIMARY" columns="ID_PROYECTO"/>
-      <foreign-key name="t_proyectos_ibfk_1" columns="ID_TIPO_PROYECTO" ref-table="t_tipo_proyectos" ref-schema="" ref-catalog="sdce" ref-columns="ID_TIPO_PROYECTO" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="t_proyectos_ibfk_2" columns="ID_ASESOR" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="t_informes_mensuales_ibfk_1" table="t_informes_mensuales" schema="" catalog="sdce" columns="ID_PROYECTO"/>
-      <exported-key name="t_practicantes_ibfk_3" table="t_practicantes" schema="" catalog="sdce" columns="ID_PROYECTO"/>
-      <exported-key name="t_registro_notas_ibfk_1" table="t_registro_notas" schema="" catalog="sdce" columns="ID_PROYECTO"/>
-    </table>
-    <table name="t_registro_notas" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_REGISTRO_NOTA" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="ID_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="CODIGO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
-      <column name="NOTA1" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
-      <column name="NOTA2" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <primary-key name="PRIMARY" columns="ID_REGISTRO_NOTA"/>
-      <foreign-key name="t_registro_notas_ibfk_1" columns="ID_PROYECTO" ref-table="t_proyectos" ref-schema="" ref-catalog="sdce" ref-columns="ID_PROYECTO" update-rule="0" delete-rule="0" deferrability="2"/>
-    </table>
-    <table name="t_registros" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_REGISTRO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="CONSECUTIVO" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="TIPO" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
-      <column name="ID_ASESOR" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="TOTAL" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
-      <column name="MOMENTO_EVALUATIVO" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="PERIODO" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-      <primary-key name="PRIMARY" columns="ID_REGISTRO"/>
-      <foreign-key name="t_registros_ibfk_1" columns="ID_ASESOR" ref-table="t_usuarios" ref-schema="" ref-catalog="sdce" ref-columns="ID_USUARIO" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="t_tipo_proyectos" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_TIPO_PROYECTO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="NOMBRE_TIPO_PROYECTO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="ID_TIPO_PROYECTO"/>
-      <exported-key name="t_proyectos_ibfk_1" table="t_proyectos" schema="" catalog="sdce" columns="ID_TIPO_PROYECTO"/>
-    </table>
-    <table name="t_usuarios" schema="" catalog="sdce" type="TABLE">
-      <column name="ID_USUARIO" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="NOMBRE" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
-      <column name="DOCUMENTO" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
-      <column name="TELEFONO" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CELULAR" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CORREO" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CLAVE" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12"/>
-      <column name="NIVEL" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MA=="/>
-      <column name="FOTO" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12" def="J2F2YXRhci5wbmcn"/>
-      <column name="PERIODO" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-      <column name="ESTADO" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MQ=="/>
-      <column name="FECHA_REGISTRO" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="FACHA_ULTIMO_INICIO_SESION" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="FECHA_MODIFICA" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="ID_USUARIO_MODIFICA" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
-      <column name="LOG_IN" sqlType="BINARY" precision="1" scale="0" nullable="true" jdbcType="-2" def="MA=="/>
-      <primary-key name="PRIMARY" columns="ID_USUARIO"/>
-      <exported-key name="t_auth_assignment_ibfk_2" table="t_auth_assignment" schema="" catalog="sdce" columns="user_id"/>
-      <exported-key name="t_gastos_transporte_ibfk_1" table="t_gastos_transporte" schema="" catalog="sdce" columns="ID_ASESOR"/>
-      <exported-key name="t_practicantes_ibfk_1" table="t_practicantes" schema="" catalog="sdce" columns="ID_ASESOR"/>
-      <exported-key name="t_proyectos_ibfk_2" table="t_proyectos" schema="" catalog="sdce" columns="ID_ASESOR"/>
-      <exported-key name="t_registros_ibfk_1" table="t_registros" schema="" catalog="sdce" columns="ID_ASESOR"/>
-    </table>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.2">
+      <schema id="1" name="sdce"/>
+      <table id="2" parent="1" name="t_agencias"/>
+      <table id="3" parent="1" name="t_asesoria_practicas"/>
+      <table id="4" parent="1" name="t_auth_assignment"/>
+      <table id="5" parent="1" name="t_auth_item"/>
+      <table id="6" parent="1" name="t_auth_item_child"/>
+      <table id="7" parent="1" name="t_auth_rule"/>
+      <table id="8" parent="1" name="t_calificacion_practicantes"/>
+      <table id="9" parent="1" name="t_ciudades"/>
+      <table id="10" parent="1" name="t_consecutivos"/>
+      <table id="11" parent="1" name="t_cooperadores"/>
+      <table id="12" parent="1" name="t_dependencias"/>
+      <table id="13" parent="1" name="t_evaluacion_estudiante"/>
+      <table id="14" parent="1" name="t_gastos_transporte"/>
+      <table id="15" parent="1" name="t_informes_mensuales"/>
+      <table id="16" parent="1" name="t_links"/>
+      <table id="17" parent="1" name="t_modalidad_practica"/>
+      <table id="18" parent="1" name="t_practicantes"/>
+      <table id="19" parent="1" name="t_proyectos"/>
+      <table id="20" parent="1" name="t_registro_notas"/>
+      <table id="21" parent="1" name="t_registros"/>
+      <table id="22" parent="1" name="t_tipo_proyectos"/>
+      <table id="23" parent="1" name="t_usuarios"/>
+      <column id="24" parent="2" name="ID_AGENCIA">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="25" parent="2" name="ID_ASESOR">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="26" parent="2" name="ID_CIUDAD">
+        <data-type>bigint(5)</data-type>
+      </column>
+      <column id="27" parent="2" name="NOMBRE_AGENCIA">
+        <data-type>varchar(80)</data-type>
+      </column>
+      <column id="28" parent="2" name="CORREO_AGENCIA">
+        <data-type>varchar(70)</data-type>
+      </column>
+      <column id="29" parent="2" name="DIRECCION">
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="30" parent="2" name="TELEFONO1">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="31" parent="2" name="TELEFONO2">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="32" parent="2" name="FAX">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="33" parent="2" name="PAGINA_WEB">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="34" parent="2" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <key id="35" parent="2" name="PRIMARY">
+        <columns>ID_AGENCIA</columns>
+        <primary>1</primary>
+      </key>
+      <column id="36" parent="3" name="ID_ASESORIA_PRACTICA">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="37" parent="3" name="ID_PRACTICANTE">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="38" parent="3" name="TIPO_ASESORIA">
+        <data-type>int(1)</data-type>
+      </column>
+      <column id="39" parent="3" name="FECHA_HORA">
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="40" parent="3" name="REUNION_ASESORIA">
+        <data-type>varchar(1500)</data-type>
+      </column>
+      <column id="41" parent="3" name="CONSECUTIVO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="42" parent="3" name="FECHA_FINALIZA">
+        <data-type>datetime</data-type>
+      </column>
+      <key id="43" parent="3" name="PRIMARY">
+        <columns>ID_ASESORIA_PRACTICA</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="44" parent="3" name="t_asesoria_practicas_ibfk_1">
+        <columns>ID_PRACTICANTE</columns>
+        <ref-key>t_practicantes.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="45" parent="4" name="item_name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(64)</data-type>
+      </column>
+      <column id="46" parent="4" name="user_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="47" parent="4" name="PRIMARY">
+        <columns>item_name
+user_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="48" parent="4" name="t_auth_assignment_ibfk_1">
+        <columns>item_name</columns>
+        <ref-key>t_auth_item.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="49" parent="4" name="t_auth_assignment_ibfk_2">
+        <columns>user_id</columns>
+        <ref-key>t_usuarios.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="50" parent="5" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(64)</data-type>
+      </column>
+      <column id="51" parent="5" name="type">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="52" parent="5" name="description">
+        <data-type>text</data-type>
+      </column>
+      <column id="53" parent="5" name="rule_name">
+        <data-type>varchar(64)</data-type>
+      </column>
+      <column id="54" parent="5" name="data">
+        <data-type>text</data-type>
+      </column>
+      <key id="55" parent="5" name="PRIMARY">
+        <columns>name</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="56" parent="5" name="t_auth_item_ibfk_1">
+        <columns>rule_name</columns>
+        <ref-key>t_auth_rule.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="57" parent="6" name="parent">
+        <mandatory>1</mandatory>
+        <data-type>varchar(64)</data-type>
+      </column>
+      <column id="58" parent="6" name="child">
+        <mandatory>1</mandatory>
+        <data-type>varchar(64)</data-type>
+      </column>
+      <key id="59" parent="6" name="PRIMARY">
+        <columns>parent
+child</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="60" parent="6" name="t_auth_item_child_ibfk_1">
+        <columns>parent</columns>
+        <ref-key>t_auth_item.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="61" parent="6" name="t_auth_item_child_ibfk_2">
+        <columns>child</columns>
+        <ref-key>t_auth_item.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="62" parent="7" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(64)</data-type>
+      </column>
+      <column id="63" parent="7" name="data">
+        <data-type>text</data-type>
+      </column>
+      <key id="64" parent="7" name="PRIMARY">
+        <columns>name</columns>
+        <primary>1</primary>
+      </key>
+      <column id="65" parent="8" name="ID_CALIFICACION_PRACTICANTE">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="66" parent="8" name="ID_PRACTICANTE">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="67" parent="8" name="PERSONA">
+        <comment>Calificador</comment>
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="68" parent="8" name="MOMENTO">
+        <data-type>int(2)</data-type>
+      </column>
+      <column id="69" parent="8" name="NOTA">
+        <data-type>varchar(80)</data-type>
+      </column>
+      <column id="70" parent="8" name="OBS_SABERSER">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="71" parent="8" name="OBS_SABERHACER">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="72" parent="8" name="OBS_SABERSABER">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="73" parent="8" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <key id="74" parent="8" name="PRIMARY">
+        <columns>ID_CALIFICACION_PRACTICANTE</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="75" parent="8" name="t_calificacion_practicantes_ibfk_1">
+        <columns>ID_PRACTICANTE</columns>
+        <ref-key>t_practicantes.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="76" parent="9" name="ID_CIUDAD">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="77" parent="9" name="NOMBRE">
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="78" parent="9" name="DEPARTAMENTO">
+        <data-type>varchar(100)</data-type>
+      </column>
+      <key id="79" parent="9" name="PRIMARY">
+        <columns>ID_CIUDAD</columns>
+        <primary>1</primary>
+      </key>
+      <column id="80" parent="10" name="NOMBRE">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="81" parent="10" name="CONSECUTIVO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="82" parent="10" name="ID_PROYECTO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="83" parent="10" name="ID_USUARIO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="84" parent="11" name="ID_COOPERADOR">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="85" parent="11" name="ID_AGENCIA">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="86" parent="11" name="NOMBRE_COOPERADOR">
+        <data-type>varchar(70)</data-type>
+      </column>
+      <column id="87" parent="11" name="DIRECCION_COOPERADOR">
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="88" parent="11" name="TELEFONO_COOPERADOR">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="89" parent="11" name="CORREO_COOPERADOR">
+        <data-type>varchar(70)</data-type>
+      </column>
+      <column id="90" parent="11" name="CARGO">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="91" parent="11" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <key id="92" parent="11" name="PRIMARY">
+        <columns>ID_COOPERADOR</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="93" parent="11" name="t_cooperadores_ibfk_1">
+        <columns>ID_AGENCIA</columns>
+        <ref-key>t_agencias.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="94" parent="12" name="DECANATURA_TITULO">
+        <data-type>int(1)</data-type>
+      </column>
+      <column id="95" parent="12" name="DECANATURA">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="96" parent="12" name="CP_TITULO">
+        <data-type>int(1)</data-type>
+      </column>
+      <column id="97" parent="12" name="CP">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="98" parent="12" name="CIAD_TITULO">
+        <data-type>int(1)</data-type>
+      </column>
+      <column id="99" parent="12" name="CIAD">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="100" parent="12" name="ADMISIONES_TITULO">
+        <data-type>int(1)</data-type>
+      </column>
+      <column id="101" parent="12" name="ADMISIONES">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="102" parent="12" name="FECHA_REGISTRO">
+        <data-type>date</data-type>
+      </column>
+      <column id="103" parent="13" name="ID_EVALUACION_ESTUDIANTE">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="104" parent="13" name="ID_PRACTICANTE">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="105" parent="13" name="R1">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="106" parent="13" name="R2">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="107" parent="13" name="FUNCION1">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="108" parent="13" name="FUNCION2">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="109" parent="13" name="FUNCION3">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="110" parent="13" name="FUNCION4">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="111" parent="13" name="R3">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="112" parent="13" name="RESP1">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="113" parent="13" name="R4">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="114" parent="13" name="R5">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="115" parent="13" name="R6">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="116" parent="13" name="R121">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="117" parent="13" name="R7">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="118" parent="13" name="RESP2">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="119" parent="13" name="R8">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="120" parent="13" name="RESP3">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="121" parent="13" name="R9">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="122" parent="13" name="R10">
+        <data-type>varchar(1)</data-type>
+      </column>
+      <column id="123" parent="13" name="DEBFOR">
+        <data-type>varchar(160)</data-type>
+      </column>
+      <column id="124" parent="13" name="METEST">
+        <data-type>varchar(160)</data-type>
+      </column>
+      <column id="125" parent="13" name="FD">
+        <data-type>varchar(380)</data-type>
+      </column>
+      <key id="126" parent="13" name="PRIMARY">
+        <columns>ID_EVALUACION_ESTUDIANTE</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="127" parent="13" name="t_evaluacion_estudiante_ibfk_1">
+        <columns>ID_PRACTICANTE</columns>
+        <ref-key>t_practicantes.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="128" parent="14" name="ID_GASTOS_TRANSPORTE">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="129" parent="14" name="FECHA_GASTO">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="130" parent="14" name="LUGAR">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="131" parent="14" name="ACTIVIDAD">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="132" parent="14" name="NUMERO_DESPLAZAMIENTOS">
+        <data-type>int(5)</data-type>
+      </column>
+      <column id="133" parent="14" name="VALOR_UNITARIO">
+        <data-type>int(6)</data-type>
+      </column>
+      <column id="134" parent="14" name="CONSECUTIVO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="135" parent="14" name="ID_ASESOR">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="136" parent="14" name="PRIMARY">
+        <columns>ID_GASTOS_TRANSPORTE</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="137" parent="14" name="t_gastos_transporte_ibfk_1">
+        <columns>ID_ASESOR</columns>
+        <ref-key>t_usuarios.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="138" parent="15" name="ID_INFORME_MENSUAL">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="139" parent="15" name="ID_PROYECTO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="140" parent="15" name="FECHAS">
+        <data-type>varchar(90)</data-type>
+      </column>
+      <column id="141" parent="15" name="AVANCES">
+        <data-type>varchar(300)</data-type>
+      </column>
+      <column id="142" parent="15" name="OBSERVACIONES">
+        <data-type>varchar(300)</data-type>
+      </column>
+      <column id="143" parent="15" name="CONSECUTIVO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="144" parent="15" name="PRIMARY">
+        <columns>ID_INFORME_MENSUAL</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="145" parent="15" name="t_informes_mensuales_ibfk_1">
+        <columns>ID_PROYECTO</columns>
+        <ref-key>t_proyectos.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="146" parent="16" name="ID_LINK">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="147" parent="16" name="ID_PRACTICANTE">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="148" parent="16" name="TIPO">
+        <data-type>varchar(2)</data-type>
+      </column>
+      <column id="149" parent="16" name="FINALIZADO">
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="150" parent="16" name="CONSECUTIVO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="151" parent="16" name="FECHA_CADUCA">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="152" parent="16" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="153" parent="16" name="FECHA_FINALIZA">
+        <comment>Fecha en la que el prcaticante evalua</comment>
+        <data-type>datetime</data-type>
+      </column>
+      <key id="154" parent="16" name="PRIMARY">
+        <columns>ID_LINK</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="155" parent="16" name="t_links_ibfk_1">
+        <columns>ID_PRACTICANTE</columns>
+        <ref-key>t_practicantes.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="156" parent="17" name="ID_MODALIDAD_PRACTICA">
+        <mandatory>1</mandatory>
+        <data-type>int(2)</data-type>
+      </column>
+      <column id="157" parent="17" name="NOMBRE_MODALIDAD_PRACTICA">
+        <data-type>varchar(70)</data-type>
+      </column>
+      <key id="158" parent="17" name="PRIMARY">
+        <columns>ID_MODALIDAD_PRACTICA</columns>
+        <primary>1</primary>
+      </key>
+      <column id="159" parent="18" name="ID_PRACTICANTE">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="160" parent="18" name="ID_ASESOR">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="161" parent="18" name="ID_COOPERADOR">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="162" parent="18" name="ID_PROYECTO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="163" parent="18" name="ID_AGENCIA">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="164" parent="18" name="ID_PROGRAMA">
+        <data-type>int(2)</data-type>
+      </column>
+      <column id="165" parent="18" name="MOMENTO">
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="166" parent="18" name="ID_MODALIDAD_PRACTICA">
+        <data-type>int(2)</data-type>
+      </column>
+      <column id="167" parent="18" name="NOMBRE_PRACTICANTE">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="168" parent="18" name="CORREO_PRACTICANTE">
+        <data-type>varchar(70)</data-type>
+      </column>
+      <column id="169" parent="18" name="DOCUMENTO">
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="170" parent="18" name="CELULAR">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="171" parent="18" name="TELEFONO">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="172" parent="18" name="CODIGO">
+        <data-type>varchar(10)</data-type>
+      </column>
+      <column id="173" parent="18" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="174" parent="18" name="FECHA_MODIFICA">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="175" parent="18" name="ID_USUARIO_MODIFICA">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="176" parent="18" name="PRIMARY">
+        <columns>ID_PRACTICANTE</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="177" parent="18" name="t_practicantes_ibfk_1">
+        <columns>ID_ASESOR</columns>
+        <ref-key>t_usuarios.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="178" parent="18" name="t_practicantes_ibfk_2">
+        <columns>ID_COOPERADOR</columns>
+        <ref-key>t_cooperadores.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="179" parent="18" name="t_practicantes_ibfk_3">
+        <columns>ID_PROYECTO</columns>
+        <ref-key>t_proyectos.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="180" parent="18" name="t_practicantes_ibfk_4">
+        <columns>ID_AGENCIA</columns>
+        <ref-key>t_agencias.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="181" parent="19" name="ID_PROYECTO">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="182" parent="19" name="ID_TIPO_PROYECTO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="183" parent="19" name="ID_ASESOR">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="184" parent="19" name="NOMBRE_PROYECTO">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="185" parent="19" name="HORARIO">
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="186" parent="19" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="187" parent="19" name="PERIODO">
+        <data-type>date</data-type>
+      </column>
+      <key id="188" parent="19" name="PRIMARY">
+        <columns>ID_PROYECTO</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="189" parent="19" name="t_proyectos_ibfk_1">
+        <columns>ID_TIPO_PROYECTO</columns>
+        <ref-key>t_tipo_proyectos.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="190" parent="19" name="t_proyectos_ibfk_2">
+        <columns>ID_ASESOR</columns>
+        <ref-key>t_usuarios.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="191" parent="20" name="ID_REGISTRO_NOTA">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="192" parent="20" name="ID_PROYECTO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="193" parent="20" name="CODIGO">
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="194" parent="20" name="NOTA1">
+        <data-type>varchar(2)</data-type>
+      </column>
+      <column id="195" parent="20" name="NOTA2">
+        <data-type>varchar(2)</data-type>
+      </column>
+      <column id="196" parent="20" name="CONSECUTIVO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="197" parent="20" name="PRIMARY">
+        <columns>ID_REGISTRO_NOTA</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="198" parent="20" name="t_registro_notas_ibfk_1">
+        <columns>ID_PROYECTO</columns>
+        <ref-key>t_proyectos.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="199" parent="21" name="ID_REGISTRO">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="200" parent="21" name="CONSECUTIVO">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="201" parent="21" name="TIPO">
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="202" parent="21" name="ID_ASESOR">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="203" parent="21" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="204" parent="21" name="TOTAL">
+        <data-type>varchar(12)</data-type>
+      </column>
+      <column id="205" parent="21" name="MOMENTO_EVALUATIVO">
+        <data-type>int(2)</data-type>
+      </column>
+      <column id="206" parent="21" name="PERIODO">
+        <data-type>date</data-type>
+      </column>
+      <key id="207" parent="21" name="PRIMARY">
+        <columns>ID_REGISTRO</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="208" parent="21" name="t_registros_ibfk_1">
+        <columns>ID_ASESOR</columns>
+        <ref-key>t_usuarios.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="209" parent="22" name="ID_TIPO_PROYECTO">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="210" parent="22" name="NOMBRE_TIPO_PROYECTO">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="211" parent="22" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <key id="212" parent="22" name="PRIMARY">
+        <columns>ID_TIPO_PROYECTO</columns>
+        <primary>1</primary>
+      </key>
+      <column id="213" parent="23" name="ID_USUARIO">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="214" parent="23" name="NOMBRE">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="215" parent="23" name="DOCUMENTO">
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="216" parent="23" name="TELEFONO">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="217" parent="23" name="CELULAR">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="218" parent="23" name="CORREO">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="219" parent="23" name="CLAVE">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="220" parent="23" name="NIVEL">
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="221" parent="23" name="FOTO">
+        <data-type>varchar(150)</data-type>
+        <default-expression>&apos;avatar.png&apos;</default-expression>
+      </column>
+      <column id="222" parent="23" name="PERIODO">
+        <data-type>date</data-type>
+      </column>
+      <column id="223" parent="23" name="ESTADO">
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="224" parent="23" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="225" parent="23" name="FACHA_ULTIMO_INICIO_SESION">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="226" parent="23" name="FECHA_MODIFICA">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="227" parent="23" name="ID_USUARIO_MODIFICA">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="228" parent="23" name="LOG_IN">
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <key id="229" parent="23" name="PRIMARY">
+        <columns>ID_USUARIO</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
   </data-source>
 </component>

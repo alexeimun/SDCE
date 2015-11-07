@@ -38,18 +38,12 @@
 
             return $this->db->query("SELECT DISTINCT ID_CALIFICACION_PRACTICANTE FROM t_calificacion_practicantes
             WHERE PERSONA IN ('$c1','$c2','$c3') AND MOMENTO=$momento
-             AND ID_PRACTICANTE=$practicante")->num_rows() > 0;
+             AND ID_PRACTICANTE = $practicante")->num_rows() > 0;
         }
 
         public function InsertarEvaluacionEstudiante()
         {
             $this->db->trans_start();
-
-            $Momento = $this->db->query("SELECT DISTINCT MOMENTO FROM t_proyectos
-            INNER JOIN t_practicantes USING(ID_PROYECTO)
-            WHERE t_practicantes.ID_PRACTICANTE=" . $this->session->userdata('ID_PRACTICANTE'))->result()[0]->MOMENTO;
-
-            $this->db->set('MOMENTO', $Momento);
             $this->db->set('ID_PRACTICANTE', $this->session->userdata('ID_PRACTICANTE'));
             $this->db->insert('t_evaluacion_estudiante', $this->input->post(null, true));
 
@@ -67,9 +61,9 @@
             }
         }
 
-        public function ActualizaProyectoMomento($Data)
+        public function ActualizaPracticanteMomento()
         {
-            $this->db->update('t_proyectos', $Data, ['ID_PROYECTO' => $this->input->post('ID_PROYECTO')]);
+            $this->db->query('UPDATE t_practicantes SET MOMENTO = MOMENTO + 1 WHERE ID_PRACTICANTE = ' . $this->input->post('ID_PRACTICANTE'));
         }
 
         public function EliminarCalificacion()
@@ -79,13 +73,14 @@
 
         public function TraeMomento()
         {
-            return $this->db->query("SELECT MOMENTO FROM t_proyectos WHERE ID_PROYECTO=" . $this->input->post('ID_PROYECTO'))->result()[0]->MOMENTO;
+            return $this->db->query("SELECT MOMENTO FROM t_practicantes WHERE ID_PRACTICANTE = " . $this->input->post('ID_PRACTICANTE'))->result()[0]->MOMENTO;
         }
 
         public function TraePracticantes()
         {
             return $this->db->query("SELECT
              ID_PRACTICANTE,
+             MOMENTO,
              NOMBRE_PRACTICANTE
              FROM t_practicantes
              WHERE ID_PROYECTO=" . $this->input->post('ID_PROYECTO'))->result('array');
@@ -229,13 +224,13 @@
             return $N;
         }
 
-        public function TraePracticantesCalificar($momento)
+        public function TraePracticantesCalificar($momento, $auto = false)
         {
             $Practicantes = $this->TraePracticantes();
             foreach ($Practicantes as $i => $practicante)
             {
-                if($this->ExisteCalificacion('A', $momento, $practicante['ID_PRACTICANTE']) && $this->ExisteCalificacion('C', $momento, $practicante['ID_PRACTICANTE'])
-                    || $this->ExisteCalificacion('M', $momento, $practicante['ID_PRACTICANTE'])
+                if($practicante['MOMENTO'] == 3 || ($this->ExisteCalificacion('A', $momento, $practicante['ID_PRACTICANTE']) && $this->ExisteCalificacion('C', $auto ? $practicante['MOMENTO'] : $momento, $practicante['ID_PRACTICANTE'])
+                        || $this->ExisteCalificacion('M', $momento, $practicante['ID_PRACTICANTE']))
                 )
                 {
                     unset($Practicantes[$i]);
@@ -251,11 +246,9 @@
                 WHERE FINALIZADO=1 AND TIPO='sp' AND ID_PRACTICANTE=" . $this->input->post('ID_PRACTICANTE'))->result()[0]->MOMENTOS;
         }
 
-        public
-        function TraeEvaluacionEstudiante($IdPracticante)
+        public function TraeEvaluacionEstudiante($IdPracticante)
         {
-            return $this->db->query("SELECT * FROM t_evaluacion_estudiante
-           WHERE MOMENTO=1 AND ID_PRACTICANTE=$IdPracticante")->result()[0];
+            return $this->db->query("SELECT * FROM t_evaluacion_estudiante WHERE  ID_PRACTICANTE=$IdPracticante")->result()[0];
         }
 
         public function TraeCalificacionPracticante($IdPracticante, $Momento)
@@ -281,11 +274,10 @@
 
              FROM t_links
              INNER JOIN t_practicantes ON t_practicantes.ID_PRACTICANTE=t_links.ID_PRACTICANTE
-             INNER JOIN t_proyectos ON t_proyectos.ID_PROYECTO=t_practicantes.ID_PROYECTO
              WHERE FECHA_CADUCA>=CURDATE()
 
              AND t_links.ID_PRACTICANTE='$_GET[_id]' AND t_links.TIPO='$_GET[_type]'
-             AND MD5(concat(t_practicantes.CORREO_PRACTICANTE,t_practicantes.DOCUMENTO,t_proyectos.MOMENTO))='$_GET[_link]'
+             AND MD5(concat(t_practicantes.CORREO_PRACTICANTE,t_practicantes.DOCUMENTO))='$_GET[_link]'
               AND  t_links.FINALIZADO=0 LIMIT 1")->num_rows() > 0;
         }
 
@@ -296,7 +288,6 @@
             return $this->db->query("SELECT
             t_practicantes.NOMBRE_PRACTICANTE,
             t_practicantes.ID_PRACTICANTE,
-            t_proyectos.MOMENTO,
             t_links.FECHA_FINALIZA,
             t_links.FECHA_REGISTRO,
             t_links.CONSECUTIVO,

@@ -76,7 +76,7 @@
     <div class="row">
         <?php foreach ($this->seguimientos_model->TraeEvaluacionEstudianteNotificacion(1) as $i => $note): ?>
             <div class="col-lg-10">
-                <?= Alert(['title' => '¡Evaluación recibida!', 'text' => 'El estudainte <a target="_blank" data-toggle="tooltip" title="Ver practicante" href="practicantes/verpracticante/' . $note->ID_PRACTICANTE . '"><b>' . $note->NOMBRE_PRACTICANTE . '</b></a> ha evaluado el momento ' . $note->MOMENTO . '&nbsp;&nbsp;&nbsp;&nbsp; <b>' . Momento($note->FECHA_FINALIZA) . '</b>']) ?>
+                <?= Alert(['title' => '¡Evaluación recibida!', 'text' => 'El estudainte <a target="_blank" data-toggle="tooltip" title="Ver practicante" href="practicantes/verpracticante/' . $note->ID_PRACTICANTE . '"><b>' . $note->NOMBRE_PRACTICANTE . '</b></a> ha realizado la autoevaluación &nbsp;&nbsp;&nbsp;&nbsp; <b>' . Momento($note->FECHA_FINALIZA) . '</b>']) ?>
             </div>
         <?php endforeach; ?>
     </div>
@@ -84,8 +84,7 @@
     <div class="row">
         <?php foreach ($this->seguimientos_model->TraeEvaluacionEstudianteNotificacion(0) as $i => $note): ?>
             <div class="col-lg-10">
-                <?= Alert(['title' => '¡En espera!', 'icon' => 'ion-clock', 'type' => 'danger', 'text' => 'El estudiante <a target="_blank" data-toggle="tooltip" title="Ver practicante" href="practicantes/verpracticante/' . $note->ID_PRACTICANTE . '"><b>' . $note->NOMBRE_PRACTICANTE . '</b></a> aún no ha evaluado el momento ' .
-                    $note->MOMENTO . ' enviado <b>' . Momento($note->FECHA_REGISTRO) . '</b> y finaliza el <b>' . FechaFormal($note->FECHA_CADUCA, false) . '</b>']) ?>
+                <?= Alert(['title' => '¡En espera!', 'icon' => 'ion-clock', 'type' => 'danger', 'text' => 'El estudiante <a target="_blank" data-toggle="tooltip" title="Ver practicante" href="practicantes/verpracticante/' . $note->ID_PRACTICANTE . '"><b>' . $note->NOMBRE_PRACTICANTE . '</b></a> aún no ha realizado la autoevaluación enviada <b>' . Momento($note->FECHA_REGISTRO) . '</b> y finaliza el <b>' . FechaFormal($note->FECHA_CADUCA, false) . '</b>']) ?>
             </div>
         <?php endforeach; ?>
     </div>

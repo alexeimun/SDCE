@@ -198,7 +198,7 @@
             $pdf->Text(180, 45, 'D0-32-F');
             $pdf->Text(70, 50, 'FORMATO REGISTRO DE ASESORíA DE PRÁCTICA');
             $pdf->Text(10, 60, 'FACULTAD DE INGENIERÍA');
-            $pdf->Text(100, 60, 'PROGRAMA DE ' . strtoupper($Info->PROGRAMA));
+            $pdf->Text(90, 60, 'PROGRAMA DE ' . strtoupper($Info->PROGRAMA));
             $pdf->SetFont('Arial', '', 10);
 
             #Marco grande
@@ -262,7 +262,9 @@
             $pdf->Text(12, 269, 'FIRMA COOPERADOR:');
             $pdf->Line(125/*Longitud*/, 269/*y*/, 52/*x*/, 269/*y*/);
 
-            $pdf->SetFont('Arial', 'B', 10);
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->Text(12, 286, 'Fecha de actualización 05/11/2009 Versión 1');
+            $pdf->Text(190, 286, '1 de 1');
 
             $pdf->Output();
             $pdf->Cell($pdf->PageNo());

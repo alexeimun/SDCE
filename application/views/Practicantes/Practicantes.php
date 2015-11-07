@@ -17,7 +17,7 @@
                 <?= input_submit(['class' => 'col-lg-offset-5 col-sm-offset-5 col-lg-2', 'icon' => 'export', 'text' => 'Exportar']) ?>
 
                 <div class="box-body">
-                    <?= Component::Table(['columns' => ['Nombre practicante', 'Proyecto', 'Modalidad de la práctica', 'Agencia'],
+                    <?= Component::Table(['columns' => ['Nombre practicante', 'Proyecto', 'Modalidad de la práctica', 'Agencia'], 'limitCell' => 120,
                         'tableName' => 'practicante', 'id' => 'ID_PRACTICANTE', 'controller' => 'practicantes',
                         'fields' => ['NOMBRE_PRACTICANTE', 'NOMBRE_PROYECTO', 'MODALIDAD', 'NOMBRE_AGENCIA',]
                         , 'dataProvider' => $this->session->userdata('ASESOR') ? $this->practicantes_model->TraePracticantes() : $this->practicantes_model->TraeTodoPracticantes(),
@@ -40,13 +40,16 @@
 
 
 <script type="text/javascript">
-    $(function () {
+    $(function ()
+    {
 
-        $(':button').on('click', function () {
+        $(':button').on('click', function ()
+        {
             ArmarTabla();
         });
 
-        function ArmarTabla() {
+        function ArmarTabla()
+        {
             var nombre = 'Listado practicantes - <?=$this->session->userdata('PERDIODO') ?>';
             $('#itable').html($('#tabla').html());
             $('#itable thead tr th:nth-of-type(5)').remove();
@@ -58,21 +61,25 @@
             location.href = '';
         }
 
-        function Pulir() {
+        function Pulir()
+        {
             $('#tabla').css({fontSize: '12pt'});
             $('#itable thead th').css({background: '#5082BD', color: 'white'});
-            $('#itable thead th').each(function (i, el) {
+            $('#itable thead th').each(function (i, el)
+            {
                 $(el).text($(el).text().toUpperCase());
             });
         }
 
         $("#tabla").dataTable();
 
-        $('body').on('click', 'a[data-id]', function () {
+        $('body').on('click', 'a[data-id]', function ()
+        {
             Alert($(this).data('id'), '<?=site_url('practicantes/eliminarpracticante') ?>');
         });
 
-        function Alert(id, url) {
+        function Alert(id, url)
+        {
             BootstrapDialog.show({
                 title: '<span class="ion ion-android-delete" style="font-size: 20pt;font-weight: bold; color: white;"></span>&nbsp;&nbsp;&nbsp; <span  style="font-size: 18pt;">Atención!</span>',
                 type: BootstrapDialog.TYPE_DANGER,
@@ -81,14 +88,18 @@
                 buttons: [{
                     label: 'Aceptar',
                     cssClass: 'btn-danger',
-                    action: function () {
+                    action: function ()
+                    {
                         $.ajax({
                             type: 'post', url: url, data: {Id: id},
-                            success: function () {
+                            success: function ()
+                            {
                                 location.href = '';
                             },
-                            error: function (a) {
-                                if (a.status == 500) {
+                            error: function (a)
+                            {
+                                if (a.status == 500)
+                                {
                                     $(".bootstrap-dialog-message").html('<br> <span style="color: #8c4646"><b>&nbsp;No se puede eliminar este registro! </b>Asegurese de que no esté siendo utilizado en otros módulos del sistema.</span>')
                                 }
                             }
@@ -97,7 +108,8 @@
                 },
                     {
                         label: 'Cancelar',
-                        action: function (dialogItself) {
+                        action: function (dialogItself)
+                        {
                             dialogItself.close();
                         }
                     }]

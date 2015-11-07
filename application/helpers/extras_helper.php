@@ -300,9 +300,10 @@
          * @var $text
          * @var $type
          * @var $color
+         * @var $localStorage
          */
-        $color=isset($color)?$color:'green';
-        return "<div class='row'>
+        $color = isset($color) ? $color : 'green';
+        $Alert = "<div class='row'>
                         <div class='col-lg-9'>
                             <div class='box box-solid bg-$color-gradient'>
                                 <div class='box-header'>
@@ -314,6 +315,7 @@
                                     </div>
                                 </div>
                                 <div class='box-body border-radius-none'>";
+        echo $Alert;
     }
 
     function Endbox()

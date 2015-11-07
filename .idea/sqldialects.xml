@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$USER_HOME$/Desktop/Backups/bck001.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Desktop/Backups/bck002.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Desktop/INVERBIENES/inconciudades.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Desktop/sdce - data - copia.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/sdce - data.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Desktop/sdce volcado.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/sdce1.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Downloads/1025788 (1).sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Downloads/1025788.sql" dialect="MySQL" />

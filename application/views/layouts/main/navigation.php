@@ -12,15 +12,15 @@
                             ['label' => 'Asesoría', 'options' => ['icon' => 'fa fa-th-list'],
                                 'items' =>
                                     [
-                                        ['label' => 'Enviar formulario', 'url' => 'informe/enviarasesoriaspractica', 'options' => ['icon' => 'ion-paper-airplane']],
-                                        ['label' => 'Asesorías prácticas', 'url' => 'informe/asesoriapracticas', 'options' => ['icon' => 'fa fa-list-alt']],
+                                        ['label' => 'Enviar asesorías', 'url' => 'informe/enviarasesoriaspractica', 'options' => ['icon' => 'ion-paper-airplane']],
+                                        ['label' => 'Asesorías de prácticas', 'url' => 'informe/asesoriapracticas', 'options' => ['icon' => 'fa fa-list-alt']],
                                     ],
                             ],
                             ['label' => 'Gastos de transporte', 'options' => ['icon' => 'fa fa-bus'],
                                 'items' =>
                                     [
                                         ['label' => 'Crear Gasto transporte', 'url' => 'informe/creargastostransporte', 'options' => ['icon' => 'ion-android-add']],
-                                        ['label' => 'Gastos transporte', 'url' => 'informe/gastostransporte', 'options' => ['icon' => 'fa fa-list-alt']],
+                                        ['label' => 'Gastos de transporte', 'url' => 'informe/gastostransporte', 'options' => ['icon' => 'fa fa-list-alt']],
                                     ],
                             ],
                         ],
@@ -34,7 +34,7 @@
                                 'items' =>
                                     [
                                         ['label' => 'Seguimiento', 'url' => 'seguimiento/seguimientos', 'options' => ['icon' => 'ion-android-exit']],
-                                        ['label' => 'Enviar formularios', 'url' => 'seguimiento/enviarformularios', 'options' => ['icon' => 'ion-paper-airplane']],
+                                        ['label' => 'Enviar autoevaluación', 'url' => 'seguimiento/enviarautoevaluacion', 'options' => ['icon' => 'ion-paper-airplane']],
                                         ['label' => 'Calificar practicante', 'url' => 'seguimiento/calificarpracticante', 'options' => ['icon' => 'ion-edit']],
 
                                     ]],
