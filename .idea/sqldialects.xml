@@ -3,8 +3,10 @@
   <component name="SqlDialectMappings">
     <file url="file://$USER_HOME$/Desktop/Backups/bck001.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/Backups/bck002.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Desktop/Backups/bck005.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Desktop/Backups/bck006.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Desktop/Backups/bck010.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/INVERBIENES/inconciudades.sql" dialect="MySQL" />
-    <file url="file://$USER_HOME$/Desktop/sdce - data - copia.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/sdce - data.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/sdce volcado.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/sdce1.sql" dialect="MySQL" />

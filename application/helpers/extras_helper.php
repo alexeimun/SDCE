@@ -299,15 +299,18 @@
          * @var $title
          * @var $text
          * @var $type
+         * @var $col
+         * @var $icon
          * @var $color
          * @var $localStorage
          */
+
+        $icon = isset($icon) ? $icon : 'fa fa-th';
         $color = isset($color) ? $color : 'green';
-        $Alert = "<div class='row'>
-                        <div class='col-lg-9'>
+        $Alert = "<div class='col-lg-$col'>
                             <div class='box box-solid bg-$color-gradient'>
                                 <div class='box-header'>
-                                    <i class='fa fa-th'></i>
+                                    <i class='$icon'></i>
                                     <h3 class='box-title'>$title</h3>
                                     <div class='box-tools pull-right'>
                                         <button class='btn bg-$color btn-sm' data-widget='collapse'><i class='fa fa-minus'></i></button>
@@ -324,8 +327,7 @@
                                 <div class='box-footer no-border'>
                                 </div><!-- /.box-footer -->
                             </div><!-- /.box -->
-                        </div>
-                    </div>";
+                        </div>";
     }
 
     function Uncamelize($string)

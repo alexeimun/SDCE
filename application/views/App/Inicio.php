@@ -6,7 +6,7 @@
     $per = date('Y-', strtotime($this->session->userdata('PERIODO'))) . (date('m', strtotime($this->session->userdata('PERIODO'))) > 6 ? 2 : 1);
 ?>
 <section class="content-header">
-    <h1>Tablero
+    <h1 style="color:#099a5b"><i class="fa fa-tachometer"></i> Tablero de control
         <small> Periodo académico
             <b><?= $per ?></b>
         </small>
@@ -55,6 +55,18 @@
                 title: "<i class='green ios ion-clock'></i> <b>Horarios de asesoría</b>",
                 content: "<b>¡Esté siempre al tanto de sus asesorías!</b> visualice todos sus horarios con sus practicantes en esta sección! <br><br>" +
                 "<img src='<?=site_url('asesorfotos/tour/horario.png') ?>' height='90' width='245'>"
+            },
+            {
+                placement: "left",
+                element: "#noticias",
+                title: "<i class='green fa fa-newspaper-o'></i> <b>Noticias</b>",
+                content: "<b>¡Permanezca al día con las noticias!</b> <br>Revise las noticias que llegan desde la faculta en esta sección, no se pierda de ningún evento o información"
+            },
+            {
+                placement: "left",
+                element: "#mensajes",
+                title: "<i class='green fa fa-comments'></i> <b>Mensajes</b>",
+                content: "<b>¡Revise los mensajes que la facultad tiene para usted!</b><br>Esté siempre informado sobre novedades y comentarios dirigidos hacia usted"
             },
             {
                 element: "#informes",

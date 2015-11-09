@@ -36,7 +36,7 @@
                                         ['label' => 'Seguimiento', 'url' => 'seguimiento/seguimientos', 'options' => ['icon' => 'ion-android-exit']],
                                         ['label' => 'Enviar autoevaluación', 'url' => 'seguimiento/enviarautoevaluacion', 'options' => ['icon' => 'ion-paper-airplane']],
                                         ['label' => 'Calificar practicante', 'url' => 'seguimiento/calificarpracticante', 'options' => ['icon' => 'ion-edit']],
-
+                                        ['label' => 'Eliminar calificación', 'url' => 'seguimiento/eliminarcalificacion', 'options' => ['icon' => 'fa fa-trash']],
                                     ]],
                         ],
                 ],

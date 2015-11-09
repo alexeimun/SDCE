@@ -13,7 +13,6 @@
 <div class="container">
     <?= form_open(site_url('seguimiento/seguimientos'), ['target' => '_blank', 'class' => 'form-horizontal col-md-8', 'style' => 'margin-left: 15%']) ?>
     <hr style="border: 1px solid #099a5b;"/>
-    <?= Alert(['title' => '<a href="eliminarcalificacion">¿Necesita desechar una calificación?</a>', 'text' => '', 'icon' => 'ion-ios-trash']) ?>
     <?= select_input(['text' => 'Proyecto', 'collabel' => 3, 'colinput' => 7, 'select' => Dropdown(['name' => 'ID_PROYECTO', 'dataProvider' => $this->proyectos_model->TraeAsesorProyectosDD(),
         'placeholder' => '-- Seleccione un proyecto --', 'fields' => ['NOMBRE_PROYECTO']])]) ?>
     <div class="practicantes"></div>
@@ -33,13 +32,15 @@
 
     $('form').jValidate();
 
-    $('select[name=ID_PROYECTO]').on('change', function () {
+    $('select[name=ID_PROYECTO]').on('change', function ()
+    {
         if ($('select[name=ID_PROYECTO] :selected').val() != 0)
             $('.practicantes').load('<?=site_url('seguimiento/traepracticantesDDAjax')?>', {ID_PROYECTO: $(this).val()});
         else $('.practicantes').html('');
     });
 
-    $('body').on('change', 'select[name=ID_PRACTICANTE]', function () {
+    $('body').on('change', 'select[name=ID_PRACTICANTE]', function ()
+    {
         if ($('select[name=ID_PRACTICANTE] :selected').val() != 0)
             $('.momento').load('<?=site_url('seguimiento/traeMomentoPracticanteDDAjax')?>', {ID_PRACTICANTE: $(this).val()});
         else $('.momento').html('');
@@ -50,19 +51,23 @@
         radius: 6, color: '#000', speed: 1, length: 15, top: '10%'
     })).spin(document.getElementById("spin"));
 
-    function SavePost() {
+    function SavePost()
+    {
         var practicante = $('select[name=ID_PRACTICANTE]');
         var momento = $('select[name=MOMENTO]');
 
-        if ($('select[name=ID_PROYECTO]').val() == 0) {
+        if ($('select[name=ID_PROYECTO]').val() == 0)
+        {
             event.preventDefault();
             Message('Debe seleccionar un proyecto');
         }
-        else if (practicante.length && practicante.val() == 0) {
+        else if (practicante.length && practicante.val() == 0)
+        {
             event.preventDefault();
             Message('Debe seleccionar un practicante');
         }
-        else if (momento.length && momento.val() == 0) {
+        else if (momento.length && momento.val() == 0)
+        {
             event.preventDefault();
             Message('No se ha encontrado ningún momento');
         }

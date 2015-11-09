@@ -139,6 +139,7 @@
      * @property cooperadores_model $cooperadores_model
      * @property practicantes_model $practicantes_model
      * @property usuarios_model $usuarios_model
+     * @property seguimientos_model $seguimientos_model
      */
 
 

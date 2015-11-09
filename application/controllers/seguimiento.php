@@ -79,7 +79,6 @@
                             $persona = 'Cooperador';
                             break;
                     }
-                    $this->seguimientos_model->InsertarCalificarPracticante();
 
                     if($this->seguimientos_model->ExisteCalificacion('C,A'))
                     {
@@ -89,6 +88,8 @@
                     {
                         $this->seguimientos_model->ActualizaPracticanteMomento();
                     }
+
+                    $this->seguimientos_model->InsertarCalificacionPracticante();
 
                     $correo = $this->practicantes_model->TraePracticante($this->input->post('ID_PRACTICANTE'))->CORREO_PRACTICANTE;
                     $subjet = 'Calificación del ' . ($momento == 1 ? 'primer' : 'segundo') . ' momento calificado como: ' . $persona;
@@ -110,8 +111,9 @@
             {
                 $Momento = $this->seguimientos_model->TraeMomento();
                 echo '<div class="row"><p class="font1 col-lg-11" style="text-align: center;">' .
-                    ($this->seguimientos_model->TraeTodoMomentos() == 0 ? ('<a target="_blank" href="' . site_url('seguimiento/enviarautoevaluacion') . '"><span class="ion-forward"></span> Primero se deben  diligenciar los formularios de autoevaluación</a>') : 'Momento ' . $Momento) .
-                    '</p> <input type="hidden" name="MOMENTO" value="' . $Momento . '"></div>';
+                    ($this->seguimientos_model->TraeTodoMomentos() == 0 ? ('<a target="_blank" href="' . site_url('seguimiento/enviarautoevaluacion') . '"><span class="ion-forward"></span> Primero se deben  diligenciar los formularios de autoevaluación</a>')
+                        : 'Momento ' . $Momento . '</p> <input type="hidden" name="MOMENTO" value="' . $Momento . '">') .
+                    '</div>';
             }
             else
             {
@@ -180,6 +182,37 @@
                 }
                 echo $CalificacionMomentos === false ? "<a target='_blank' class='col-lg-9 col-lg-push-2'  href='" . site_url('seguimiento/enviarautoevaluacion') . "'><b>El practicante no ha realizado la aotoevaluación, ¿desea enviarsela?</b></a><br>" :
                     form_dropdown('MOMENTO', $CalificacionMomentos, ['input' => ['col' => '7'], 'label' => ['text' => 'Momento', 'col' => 3]]);
+            }
+            else
+            {
+                show_404();
+            }
+        }
+
+        public function traeMomentoEliminarAjax()
+        {
+            if($this->input->is_ajax_request() && !empty($_POST))
+            {
+                $Calificado1 = ($this->seguimientos_model->ExisteCalificacion('A', 1) && $this->seguimientos_model->ExisteCalificacion('C', 1))
+                    || $this->seguimientos_model->ExisteCalificacion('M', 1);
+
+                $Calificado2 = ($this->seguimientos_model->ExisteCalificacion('A', 2) && $this->seguimientos_model->ExisteCalificacion('C', 2))
+                    || $this->seguimientos_model->ExisteCalificacion('M', 2);
+
+                if($Calificado2 == true)
+                {
+                    $CalificacionMomentos = [2 => 'Momento 2'];
+                }
+                else if($Calificado1 == true)
+                {
+                    $CalificacionMomentos = [1 => 'Momento 1'];
+                }
+                else
+                {
+                    $CalificacionMomentos = [0 => 'No hay momentos'];
+                }
+
+                echo form_dropdown('MOMENTO', $CalificacionMomentos, ['input' => ['col' => '7'], 'label' => ['text' => 'Momento', 'col' => 3]]);
             }
             else
             {
@@ -283,7 +316,8 @@
             }
         }
 
-        public function validaringreso()
+        public
+        function validaringreso()
         {
             if($this->input->is_ajax_request() && !empty($_POST))
             {
@@ -491,7 +525,8 @@ SI  X                                   NO', 1, 'L');
             $pdf->Cell($pdf->PageNo());
         }
 
-        private function ImprimeSeguimientoPractica()
+        private
+        function ImprimeSeguimientoPractica()
         {
             $this->load->library('fpdf/pdf');
             $pdf = new PDF('L');
@@ -609,7 +644,7 @@ SI  X                                   NO', 1, 'L');
             $pdf->Text($x, 4 + $c + $h * ++$f, '1.1.3 ¿Ha tenido experiencia previa en las funciones o actividades establecidas?');
             $pdf->Text($x, 4 + $c + $h * ++$f, '        ' . $r4);
 
-            $pdf->Text(270, 13 + $c + $h * ++$f, 'Página '.$pdf->PageNo());
+            $pdf->Text(270, 13 + $c + $h * ++$f, 'Página ' . $pdf->PageNo());
 
             ######################Page Nro 2######################
             $pdf->AddPage('L');
@@ -767,7 +802,7 @@ SI  X                                   NO', 1, 'L');
             }
             $pdf->SetFont('Arial', '', 8);
 
-            $pdf->Text(270, 13 + $c + $h * ++$f + 20, 'Página '.$pdf->PageNo());
+            $pdf->Text(270, 13 + $c + $h * ++$f + 20, 'Página ' . $pdf->PageNo());
             ######################FUNCIÓN FORMATIVA#########################
             $Ambos = false;
             $Asesor = false;
@@ -859,7 +894,7 @@ SI  X                                   NO', 1, 'L');
                     $this->Observaciones($pdf, $Asesor);
                     $this->FuncionFormativa($pdf, $Cooperador);
                     $this->Observaciones($pdf, $Cooperador);
-                    $this->FuncionSumativa($pdf, $Asesor2, $Cooperador2->NOTA);
+                    $this->FuncionSumativa($pdf, $Ambos2);
                 }
                 else if($Ambos2 !== false && $Ambos !== false)
                 {
@@ -916,7 +951,8 @@ SI  X                                   NO', 1, 'L');
          * @param PDF $pdf
          * @param $Persona
          */
-        private function FuncionFormativa($pdf, $Persona)
+        private
+        function FuncionFormativa($pdf, $Persona)
         {
             ######################Page Nro 2######################
             $pdf->AddPage('L');
@@ -1103,10 +1139,11 @@ SI  X                                   NO', 1, 'L');
             $pdf->Text($x, $c + 1 + $h * ++$f, '  Exclente ___   Bueno___   Aceptable___   Deficiente ___');
             $this->Nota($x, $c + 1 + $h * $f, $pdf, $Persona->NOTA);
 
-            $pdf->Text(270, 5 + $c + $h * ++$f, 'Página '.$pdf->PageNo());
+            $pdf->Text(270, 5 + $c + $h * ++$f, 'Página ' . $pdf->PageNo());
         }
 
-        private function CalcularMomento($Nota1, $Nota2 = null, $fecha)
+        private
+        function CalcularMomento($Nota1, $Nota2 = null, $fecha)
         {
             $Notas = [];
             $saberser = 0;
@@ -1168,7 +1205,8 @@ SI  X                                   NO', 1, 'L');
          * @param bool $index
          * @return
          */
-        private function Nota($x, $y, $pdf, $Nota, $eval = false, $index = false)
+        private
+        function Nota($x, $y, $pdf, $Nota, $eval = false, $index = false)
         {
             $pdf->SetFont('Arial', 'B', 8);
             if($index === false)
@@ -1211,7 +1249,8 @@ SI  X                                   NO', 1, 'L');
          * @param PDF $pdf
          * @param $Persona
          */
-        private function Observaciones($pdf, $Persona = null)
+        private
+        function Observaciones($pdf, $Persona = null)
         {
             ######################Page Nro 2######################
             $pdf->AddPage('L');
@@ -1243,7 +1282,7 @@ SI  X                                   NO', 1, 'L');
             $pdf->SetXY($x + 187, $c + $h * $f + 7);
             $pdf->MultiCell(91, 4, $Persona->OBS_SABERSABER);
 
-            $pdf->Text(270, 200, 'Página '.$pdf->PageNo());
+            $pdf->Text(270, 200, 'Página ' . $pdf->PageNo());
         }
 
         /**
@@ -1251,7 +1290,8 @@ SI  X                                   NO', 1, 'L');
          * @param $Persona1
          * @param $Persona2
          */
-        private function FuncionSumativa($pdf, $Persona1, $Persona2 = null)
+        private
+        function FuncionSumativa($pdf, $Persona1, $Persona2 = null)
         {
             $pdf->AddPage('L');
             $this->item = 0;
@@ -1531,7 +1571,7 @@ SI  X                                   NO', 1, 'L');
             $pdf->Line($x + 90, $c + $h * $f, 205, $c + $h * $f);
             $pdf->Text($x, $c + $h * ++$f, 'NOTA: Anexar a este, los registros de asesoría que dan cuenta del acompañamiento al estudiante en el semestre');
 
-            $pdf->Text(270, $c + $h * ++$f + 5, 'Página '.$pdf->PageNo());
+            $pdf->Text(270, $c + $h * ++$f + 5, 'Página ' . $pdf->PageNo());
 
         }
     }

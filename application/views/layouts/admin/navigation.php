@@ -55,6 +55,7 @@
                             ['label' => 'Listado usuarios', 'url' => 'usuarios', 'options' => ['icon' => 'fa fa-list-alt']],
                         ],
                 ],
+                ['label' => 'Noticias', 'url' => 'noticias', 'options' => ['icon' => 'ion-speakerphone']],
                 ['label' => 'Parámetros', 'url' => 'parametros', 'options' => ['icon' => 'fa fa-sliders'], 'visible' => $this->rbca->can('parámetros', false)],
                 ['label' => 'Acerca', 'url' => 'app/acerca', 'options' => ['icon' => 'fa fa-leaf']],
             ],

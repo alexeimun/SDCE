@@ -18,6 +18,28 @@
             $this->db->update('t_dependencias', $this->input->post(null, true));
         }
 
+        public function EnviarNoticiasYMensajes()
+        {
+            $Asesores = explode(',', $_POST['ID_ASESOR']);
+            $Noticias = [];
+            unset($_POST['_wysihtml5_mode'], $_POST['ID_ASESOR'], $_POST['tabla_length']);
+
+            $this->db->set('FECHA_ENVIO', 'now()', false);
+            $this->db->set('ENVIADO_POR', $this->session->userdata('ID_USUARIO'));
+            $this->db->insert('t_noticias', $this->input->post(null, true));
+            $id_noticia = @$this->db->query("SELECT max(ID_NOTICIA) ID FROM t_noticias")->result()[0]->ID;
+
+            foreach ($Asesores as $asesor)
+            {
+                $Noticias[] =
+                    [
+                        'ID_NOTICIA' => $id_noticia,
+                        'ID_ASESOR' => $asesor,
+                    ];
+            }
+            $this->db->insert_batch('t_destinatarios', $Noticias);
+        }
+
         public function TraePeriodo()
         {
             $q = $this->db->query("SELECT
@@ -25,6 +47,50 @@
                FROM t_usuarios
                 WHERE ID_USUARIO=" . $this->session->userdata('ID_USUARIO'));
             return $q->num_rows() > 0 ? $q->result()[0]->PERIODO : date('Y-') . (date('m') > 6 ? '07' : '01') . '-01';
+        }
+
+        public function TraeNoticias()
+        {
+            return $this->db->query("SELECT
+              t_noticias.ID_NOTICIA,
+              t_noticias.TIPO,
+              t_noticias.ASUNTO,
+              t_noticias.FECHA_ENVIO
+
+               FROM t_destinatarios
+               INNER JOIN t_noticias ON t_destinatarios.ID_NOTICIA=t_noticias.ID_NOTICIA
+                WHERE t_noticias.TIPO=1 AND t_destinatarios.ID_ASESOR=" . $this->session->userdata('ID_USUARIO'))->result();
+        }
+
+        public function TraeNoticia($idnoticia)
+        {
+            $q = $this->db->query("SELECT
+              t_noticias.ID_NOTICIA,
+              t_noticias.TIPO,
+              t_noticias.MENSAJE,
+              t_noticias.ASUNTO,
+              t_noticias.FECHA_ENVIO,
+              t_usuarios.NOMBRE NOMBRE_USUARIO
+
+               FROM t_destinatarios
+               INNER JOIN t_noticias ON t_destinatarios.ID_NOTICIA=t_noticias.ID_NOTICIA
+               INNER JOIN t_usuarios ON t_usuarios.ID_USUARIO=t_noticias.ENVIADO_POR
+                WHERE t_noticias.TIPO=1 AND t_destinatarios.ID_NOTICIA=$idnoticia AND t_destinatarios.ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . ' limit 1');
+            return $q->num_rows() > 0 ? $q->result()[0] : null;
+        }
+
+        public function TraeMensajes()
+        {
+            return $this->db->query("SELECT
+              t_noticias.ID_NOTICIA,
+              t_noticias.TIPO,
+              t_noticias.MENSAJE,
+              t_noticias.ASUNTO,
+              t_noticias.FECHA_ENVIO
+
+               FROM t_destinatarios
+               INNER JOIN t_noticias ON t_destinatarios.ID_NOTICIA=t_noticias.ID_NOTICIA
+                WHERE t_noticias.TIPO=2 AND t_destinatarios.ID_ASESOR=" . $this->session->userdata('ID_USUARIO'))->result();
         }
 
         public function CrearMesComponente()

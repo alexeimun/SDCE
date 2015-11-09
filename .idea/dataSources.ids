@@ -21,15 +21,15 @@
       <table id="12" parent="1" name="t_dependencias"/>
       <table id="13" parent="1" name="t_evaluacion_estudiante"/>
       <table id="14" parent="1" name="t_gastos_transporte"/>
-      <table id="15" parent="1" name="t_informes_mensuales"/>
-      <table id="16" parent="1" name="t_links"/>
-      <table id="17" parent="1" name="t_modalidad_practica"/>
-      <table id="18" parent="1" name="t_practicantes"/>
-      <table id="19" parent="1" name="t_proyectos"/>
-      <table id="20" parent="1" name="t_registro_notas"/>
-      <table id="21" parent="1" name="t_registros"/>
-      <table id="22" parent="1" name="t_tipo_proyectos"/>
-      <table id="23" parent="1" name="t_usuarios"/>
+      <table id="15" parent="1" name="t_links"/>
+      <table id="16" parent="1" name="t_modalidad_practica"/>
+      <table id="17" parent="1" name="t_practicantes"/>
+      <table id="18" parent="1" name="t_proyectos"/>
+      <table id="19" parent="1" name="t_registros"/>
+      <table id="20" parent="1" name="t_tipo_proyectos"/>
+      <table id="21" parent="1" name="t_usuarios"/>
+      <table id="22" parent="1" name="t_destinatarios"/>
+      <table id="23" parent="1" name="t_noticias"/>
       <column id="24" parent="2" name="ID_AGENCIA">
         <mandatory>1</mandatory>
         <data-type>bigint(20)</data-type>
@@ -377,10 +377,10 @@ child</columns>
         <data-type>varchar(1)</data-type>
       </column>
       <column id="123" parent="13" name="DEBFOR">
-        <data-type>varchar(160)</data-type>
+        <data-type>varchar(260)</data-type>
       </column>
       <column id="124" parent="13" name="METEST">
-        <data-type>varchar(160)</data-type>
+        <data-type>varchar(260)</data-type>
       </column>
       <column id="125" parent="13" name="FD">
         <data-type>varchar(380)</data-type>
@@ -430,335 +430,314 @@ child</columns>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="138" parent="15" name="ID_INFORME_MENSUAL">
+      <column id="138" parent="15" name="ID_LINK">
         <mandatory>1</mandatory>
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="139" parent="15" name="ID_PROYECTO">
+      <column id="139" parent="15" name="ID_PRACTICANTE">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="140" parent="15" name="FECHAS">
-        <data-type>varchar(90)</data-type>
-      </column>
-      <column id="141" parent="15" name="AVANCES">
-        <data-type>varchar(300)</data-type>
-      </column>
-      <column id="142" parent="15" name="OBSERVACIONES">
-        <data-type>varchar(300)</data-type>
-      </column>
-      <column id="143" parent="15" name="CONSECUTIVO">
-        <data-type>bigint(20)</data-type>
-      </column>
-      <key id="144" parent="15" name="PRIMARY">
-        <columns>ID_INFORME_MENSUAL</columns>
-        <primary>1</primary>
-      </key>
-      <foreign-key id="145" parent="15" name="t_informes_mensuales_ibfk_1">
-        <columns>ID_PROYECTO</columns>
-        <ref-key>t_proyectos.PRIMARY</ref-key>
-        <cascade-update-rule>restrict</cascade-update-rule>
-        <cascade-delete-rule>restrict</cascade-delete-rule>
-      </foreign-key>
-      <column id="146" parent="16" name="ID_LINK">
-        <mandatory>1</mandatory>
-        <data-type>bigint(20)</data-type>
-      </column>
-      <column id="147" parent="16" name="ID_PRACTICANTE">
-        <data-type>bigint(20)</data-type>
-      </column>
-      <column id="148" parent="16" name="TIPO">
+      <column id="140" parent="15" name="TIPO">
         <data-type>varchar(2)</data-type>
       </column>
-      <column id="149" parent="16" name="FINALIZADO">
+      <column id="141" parent="15" name="FINALIZADO">
         <data-type>int(1)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <column id="150" parent="16" name="CONSECUTIVO">
+      <column id="142" parent="15" name="CONSECUTIVO">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="151" parent="16" name="FECHA_CADUCA">
+      <column id="143" parent="15" name="FECHA_CADUCA">
         <data-type>datetime</data-type>
       </column>
-      <column id="152" parent="16" name="FECHA_REGISTRO">
+      <column id="144" parent="15" name="FECHA_REGISTRO">
         <data-type>datetime</data-type>
       </column>
-      <column id="153" parent="16" name="FECHA_FINALIZA">
+      <column id="145" parent="15" name="FECHA_FINALIZA">
         <comment>Fecha en la que el prcaticante evalua</comment>
         <data-type>datetime</data-type>
       </column>
-      <key id="154" parent="16" name="PRIMARY">
+      <key id="146" parent="15" name="PRIMARY">
         <columns>ID_LINK</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="155" parent="16" name="t_links_ibfk_1">
+      <foreign-key id="147" parent="15" name="t_links_ibfk_1">
         <columns>ID_PRACTICANTE</columns>
         <ref-key>t_practicantes.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="156" parent="17" name="ID_MODALIDAD_PRACTICA">
+      <column id="148" parent="16" name="ID_MODALIDAD_PRACTICA">
         <mandatory>1</mandatory>
         <data-type>int(2)</data-type>
       </column>
-      <column id="157" parent="17" name="NOMBRE_MODALIDAD_PRACTICA">
+      <column id="149" parent="16" name="NOMBRE_MODALIDAD_PRACTICA">
         <data-type>varchar(70)</data-type>
       </column>
-      <key id="158" parent="17" name="PRIMARY">
+      <key id="150" parent="16" name="PRIMARY">
         <columns>ID_MODALIDAD_PRACTICA</columns>
         <primary>1</primary>
       </key>
-      <column id="159" parent="18" name="ID_PRACTICANTE">
+      <column id="151" parent="17" name="ID_PRACTICANTE">
         <mandatory>1</mandatory>
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="160" parent="18" name="ID_ASESOR">
+      <column id="152" parent="17" name="ID_ASESOR">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="161" parent="18" name="ID_COOPERADOR">
+      <column id="153" parent="17" name="ID_COOPERADOR">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="162" parent="18" name="ID_PROYECTO">
+      <column id="154" parent="17" name="ID_PROYECTO">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="163" parent="18" name="ID_AGENCIA">
+      <column id="155" parent="17" name="ID_AGENCIA">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="164" parent="18" name="ID_PROGRAMA">
+      <column id="156" parent="17" name="ID_PROGRAMA">
         <data-type>int(2)</data-type>
       </column>
-      <column id="165" parent="18" name="MOMENTO">
+      <column id="157" parent="17" name="MOMENTO">
         <data-type>int(1)</data-type>
         <default-expression>&apos;1&apos;</default-expression>
       </column>
-      <column id="166" parent="18" name="ID_MODALIDAD_PRACTICA">
+      <column id="158" parent="17" name="ID_MODALIDAD_PRACTICA">
         <data-type>int(2)</data-type>
       </column>
-      <column id="167" parent="18" name="NOMBRE_PRACTICANTE">
+      <column id="159" parent="17" name="NOMBRE_PRACTICANTE">
         <data-type>varchar(60)</data-type>
       </column>
-      <column id="168" parent="18" name="CORREO_PRACTICANTE">
+      <column id="160" parent="17" name="CORREO_PRACTICANTE">
         <data-type>varchar(70)</data-type>
       </column>
-      <column id="169" parent="18" name="DOCUMENTO">
+      <column id="161" parent="17" name="DOCUMENTO">
         <data-type>varchar(20)</data-type>
       </column>
-      <column id="170" parent="18" name="CELULAR">
+      <column id="162" parent="17" name="CELULAR">
         <data-type>varchar(15)</data-type>
       </column>
-      <column id="171" parent="18" name="TELEFONO">
+      <column id="163" parent="17" name="TELEFONO">
         <data-type>varchar(15)</data-type>
       </column>
-      <column id="172" parent="18" name="CODIGO">
+      <column id="164" parent="17" name="CODIGO">
         <data-type>varchar(10)</data-type>
       </column>
-      <column id="173" parent="18" name="FECHA_REGISTRO">
+      <column id="165" parent="17" name="FECHA_REGISTRO">
         <data-type>datetime</data-type>
       </column>
-      <column id="174" parent="18" name="FECHA_MODIFICA">
+      <column id="166" parent="17" name="FECHA_MODIFICA">
         <data-type>datetime</data-type>
       </column>
-      <column id="175" parent="18" name="ID_USUARIO_MODIFICA">
+      <column id="167" parent="17" name="ID_USUARIO_MODIFICA">
         <data-type>bigint(20)</data-type>
       </column>
-      <key id="176" parent="18" name="PRIMARY">
+      <key id="168" parent="17" name="PRIMARY">
         <columns>ID_PRACTICANTE</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="177" parent="18" name="t_practicantes_ibfk_1">
+      <foreign-key id="169" parent="17" name="t_practicantes_ibfk_1">
         <columns>ID_ASESOR</columns>
         <ref-key>t_usuarios.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="178" parent="18" name="t_practicantes_ibfk_2">
+      <foreign-key id="170" parent="17" name="t_practicantes_ibfk_2">
         <columns>ID_COOPERADOR</columns>
         <ref-key>t_cooperadores.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="179" parent="18" name="t_practicantes_ibfk_3">
+      <foreign-key id="171" parent="17" name="t_practicantes_ibfk_3">
         <columns>ID_PROYECTO</columns>
         <ref-key>t_proyectos.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="180" parent="18" name="t_practicantes_ibfk_4">
+      <foreign-key id="172" parent="17" name="t_practicantes_ibfk_4">
         <columns>ID_AGENCIA</columns>
         <ref-key>t_agencias.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="181" parent="19" name="ID_PROYECTO">
+      <column id="173" parent="18" name="ID_PROYECTO">
         <mandatory>1</mandatory>
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="182" parent="19" name="ID_TIPO_PROYECTO">
+      <column id="174" parent="18" name="ID_TIPO_PROYECTO">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="183" parent="19" name="ID_ASESOR">
+      <column id="175" parent="18" name="ID_ASESOR">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="184" parent="19" name="NOMBRE_PROYECTO">
+      <column id="176" parent="18" name="NOMBRE_PROYECTO">
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="185" parent="19" name="HORARIO">
+      <column id="177" parent="18" name="HORARIO">
         <data-type>varchar(20)</data-type>
       </column>
-      <column id="186" parent="19" name="FECHA_REGISTRO">
+      <column id="178" parent="18" name="FECHA_REGISTRO">
         <data-type>datetime</data-type>
       </column>
-      <column id="187" parent="19" name="PERIODO">
+      <column id="179" parent="18" name="PERIODO">
         <data-type>date</data-type>
       </column>
-      <key id="188" parent="19" name="PRIMARY">
+      <key id="180" parent="18" name="PRIMARY">
         <columns>ID_PROYECTO</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="189" parent="19" name="t_proyectos_ibfk_1">
+      <foreign-key id="181" parent="18" name="t_proyectos_ibfk_1">
         <columns>ID_TIPO_PROYECTO</columns>
         <ref-key>t_tipo_proyectos.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="190" parent="19" name="t_proyectos_ibfk_2">
+      <foreign-key id="182" parent="18" name="t_proyectos_ibfk_2">
         <columns>ID_ASESOR</columns>
         <ref-key>t_usuarios.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="191" parent="20" name="ID_REGISTRO_NOTA">
+      <column id="183" parent="19" name="ID_REGISTRO">
         <mandatory>1</mandatory>
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="192" parent="20" name="ID_PROYECTO">
+      <column id="184" parent="19" name="CONSECUTIVO">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="193" parent="20" name="CODIGO">
-        <data-type>varchar(20)</data-type>
+      <column id="185" parent="19" name="TIPO">
+        <data-type>varchar(30)</data-type>
       </column>
-      <column id="194" parent="20" name="NOTA1">
-        <data-type>varchar(2)</data-type>
-      </column>
-      <column id="195" parent="20" name="NOTA2">
-        <data-type>varchar(2)</data-type>
-      </column>
-      <column id="196" parent="20" name="CONSECUTIVO">
+      <column id="186" parent="19" name="ID_ASESOR">
         <data-type>bigint(20)</data-type>
       </column>
-      <key id="197" parent="20" name="PRIMARY">
-        <columns>ID_REGISTRO_NOTA</columns>
+      <column id="187" parent="19" name="FECHA_REGISTRO">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="188" parent="19" name="TOTAL">
+        <data-type>varchar(12)</data-type>
+      </column>
+      <column id="189" parent="19" name="MOMENTO_EVALUATIVO">
+        <data-type>int(2)</data-type>
+      </column>
+      <column id="190" parent="19" name="PERIODO">
+        <data-type>date</data-type>
+      </column>
+      <key id="191" parent="19" name="PRIMARY">
+        <columns>ID_REGISTRO</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="198" parent="20" name="t_registro_notas_ibfk_1">
-        <columns>ID_PROYECTO</columns>
-        <ref-key>t_proyectos.PRIMARY</ref-key>
+      <foreign-key id="192" parent="19" name="t_registros_ibfk_1">
+        <columns>ID_ASESOR</columns>
+        <ref-key>t_usuarios.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="199" parent="21" name="ID_REGISTRO">
+      <column id="193" parent="20" name="ID_TIPO_PROYECTO">
         <mandatory>1</mandatory>
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="200" parent="21" name="CONSECUTIVO">
-        <data-type>bigint(20)</data-type>
+      <column id="194" parent="20" name="NOMBRE_TIPO_PROYECTO">
+        <data-type>varchar(60)</data-type>
       </column>
-      <column id="201" parent="21" name="TIPO">
-        <data-type>varchar(30)</data-type>
-      </column>
-      <column id="202" parent="21" name="ID_ASESOR">
-        <data-type>bigint(20)</data-type>
-      </column>
-      <column id="203" parent="21" name="FECHA_REGISTRO">
+      <column id="195" parent="20" name="FECHA_REGISTRO">
         <data-type>datetime</data-type>
       </column>
-      <column id="204" parent="21" name="TOTAL">
-        <data-type>varchar(12)</data-type>
+      <key id="196" parent="20" name="PRIMARY">
+        <columns>ID_TIPO_PROYECTO</columns>
+        <primary>1</primary>
+      </key>
+      <column id="197" parent="21" name="ID_USUARIO">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
       </column>
-      <column id="205" parent="21" name="MOMENTO_EVALUATIVO">
-        <data-type>int(2)</data-type>
+      <column id="198" parent="21" name="NOMBRE">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="199" parent="21" name="DOCUMENTO">
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="200" parent="21" name="TELEFONO">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="201" parent="21" name="CELULAR">
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="202" parent="21" name="CORREO">
+        <data-type>varchar(60)</data-type>
+      </column>
+      <column id="203" parent="21" name="CLAVE">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="204" parent="21" name="NIVEL">
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="205" parent="21" name="FOTO">
+        <data-type>varchar(150)</data-type>
+        <default-expression>&apos;avatar.png&apos;</default-expression>
       </column>
       <column id="206" parent="21" name="PERIODO">
         <data-type>date</data-type>
       </column>
-      <key id="207" parent="21" name="PRIMARY">
-        <columns>ID_REGISTRO</columns>
-        <primary>1</primary>
-      </key>
-      <foreign-key id="208" parent="21" name="t_registros_ibfk_1">
-        <columns>ID_ASESOR</columns>
-        <ref-key>t_usuarios.PRIMARY</ref-key>
-        <cascade-update-rule>restrict</cascade-update-rule>
-        <cascade-delete-rule>restrict</cascade-delete-rule>
-      </foreign-key>
-      <column id="209" parent="22" name="ID_TIPO_PROYECTO">
-        <mandatory>1</mandatory>
-        <data-type>bigint(20)</data-type>
-      </column>
-      <column id="210" parent="22" name="NOMBRE_TIPO_PROYECTO">
-        <data-type>varchar(60)</data-type>
-      </column>
-      <column id="211" parent="22" name="FECHA_REGISTRO">
-        <data-type>datetime</data-type>
-      </column>
-      <key id="212" parent="22" name="PRIMARY">
-        <columns>ID_TIPO_PROYECTO</columns>
-        <primary>1</primary>
-      </key>
-      <column id="213" parent="23" name="ID_USUARIO">
-        <mandatory>1</mandatory>
-        <data-type>bigint(20)</data-type>
-      </column>
-      <column id="214" parent="23" name="NOMBRE">
-        <data-type>varchar(50)</data-type>
-      </column>
-      <column id="215" parent="23" name="DOCUMENTO">
-        <data-type>varchar(20)</data-type>
-      </column>
-      <column id="216" parent="23" name="TELEFONO">
-        <data-type>varchar(15)</data-type>
-      </column>
-      <column id="217" parent="23" name="CELULAR">
-        <data-type>varchar(15)</data-type>
-      </column>
-      <column id="218" parent="23" name="CORREO">
-        <data-type>varchar(60)</data-type>
-      </column>
-      <column id="219" parent="23" name="CLAVE">
-        <data-type>varchar(40)</data-type>
-      </column>
-      <column id="220" parent="23" name="NIVEL">
-        <data-type>int(1)</data-type>
-        <default-expression>&apos;0&apos;</default-expression>
-      </column>
-      <column id="221" parent="23" name="FOTO">
-        <data-type>varchar(150)</data-type>
-        <default-expression>&apos;avatar.png&apos;</default-expression>
-      </column>
-      <column id="222" parent="23" name="PERIODO">
-        <data-type>date</data-type>
-      </column>
-      <column id="223" parent="23" name="ESTADO">
+      <column id="207" parent="21" name="ESTADO">
         <data-type>int(1)</data-type>
         <default-expression>&apos;1&apos;</default-expression>
       </column>
-      <column id="224" parent="23" name="FECHA_REGISTRO">
+      <column id="208" parent="21" name="FECHA_REGISTRO">
         <data-type>datetime</data-type>
       </column>
-      <column id="225" parent="23" name="FACHA_ULTIMO_INICIO_SESION">
+      <column id="209" parent="21" name="FACHA_ULTIMO_INICIO_SESION">
         <data-type>datetime</data-type>
       </column>
-      <column id="226" parent="23" name="FECHA_MODIFICA">
+      <column id="210" parent="21" name="FECHA_MODIFICA">
         <data-type>datetime</data-type>
       </column>
-      <column id="227" parent="23" name="ID_USUARIO_MODIFICA">
+      <column id="211" parent="21" name="ID_USUARIO_MODIFICA">
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="228" parent="23" name="LOG_IN">
+      <column id="212" parent="21" name="LOG_IN">
         <data-type>int(1)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <key id="229" parent="23" name="PRIMARY">
+      <key id="213" parent="21" name="PRIMARY">
         <columns>ID_USUARIO</columns>
+        <primary>1</primary>
+      </key>
+      <column id="214" parent="22" name="ID_DESTINATARIO">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="215" parent="22" name="ID_NOTICIA">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="216" parent="22" name="ID_ASESOR">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="217" parent="22" name="PRIMARY">
+        <columns>ID_DESTINATARIO</columns>
+        <primary>1</primary>
+      </key>
+      <column id="218" parent="23" name="ID_NOTICIA">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="219" parent="23" name="ASUNTO">
+        <data-type>varchar(150)</data-type>
+      </column>
+      <column id="220" parent="23" name="MENSAJE">
+        <data-type>varchar(1000)</data-type>
+      </column>
+      <column id="221" parent="23" name="TIPO">
+        <data-type>int(1)</data-type>
+      </column>
+      <column id="222" parent="23" name="FECHA_ENVIO">
+        <data-type>date</data-type>
+      </column>
+      <column id="223" parent="23" name="ENVIADO_POR">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="224" parent="23" name="PRIMARY">
+        <columns>ID_NOTICIA</columns>
         <primary>1</primary>
       </key>
     </database-model>

@@ -12,7 +12,7 @@
             $this->db->insert_batch('t_links', $Data);
         }
 
-        public function InsertarCalificarPracticante()
+        public function InsertarCalificacionPracticante()
         {
             $this->db->set('FECHA_REGISTRO', 'NOW()', false);
             $this->db->set('ID_PRACTICANTE', $this->input->post('ID_PRACTICANTE'), false);
@@ -33,11 +33,10 @@
             $c2 = isset($c[1]) ? $c[1] : '';
             $c3 = isset($c[2]) ? $c[2] : '';
             $practicante = $this->input->post('ID_PRACTICANTE') ? $this->input->post('ID_PRACTICANTE') : $practicante;
-
             $momento = $this->input->post('MOMENTO') ? $this->input->post('MOMENTO') : $momento;
 
             return $this->db->query("SELECT DISTINCT ID_CALIFICACION_PRACTICANTE FROM t_calificacion_practicantes
-            WHERE PERSONA IN ('$c1','$c2','$c3') AND MOMENTO=$momento
+            WHERE PERSONA IN ('$c1','$c2','$c3') AND MOMENTO = $momento
              AND ID_PRACTICANTE = $practicante")->num_rows() > 0;
         }
 
@@ -61,14 +60,25 @@
             }
         }
 
-        public function ActualizaPracticanteMomento()
+        public function ActualizaPracticanteMomento($num = 1)
         {
-            $this->db->query('UPDATE t_practicantes SET MOMENTO = MOMENTO + 1 WHERE ID_PRACTICANTE = ' . $this->input->post('ID_PRACTICANTE'));
+            $this->db->query("UPDATE t_practicantes SET MOMENTO = MOMENTO + $num WHERE ID_PRACTICANTE = " . $this->input->post('ID_PRACTICANTE'));
         }
 
         public function EliminarCalificacion()
         {
+            $this->db->trans_start();
             $this->db->delete('t_calificacion_practicantes', ['ID_PRACTICANTE' => $this->input->post('ID_PRACTICANTE'), 'MOMENTO' => $this->input->post('MOMENTO')]);
+
+            if($this->db->trans_status() == false)
+            {
+                $this->db->trans_rollback();
+            }
+            else
+            {
+                $this->seguimientos_model->ActualizaPracticanteMomento(-1);
+                $this->db->trans_complete();
+            }
         }
 
         public function TraeMomento()
@@ -181,23 +191,33 @@
             FROM t_calificacion_practicantes
 
             WHERE ID_PRACTICANTE=$IdPracticante")->result();
+
             $Notas['Momento1'] = ['saberser' => 0, 'saberhacer' => 0, 'sabersaber' => 0];
             $Notas['Momento2'] = ['saberser' => 0, 'saberhacer' => 0, 'sabersaber' => 0];
-
+            $m1 = 1;
+            $m2 = 1;
             foreach ($calificaciones as $nota)
             {
+                $this->EvaluarNota(explode(',', $nota->NOTA), $Notas, $nota->MOMENTO);
                 if($nota->MOMENTO == 1)
                 {
-                    $this->EvaluarNota(explode(',', $nota->NOTA), $Notas, 1);
+                    $this->EvalSaberes($Notas, $m1++, 1);
                 }
                 else if($nota->MOMENTO == 2)
                 {
-                    $this->EvaluarNota(explode(',', $nota->NOTA), $Notas, 2);
+                    $this->EvalSaberes($Notas, $m2++, 2);
                 }
             }
             $Notas['NOTA1'] = number_format($Notas['Momento1']['saberser'] + $Notas['Momento1']['saberhacer'] + $Notas['Momento1']['sabersaber'], 1);
             $Notas['NOTA2'] = number_format($Notas['Momento2']['saberser'] + $Notas['Momento2']['saberhacer'] + $Notas['Momento2']['sabersaber'], 1);
             return $Notas;
+        }
+
+        public function EvalSaberes(&$Notas, $n, $momento)
+        {
+            $Notas['Momento' . $momento]['sabersaber'] /= $n;
+            $Notas['Momento' . $momento]['saberhacer'] /= $n;
+            $Notas['Momento' . $momento]['saberser'] /= $n;
         }
 
         private function  EvaluarNota($notas, &$Momentos, $m)
@@ -335,25 +355,5 @@
         public function ExisteRegistro($Consecutivo, $Tipo)
         {
             return $this->db->query("SELECT ID_REGISTRO FROM t_registros WHERE CONSECUTIVO=$Consecutivo AND TIPO='$Tipo' AND ID_ASESOR=" . $this->session->userdata('ID_USUARIO'))->num_rows() > 0;
-        }
-
-        public function TraeRegistroNotas($Consecutivo)
-        {
-            if($this->ExisteRegistro($Consecutivo, 'RN'))
-            {
-                return $this->db->query("SELECT
-                  NOTA1,
-                  NOTA2,
-                  CODIGO,
-                  ID_PROYECTO
-
-               FROM t_registro_notas
-
-                WHERE CONSECUTIVO=$Consecutivo");
-            }
-            else
-            {
-                return null;
-            }
         }
     }

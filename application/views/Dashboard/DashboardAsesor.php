@@ -43,34 +43,74 @@
         <!-- ./col -->
         <!-- ./col -->
     </div>
-    <?= Beginbox(['title' => 'Horarios de asesoría <b>' .
-        date('Y-', strtotime($this->session->userdata('PERIODO'))) . (date('m', strtotime($this->session->userdata('PERIODO'))) > 6 ? 2 : 1) . '</b>', 'text' => 'ss']) ?>
+    <div class="row">
+        <?= Beginbox(['title' => 'Horarios de asesoría <b>' .
+            date('Y-', strtotime($this->session->userdata('PERIODO'))) . (date('m', strtotime($this->session->userdata('PERIODO'))) > 6 ? 2 : 1) . '</b>', 'text' => 'ss', 'col' => 6]) ?>
 
-    <?php
-        $c = 0;
-        foreach ($this->proyectos_model->TraeHorarios() as $proyecto)
-        {
-            $horario = new DateTime(date('Y-m-d', strtotime($proyecto->HORARIO)));
-            $actual = new DateTime(date('Y-m-d'));
-
-            while ($horario->diff($actual)->days > 7 && $horario->diff($actual)->invert == 0)
+        <?php
+            $c = 0;
+            foreach ($this->proyectos_model->TraeHorarios() as $proyecto)
             {
-                $horario->add(new DateInterval('P7D'));
-            }
-            $momento = MomentoFuturo($horario->format('Y-m-d'), date('h:i a', strtotime($proyecto->HORARIO)));
+                $horario = new DateTime(date('Y-m-d', strtotime($proyecto->HORARIO)));
+                $actual = new DateTime(date('Y-m-d'));
 
-            echo Alert(['title' => ucfirst($momento), 'icon' => 'ion-calendar', 'type' => is_int(strpos($momento, 'hoy, ')) ? 'danger' : 'success',
-                'text' => 'será el próximo encuentro con el proyecto
+                while ($horario->diff($actual)->days > 7 && $horario->diff($actual)->invert == 0)
+                {
+                    $horario->add(new DateInterval('P7D'));
+                }
+                $momento = MomentoFuturo($horario->format('Y-m-d'), date('h:i a', strtotime($proyecto->HORARIO)));
+
+                echo Alert(['title' => ucfirst($momento), 'icon' => 'ion-calendar', 'type' => is_int(strpos($momento, 'hoy, ')) ? 'danger' : 'success',
+                    'text' => 'será el próximo encuentro con el proyecto
                 <a data-toggle="tooltip" title="Ver proyecto"  href="proyectos/verproyecto/' . $proyecto->ID_PROYECTO . '" target="_blank"><b>' . $proyecto->NOMBRE_PROYECTO . '</b></a>']);
-            $c++;
-        }
-        if($c == 0)
-        {
-            echo "<a id='horarios' style='color: cornsilk;font-size: 13pt;text-decoration:underline' href='proyectos/horarios'><b>¡Agregue sus horarios de asesoría prara visualizar los eventos aquí!</b></a>";
-        }
-    ?>
+                $c++;
+            }
+            if($c == 0)
+            {
+                echo "<a id='horarios' style='color: cornsilk;font-size: 13pt;text-decoration:underline' href='proyectos/horarios'><b>¡Agregue sus horarios de asesoría prara visualizar los eventos aquí!</b></a>";
+            }
+        ?>
+        <?= Endbox() ?>
+        <!--Noticias y comunicados-->
+        <?= Beginbox(['title' => 'Noticias', 'icon' => 'fa fa-newspaper-o', 'text' => 'ss', 'col' => 5, 'color' => 'red']) ?>
 
-    <?= Endbox() ?>
+        <?php
+            $c = 0;
+            foreach ($this->parametros_model->TraeNoticias() as $noticia)
+            {
+                echo Alert(['title' => '<a href="'.site_url('noticias/vernoticia/'.$noticia->ID_NOTICIA).'" data-toggle="tooltip" title="Ver noticia" target="_blank">' . $noticia->ASUNTO . '</a>&nbsp;&nbsp; <small><em>' . Momento($noticia->FECHA_ENVIO) . '</em></small>', 'icon' => 'ion-radio-waves', 'text' => '', 'type' => 'danger']);
+                if(++$c > 5)
+                {
+                    break;
+                }
+            }
+            if($c == 0)
+            {
+                echo "<p id='noticias'><b>¡Vea las noticias de las prácticas aquí!</b></p>";
+            }
+        ?>
+        <?= Endbox() ?>
+        <!--Mensajes-->
+        <?= Beginbox(['title' => 'Mensajes', 'icon' => 'fa fa-comments-o', 'text' => 'ss', 'col' => 5, 'color' => 'blue']) ?>
+
+        <?php
+            $c = 0;
+            foreach ($this->parametros_model->TraeMensajes() as $mensaje)
+            {
+                echo Alert(['title' => ' ','text' => ' '.$mensaje->MENSAJE . '&nbsp;&nbsp; <small><em>' . Momento($mensaje->FECHA_ENVIO) . '</em></small>', 'icon' => 'fa fa-comment', 'type' => '']);
+                if(++$c > 8)
+                {
+                    break;
+                }
+            }
+            if($c == 0)
+            {
+                echo "<p id='mensajes'><b>¡Vea los mensajes de la facultad aquí!</b></p>";
+            }
+        ?>
+        <?= Endbox() ?>
+
+    </div>
     <!-- /.row -->
     <!-- Notificaciones de Evaluaciones -->
     <div class="row">

@@ -242,7 +242,11 @@
         {
             var practicante = $('select[name=ID_PRACTICANTE]');
 
-            if ($('select[name=ID_PROYECTO]').val() == 0)
+            if (!$('input[name=MOMENTO]').length)
+            {
+                Message('Primero se deben diligenciar los formularios de autoevaluación.');
+            }
+            else if ($('select[name=ID_PROYECTO]').val() == 0)
             {
                 Message('Debe seleccionar un proyecto para continuar.');
             }

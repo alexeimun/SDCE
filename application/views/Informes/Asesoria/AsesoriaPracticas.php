@@ -42,7 +42,7 @@
                 title: '<span class="ion ion-android-delete" style="font-size: 20pt;font-weight: bold; color: white;"></span>&nbsp;&nbsp;&nbsp; <span  style="font-size: 18pt;">Atención!</span>',
                 type: BootstrapDialog.TYPE_DANGER,
                 draggable: true,
-                message: 'Está seguro que desea eliminar este registro?</span>',
+                message: '¿Está seguro que desea eliminar este registro?</span>',
                 buttons: [{
                     label: 'Aceptar',
                     cssClass: 'btn-danger',

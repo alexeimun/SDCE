@@ -88,7 +88,7 @@
              * @var integer $limitCell
              */
 
-            $limitCell = isset($limitCell) ? $limitCell : 40;
+            $limitCell = isset($limitCell) ? $limitCell : 60;
             $align = isset($align) ? $align : 'left';
             $actions = isset($actions) ? $actions : '';
             $controller = isset($controller) ? $controller : '';
