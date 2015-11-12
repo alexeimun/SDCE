@@ -164,7 +164,7 @@
             $actual = new DateTime((date('Y') + 1) . date('-m-d'));
             $periodo = $this->TraePeriodo();
 
-            $select = "<li id='periodoacademico' class='dropdown messages-menu' data-periodo_academico_url='" . site_url('parametros/CambiarPeriodoAcdemicoAjax') . "'>
+            $select = "<li id='periodoacademico' class='dropdown messages-menu' data-periodo_academico_url='" . site_url() . "'>
                         <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
                              <i class='ion ion-university'></i> <b>" . date('Y', strtotime($periodo)) . '-' . (date('m', strtotime($periodo)) > 6 ? 2 : 1) . "</b>
                                 </a>

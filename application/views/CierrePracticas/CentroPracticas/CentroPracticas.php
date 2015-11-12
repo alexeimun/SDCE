@@ -18,7 +18,7 @@
                 <div class="box-body">
                     <?= TablaCierre(['columns' => ['Nombre del estudiante', 'Agencia', 'Tema', 'Registro de asesoría','Paz y salvo empresa','paz y salvo asesor en el cd',
                     'Formato de evaluación','CD'],
-                        'tableName' => 'practicante', 'id' => 'ID_PRACTICANTE','autoNumeric'=>true,
+                        'tableName' => 'practicante', 'id' => 'ID_PRACTICANTE',
                         'fields' => ['NOMBRE_PRACTICANTE', 'NOMBRE_AGENCIA', 'NOMBRE_PROYECTO', 'CHECKBOX', 'CHECKBOX', 'CHECKBOX', 'CHECKBOX', 'CHECKBOX'], 'dataProvider' => $this->practicantes_model->TraePracticantes()]) ?>
                 </div>
                 <div id="table" style="display: none;">

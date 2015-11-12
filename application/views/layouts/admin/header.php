@@ -51,13 +51,15 @@
                             </li>
 
                             <!-- Menu Footer-->
-                            <li class="user-footer">
+                            <li class="user-footer" style="background-color: rgba(61, 142, 188, 0.7)">
                                 <!--<div class="pull-left">-->
-                                <!--    <a href="--><?//= site_url('perfil') ?><!--" class="btn btn-default btn-flat">Perfil</a>-->
+                                <!--    <a href="-->
+                                <? //= site_url('perfil') ?><!--" class="btn btn-default btn-flat">Perfil</a>-->
                                 <!--</div>-->
                                 <div class="pull-right">
                                     <a href="<?= site_url('app/logout') ?>" style="" id="logout"
-                                       class="btn btn-default btn-flat">Cerrar sesi&oacute;n <i style="color: #b60000" class="ion-power"></i></a>
+                                       class="btn btn-default btn-flat">Cerrar sesi&oacute;n <i style="color: #b60000"
+                                                                                                class="ion-power"></i></a>
                                 </div>
                             </li>
                         </ul>

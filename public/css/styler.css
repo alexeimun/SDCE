@@ -22,7 +22,6 @@ label, .form-group strong
 tbody tr:hover
 {
     background: #ebf0ff !important;
-    cursor: pointer;
 }
 
 .font1

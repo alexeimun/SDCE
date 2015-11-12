@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-orange-active">
+            <div class="small-box bg-blue-gradient">
                 <div class="inner">
                     <h3><?= $Asesores ?></h3>
 
@@ -37,12 +37,11 @@
                 </div>
                 <a href="practicantes" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-blue-gradient">
+            <div class="small-box bg-orange">
                 <div class="inner">
                     <h3><?= $Proyectos ?></h3>
 

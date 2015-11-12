@@ -6,21 +6,17 @@
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <?= page_title(['ob' => $this, 'class' => 'ion-speakerphone', 'text' => 'Ver Noticia']) ?>
 </section>
 <!-- Main content -->
 <div class="container">
-    <?= form_open('seguimiento/pazysalvo', ['class' => 'form-horizontal col-md-8', 'target' => '_blank', 'style' => 'margin-left: 15%']) ?>
-    <hr style="border: 1px solid #099a5b;"/>
-        <!--<h1 style="text-align: center;">--><?//= $Info->ASUNTO ?><!--</h1>-->
-    <br>
+    <?= form_open('seguimiento/pazysalvo', ['class' => 'form-horizontal col-md-11', 'target' => '_blank', 'style' => 'margin-left:0%']) ?>
 
     <div class="form-group">
 
         <div class="col-lg-12">
 
             <div class='box'>
-                <div class='box-header' style="background: #8e1513">
+                <div class='box-header' style="background: #9e1715">
                     <h3  style="color: whitesmoke"><i class="fa fa-newspaper-o"></i> <?= $Info->ASUNTO ?></h3>
                 </div>
                 <!-- /.box-header -->

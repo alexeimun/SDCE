@@ -98,9 +98,6 @@
 
         public function TraePracticantesCalificacion()
         {
-            $inf = $this->input->post('PERIODO');
-            $sup = (new DateTime($inf))->add(new DateInterval('P6M'))->format('Y-m-d');
-
             return $this->db->query("SELECT
              t_practicantes.ID_PRACTICANTE,
              t_practicantes.CODIGO,
@@ -113,7 +110,7 @@
              INNER JOIN t_proyectos USING (ID_PROYECTO)
              INNER JOIN t_agencias ON t_practicantes.ID_AGENCIA=t_agencias.ID_AGENCIA
 
-             WHERE t_practicantes.FECHA_REGISTRO>='$inf' AND t_practicantes.FECHA_REGISTRO<'$sup'
+             WHERE t_proyectos.PERIODO='" . $this->session->userdata('PERIODO') ."'
              AND t_practicantes.ID_ASESOR=" . $this->session->userdata('ID_USUARIO'))->result('array');
         }
 

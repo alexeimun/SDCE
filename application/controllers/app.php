@@ -28,6 +28,14 @@
             $this->load->view('App/Login');
         }
 
+        public function sessionIsActive()
+        {
+            if(!$this->session->userdata('ID_USUARIO') || !$this->session->userdata('ID_PRACTICANTE'))
+            {
+                echo 'ok';
+            }
+        }
+
         public function logout()
         {
             $this->usuarios_model->Lougout();
@@ -100,7 +108,6 @@
 
         public function subirimagenasesor()
         {
-            //var_dump($_POST);exit;
             $route = '/';
             if($_SERVER['DOCUMENT_ROOT'] == 'C:/wamp/www')
             {
@@ -108,7 +115,8 @@
             }
             //Define a destination
             $targetFolder = $_SERVER['DOCUMENT_ROOT'] . $route . 'asesorfotos'; // Relative to the root
-            $verifyToken = md5('unique_salt' . $_POST['timestamp']);
+            $verifyToken = md5('Jürgen Habermas' . $_POST['timestamp']);
+
             if(!empty($_FILES) && $_POST['token'] == $verifyToken)
             {
                 $ext = explode('.', $_FILES['Filedata']['name']);

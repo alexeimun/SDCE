@@ -46,25 +46,25 @@
                             ['label' => 'Admisiones y registros', 'options' => ['icon' => 'fa fa-folder-open'],
                                 'items' =>
                                     [
-                                        ['label' => 'Cierre admisiones y registros', 'url' => 'cierres/admisiones', 'options' => ['icon' => 'ion-plus-round']],
+                                        ['label' => 'Cierre admisiones y registros', 'url' => 'cierres/admisiones', 'options' => ['icon' => 'fa fa-dot-circle-o']],
                                         ['label' => 'Carta admisiones y registros', 'url' => 'cierres/cartaadmisiones', 'options' => ['icon' => 'ion-compose']],
                                     ]],
                             ['label' => 'CIAD', 'options' => ['icon' => 'fa fa-folder-open'],
                                 'items' =>
                                     [
-                                        ['label' => 'Cierre CIAD', 'url' => 'cierres/ciad', 'options' => ['icon' => 'ion-plus-round']],
+                                        ['label' => 'Cierre CIAD', 'url' => 'cierres/ciad', 'options' => ['icon' => 'fa fa-dot-circle-o']],
                                         ['label' => 'Carta CIAD', 'url' => 'cierres/cartaciad', 'options' => ['icon' => 'ion-compose']],
                                     ]],
                             ['label' => 'Centro prácticas', 'options' => ['icon' => 'fa fa-folder-open'],
                                 'items' =>
                                     [
-                                        ['label' => 'Cierre centro prácticas', 'url' => 'cierres/centropracticas', 'options' => ['icon' => 'ion-plus-round']],
+                                        ['label' => 'Cierre centro prácticas', 'url' => 'cierres/centropracticas', 'options' => ['icon' => 'fa fa-dot-circle-o']],
                                         ['label' => 'Carta centro prácticas', 'url' => 'cierres/cartacentropracticas', 'options' => ['icon' => 'ion-compose']],
                                     ]],
                             ['label' => 'Decanatura', 'options' => ['icon' => 'fa fa-folder-open'],
                                 'items' =>
                                     [
-                                        ['label' => 'Cierre decanatura', 'url' => 'cierres/decanatura', 'options' => ['icon' => 'ion-plus-round']],
+                                        ['label' => 'Cierre decanatura', 'url' => 'cierres/decanatura', 'options' => ['icon' => 'fa fa-dot-circle-o']],
                                         ['label' => 'Carta decanatura', 'url' => 'cierres/cartadecanatura', 'options' => ['icon' => 'ion-compose']],
                                     ]],
                         ],

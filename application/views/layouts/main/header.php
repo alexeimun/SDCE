@@ -56,7 +56,7 @@
                                 </p>
                             </li>
                             <!-- Menu Footer-->
-                            <li class="user-footer">
+                            <li class="user-footer" style="background-color: rgba(2, 140, 76, 0.7)">
                                 <div class="pull-left">
                                     <a href="<?= site_url('perfil') ?>" class="btn btn-default btn-flat">Perfil <i
                                             class="ion-ios-color-wand"></i></a>

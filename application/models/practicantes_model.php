@@ -90,6 +90,8 @@
              t_practicantes.CORREO_PRACTICANTE,
              t_cooperadores.NOMBRE_COOPERADOR,
              t_agencias.NOMBRE_AGENCIA,
+             t_agencias.DIRECCION DIRECCION_AGENCIA,
+             t_agencias.TELEFONO1 TELEFONO_AGENCIA,
             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Práctica empresarial'  END AS MODALIDAD
 
 
@@ -109,6 +111,8 @@
              t_practicantes.CORREO_PRACTICANTE,
              t_cooperadores.NOMBRE_COOPERADOR,
              t_agencias.NOMBRE_AGENCIA,
+             t_agencias.DIRECCION DIRECCION_AGENCIA,
+             t_agencias.TELEFONO1 TELEFONO_AGENCIA,
             CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Práctica empresarial'  END AS MODALIDAD
 
 
@@ -185,6 +189,8 @@
              t_usuarios.NOMBRE NOMBRE_ASESOR,
              t_cooperadores.NOMBRE_COOPERADOR,
              t_agencias.NOMBRE_AGENCIA,
+             t_agencias.DIRECCION DIRECCION_AGENCIA,
+             t_agencias.TELEFONO1 TELEFONO_AGENCIA,
              CASE t_practicantes.ID_MODALIDAD_PRACTICA WHEN 1 THEN  'Validación experiencia profesional' WHEN 2 THEN 'Práctica empresarial'  END AS MODALIDAD
 
              FROM t_practicantes

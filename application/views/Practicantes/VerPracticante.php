@@ -34,7 +34,7 @@
                         </div>
             <div class='col-lg-4'>
                         <div class=\"alert alert-" . ((($Notas['NOTA1'] + $Notas['NOTA2']) / 2) >= 3.5 ? 'success' : 'danger') . "\">
-                                        <strong>Nota Final: </strong> " . (($Notas['NOTA1'] + $Notas['NOTA2']) / 2) . "
+                                        <strong>Nota Final: </strong> " . number_format(($Notas['NOTA1'] + $Notas['NOTA2']) / 2, 1) . "
                                     </div>
                         </div>
             </div>";

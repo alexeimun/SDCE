@@ -49,18 +49,24 @@
         radius: 6, color: '#000', speed: 1, length: 15, top: '10%'
     })).spin(document.getElementById("spin"));
 
-    function Save() {
+    function Save()
+    {
         if ($('input[name=CLAVE]').val().length < 8)
+        {
             Message('La contraseña debe tener una longitud de al menos 8 caracteres');
-        else {
+        }
+        else
+        {
             $.ajax({
                 type: 'post', url: '<?=site_url('usuario/actualizarasesor')?>', data: $('form').serialize(),
-                beforeSend: function () {
+                beforeSend: function ()
+                {
                     $('body').addClass('Wait');
                     $('body,html').animate({scrollTop: 0}, 200);
                     $('#spin').show();
                 },
-                success: function () {
+                success: function ()
+                {
                     $('body').removeClass('Wait');
                     Alerta('Tu perfil se ha actualizado correctamente.');
                     $('#spin').hide();
@@ -79,9 +85,11 @@
         multi: false,
         'swf': '<?=base_url('public/plugins/uploadify/uploadify.swf') ?>',
         'uploader': '<?= site_url('app/subirimagenasesor')?>',
-        onUploadSuccess: function (file, data) {
+        onUploadSuccess: function (file, data)
+        {
             data = JSON.parse(data);
-            if (data.status) {
+            if (data.status)
+            {
                 $('#dim').attr('src', '<?=base_url('asesorfotos') ?>/' + data.data);
             }
         }

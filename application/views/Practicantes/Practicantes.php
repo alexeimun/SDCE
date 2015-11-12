@@ -17,9 +17,9 @@
                 <?= input_submit(['class' => 'col-lg-offset-5 col-sm-offset-5 col-lg-2', 'icon' => 'export', 'text' => 'Exportar']) ?>
 
                 <div class="box-body">
-                    <?= Component::Table(['columns' => ['Nombre practicante', 'Proyecto', 'Modalidad de la práctica', 'Agencia'], 'limitCell' => 120,
+                    <?= Component::Table(['columns' => ['Nombre practicante', 'Proyecto', 'Modalidad de la práctica','Cooperador', 'Agencia','Teléfono agencia','Dirección agencia'], 'limitCell' => 120,
                         'tableName' => 'practicante', 'id' => 'ID_PRACTICANTE', 'controller' => 'practicantes',
-                        'fields' => ['NOMBRE_PRACTICANTE', 'NOMBRE_PROYECTO', 'MODALIDAD', 'NOMBRE_AGENCIA',]
+                        'fields' => ['NOMBRE_PRACTICANTE', 'NOMBRE_PROYECTO', 'MODALIDAD','NOMBRE_COOPERADOR', 'NOMBRE_AGENCIA','TELEFONO_AGENCIA','DIRECCION_AGENCIA']
                         , 'dataProvider' => $this->session->userdata('ASESOR') ? $this->practicantes_model->TraePracticantes() : $this->practicantes_model->TraeTodoPracticantes(),
                         'actions' => $this->session->userdata('ASESOR') ? 'v' : 'duv']) ?>
                 </div>
@@ -52,8 +52,8 @@
         {
             var nombre = 'Listado practicantes - <?=$this->session->userdata('PERDIODO') ?>';
             $('#itable').html($('#tabla').html());
-            $('#itable thead tr th:nth-of-type(5)').remove();
-            $('#itable tbody tr td:nth-of-type(5)').remove();
+            $('#itable thead tr th:nth-of-type(8)').remove();
+            $('#itable tbody tr td:nth-of-type(8)').remove();
             Pulir();
             $("#t").battatech_excelexport({
                 containerid: "itable", datatype: 'table', worksheetName: nombre
