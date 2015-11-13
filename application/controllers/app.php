@@ -25,7 +25,14 @@
 
         public function asesor()
         {
-            $this->load->view('App/Login');
+            if(!$this->session->userdata('ID_USUARIO') && !$this->session->userdata('ID_PRACTICANTE'))
+            {
+                $this->load->view('App/Login');
+            }
+            else
+            {
+                redirect(site_url(), 'refresh');
+            }
         }
 
         public function sessionIsActive()
@@ -33,6 +40,17 @@
             if(!$this->session->userdata('ID_USUARIO') || !$this->session->userdata('ID_PRACTICANTE'))
             {
                 echo 'ok';
+            }
+        }
+
+        public function ValidarClaveAjax()
+        {
+            if($this->input->is_ajax_request())
+            {
+                if(!is_null($this->usuarios_model->ValidarCredenciales($this->session->userdata('CORREO'), $this->input->post('CLAVE'), 0)))
+                {
+                    echo 'ok';
+                }
             }
         }
 
@@ -161,6 +179,7 @@
             $Dashboard["Proyectos"] = $this->proyectos_model->ContarProyectos()->PROYECTOS;
             $Dashboard["Agencias"] = $this->agencias_model->ContarAgencias()->AGENCIAS;
             $Dashboard["Cooperadores"] = $this->cooperadores_model->ContarCooperadores();
+            $Dashboard["Noticias"] = $this->parametros_model->ContarNoticias();
             return ['Dashboard' => $this->load->view('Dashboard/DashboardAdmin', $Dashboard, true)];
         }
     }

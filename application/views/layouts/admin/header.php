@@ -34,7 +34,7 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="ion ion-locked"></span>
+                            <span class="fa fa-cogs"></span>
                             <span class="hidden-xs"><?= $this->session->userdata('NOMBRE_USUARIO'); ?></span>
                         </a>
                         <ul class="dropdown-menu">

@@ -3,6 +3,7 @@
      * @var $this CI_Loader
      */
     $this->Header(['assets' => ['jvalidator', 'icheck']]);
+    $sem = explode('-', $this->session->userdata('PERIODO'))[2] == 2 ? 'primer' : 'segundo';
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -47,7 +48,7 @@
                     <i class="fa fa-calendar"></i>
                 </div>
                 <input type="date" class="form-control fecha" name="FINALIZACION"
-                       value="<?= (new DateTime($this->session->userdata('PERIODO')))->add(new DateInterval('P6M'))->format('Y-m-d')?>"
+                       value="<?= (new DateTime($this->session->userdata('PERIODO')))->add(new DateInterval('P5M'))->format('Y-m-d') ?>"
                        required>
             </div>
         </div>
@@ -57,9 +58,9 @@
         <div class="row"><label class="col-sm-7 control-label">Concepto</label>
         </div>
         <div class="col-lg-12">
-            <textarea name="CONCEPTO" style="height: 100px;margin-top:5px;" class="form-control obligatorio"
+            <textarea name="CONCEPTO" style="height: 160px;margin-top:5px;" class="form-control obligatorio"
                       placeholder="Concepto del asesor frente al cumplimiento y entrega de todos los compromisos del estudiante en la práctica (máximo 600 caracteres)"
-                      maxlength="600" title=""></textarea>
+                      maxlength="600" title="">Considero que el presente trabajo, cumple a cabalidad con las directrices señaladas por la fundación universitaria María Cano (FUMC), para su realización y presentación; así como la entrega de todos los compromisos por parte del (los) estudiante (s). Por tal motivo, doy por aprobado el trabajo realizado durante el <?= $sem ?> semestre del <?= date('Y') ?>.</textarea>
         </div>
     </div>
     <br>
@@ -79,13 +80,17 @@
 <script>
     $('form').jValidate();
 
-    function SavePost() {
-        if ($('input:checkbox:checked').length == 0) {
+    function SavePost()
+    {
+        if ($('input:checkbox:checked').length == 0)
+        {
             Message('Debe seleccionar al menos un practicante...');
             event.preventDefault();
         }
-        else {
-            $('table tbody input:checkbox:checked').each(function (i, e) {
+        else
+        {
+            $('table tbody input:checkbox:checked').each(function (i, e)
+            {
                 $('form').append('<input  type="hidden" value="' + $(e).val() + '" name="ID_PRACTICANTE[]">');
             });
             $('select[name=ID_PROYECTO]').val(0);
@@ -93,12 +98,16 @@
         }
     }
 
-    $(function () {
+    $(function ()
+    {
 
-        $('select[name=ID_PROYECTO]').on('change', function () {
-            if ($('select[name=ID_PROYECTO] :selected').val() != 0) {
+        $('select[name=ID_PROYECTO]').on('change', function ()
+        {
+            if ($('select[name=ID_PROYECTO] :selected').val() != 0)
+            {
                 $('input:hidden').remove();
-                $('.box-body').load('<?=site_url('seguimiento/tableAjax')?>', {ID_PROYECTO: $('select[name=ID_PROYECTO] :selected').val()}, function () {
+                $('.box-body').load('<?=site_url('seguimiento/tableAjax')?>', {ID_PROYECTO: $('select[name=ID_PROYECTO] :selected').val()}, function ()
+                {
                     $('input:checkbox').iCheck({
                         checkboxClass: 'iradio_square-green',
                         radioClass: 'iradio_flat-green',
@@ -106,7 +115,8 @@
                     });
                 });
             }
-            else {
+            else
+            {
                 $('.box-body').html('');
             }
         });

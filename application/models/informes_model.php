@@ -13,12 +13,6 @@
             $this->db->delete('t_gastos_transporte', ['CONSECUTIVO' => $this->input->post('Id')]);
         }
 
-        public function EliminarInformeMensual()
-        {
-            $this->db->delete('t_registros', ['TIPO' => 'IM', 'CONSECUTIVO' => $this->input->post('Id')]);
-            $this->db->delete('t_informes_mensuales', ['CONSECUTIVO' => $this->input->post('Id')]);
-        }
-
         public function EliminaAsesoriaPractica()
         {
             $this->db->delete('t_asesoria_practicas', ['ID_ASESORIA_PRACTICA' => $this->input->post('Id')]);
@@ -27,12 +21,6 @@
         public function TraeTodoGastosTransporte()
         {
             return @$this->db->query("SELECT * FROM t_registros WHERE TIPO='GT' AND ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . " ORDER BY CONSECUTIVO DESC")->result('array');
-        }
-
-        public function TraeTodoInformeMensuales()
-        {
-            return @$this->db->query("SELECT
-            * FROM t_registros WHERE TIPO='IM' AND ID_ASESOR=" . $this->session->userdata('ID_USUARIO') . " ORDER BY CONSECUTIVO DESC")->result('array');
         }
 
         public function TraeRegistro($Consecutivo, $Tipo)
@@ -65,28 +53,6 @@
         public function ExisteRegistro($Consecutivo, $Tipo)
         {
             return $this->db->query("SELECT ID_REGISTRO FROM t_registros WHERE CONSECUTIVO=$Consecutivo AND TIPO='$Tipo' AND ID_ASESOR=" . $this->session->userdata('ID_USUARIO'))->num_rows() > 0;
-        }
-
-        public function TraeInformeMensual($Consecutivo)
-        {
-            if($this->ExisteRegistro($Consecutivo, 'IM'))
-            {
-                return @$this->db->query("SELECT DISTINCT
-               AVANCES,
-               OBSERVACIONES,
-               FECHAS,
-               t_proyectos.ID_PROYECTO,
-               t_proyectos.NOMBRE_PROYECTO
-
-               FROM t_informes_mensuales
-               INNER JOIN t_proyectos USING (ID_PROYECTO)
-
-                WHERE CONSECUTIVO=$Consecutivo");
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public function TraeAsesoriaPractica($id)
@@ -180,49 +146,10 @@
             }
         }
 
-        public function InsertarInformeMensual()
-        {
-            array_shift($_POST['ID_PROYECTO']);
-            $Post = $this->input->post(null, true);
-            $Consecutivo = $this->consecutivos_model->TraeConsecutivoInformeMensual();
-
-            foreach ($Post['ID_PROYECTO'] as $i => $reg)
-            {
-                $Data[] =
-                    [
-                        'ID_PROYECTO' => $Post['ID_PROYECTO'][$i],
-                        'FECHAS' => $Post['FECHAS'][$i],
-                        'AVANCES' => $Post['AVANCES'][$i],
-                        'OBSERVACIONES' => $Post['OBSERVACIONES'][$i],
-                        'CONSECUTIVO' => $Consecutivo,
-                    ];
-            }
-
-            $this->db->trans_start();
-
-            $this->db->insert_batch('t_informes_mensuales', $Data);
-
-            $this->db->set('FECHA_REGISTRO', 'NOW()', false);
-            $this->db->set('ID_ASESOR', $this->session->userdata('ID_USUARIO'));
-
-            $this->db->insert('t_registros', ['CONSECUTIVO' => $Consecutivo, 'TIPO' => 'IM']);
-            $this->consecutivos_model->ActualizaConsecutivoInformeMensual();
-
-            if($this->db->trans_status() == false)
-            {
-                $this->db->trans_rollback();
-            }
-            else
-            {
-                $this->db->trans_complete();
-                echo $Consecutivo;
-            }
-        }
-
         public function InsertarAsesoriaPractica()
         {
             $this->db->trans_start();
-            $_POST['FECHA_HORA'] =  $_POST['FECHA_HORA'];
+            $_POST['FECHA_HORA'] = $_POST['FECHA_HORA'];
             $this->db->set('FECHA_FINALIZA', 'NOW()', false);
             $this->db->set('ID_PRACTICANTE', $this->session->userdata('ID_PRACTICANTE'));
             $this->db->set('CONSECUTIVO', $this->session->userdata('CONSECUTIVO'));

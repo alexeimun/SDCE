@@ -195,7 +195,7 @@
             $pdf->SetFont('Arial', 'B', 10);
             #ENCABEZADO
             //$pdf->SetXY(10,35);
-            $pdf->Text(180, 45, 'D0-32-F');
+            $pdf->Text(180, 45, 'DO-32-F');
             $pdf->Text(70, 50, 'FORMATO REGISTRO DE ASESORíA DE PRÁCTICA');
             $pdf->Text(10, 60, 'FACULTAD DE INGENIERÍA');
             $pdf->Text(90, 60, 'PROGRAMA DE ' . strtoupper($Info->PROGRAMA));
@@ -300,7 +300,7 @@
 
             $pdf->SetFont('Arial', 'B', 10);
             #ENCABEZADO
-            $pdf->Text(180, 45, 'D0-69-F');
+            $pdf->Text(180, 45, 'DO-69-F');
             $pdf->Text(70, 48, 'FORMATO REPORTE GASTOS DE TRANSPORTE');
             $pdf->Text(75, 55, 'FUNDACIÓN UNIVERSITARIA MARÍA CANO');
             $pdf->Text(78, 60, 'PROGRAMA DE INGENIERÍA DE SISTEMAS');
@@ -345,80 +345,6 @@
             $pdf->Text(25, $pdf->GetY() + 20, 'Firma Coordinador de Práctica');
             $pdf->Line(10, $pdf->GetY() + 15, 90, $pdf->GetY() + 15);
             $pdf->Text(140, $pdf->GetY() + 20, 'CENTRO DE PRÁCTICAS');
-
-            $pdf->Output();
-            $pdf->Cell($pdf->PageNo());
-        }
-
-        public function imprimirinformemensual($id)
-        {
-            if(isset($id) && is_numeric($id))
-            {
-                $Informes = $this->informes_model->TraeInformeMensual($id);
-
-                if(!is_null($Informes))
-                {
-                    if($Informes->num_rows() == 0)
-                    {
-                        redirect(site_url(), 'refresh');
-                    }
-                }
-                else
-                {
-                    redirect(site_url(), 'refresh');
-                }
-            }
-            else
-            {
-                redirect(site_url(), 'refresh');
-            }
-
-            $pdf = new PDF();
-            $pdf->AddPage('L');
-
-            $pdf->Image(base_url('public/images/logo.jpg'), 10, 12, 60, 15);
-
-            $pdf->SetFont('Arial', 'B', 10);
-            #ENCABEZADO
-            //$pdf->SetXY(10,35);
-            $pdf->Text(120, 36, 'CENTRO DE PRÁCTICAS');
-            $pdf->Text(85, 42, 'FORMATO PARA LA PRESENTACIÓN DE INFORMES MENSUALES');
-            $pdf->Text(120, 49, 'ASESORES DE PRÁCTICA');
-            $pdf->SetFont('Arial', '', 10);
-
-            #Headers
-            $pdf->SetFillColor(230, 230, 230);
-            $pdf->SetFont('Arial', 'B', 9);
-            $pdf->SetXY(10, 55);
-            $pdf->Cell(60, 10, 'Nombre estudiantes', 1, 0, 'C', true);
-            $pdf->SetXY(70, 55);
-            $pdf->MultiCell(60, 10, 'Nombre empresa y/o proyecto', 1, 'C', true);
-            $pdf->SetXY(130, 55);
-            $pdf->MultiCell(45, 5, 'Fechas de asesorías realizadas', 1, 'C', true);
-            $pdf->SetXY(175, 55);
-            $pdf->MultiCell(55, 5, 'Avances, logros y cumplimiento de objetivos', 1, 'C', true);
-            $pdf->SetXY(230, 55);
-            $pdf->MultiCell(55, 5, 'Observaciones y/o recomendaciones', 1, 'C', true);
-
-            $pdf->SetFont('Arial', '', 9);
-
-            $pdf->SetWidths([60, 60, 45, 55, 55]);
-            $pdf->SetAligns(['C', 'C', 'C', 'C', 'C']);
-
-            foreach ($Informes->result() as $informe)
-            {
-                $Practicantes = '';
-                $Agencia = '';
-                foreach ($this->practicantes_model->TraePracticantesPorProyecto($informe->ID_PROYECTO, true) as $practicante)
-                {
-                    $Practicantes .= $practicante['NOMBRE_PRACTICANTE'] . ', ';
-                    $Agencia = $practicante['NOMBRE_AGENCIA'] . ', ';
-                }
-                $Practicantes = substr_replace($Practicantes, '', strlen($Practicantes) - 2, 1);
-
-                $pdf->SetX(10);
-                $pdf->Row([trim($Practicantes), $Agencia . $informe->NOMBRE_PROYECTO, $informe->FECHAS, $informe->AVANCES, $informe->OBSERVACIONES]);
-            }
 
             $pdf->Output();
             $pdf->Cell($pdf->PageNo());

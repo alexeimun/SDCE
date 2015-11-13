@@ -223,7 +223,7 @@
                     }
                     if($delete)
                     {
-                        $table .= " <a data-id='$data[$id]' style='color:#e54040;font-size:20pt;' class='fa fa-trash-o' data-toggle='tooltip' title='Eliminar'></a>";
+                        $table .= "<a data-id='$data[$id]' style='color:#e54040;font-size:20pt;cursor: pointer' class='fa fa-trash-o' data-toggle='tooltip' title='Eliminar'></a>";
                     }
                     ###Check###
                     if($check)

@@ -60,8 +60,8 @@
                 }
                 $momento = MomentoFuturo($horario->format('Y-m-d'), date('h:i a', strtotime($proyecto->HORARIO)));
 
-                echo Alert(['title' => ucfirst($momento), 'icon' => 'ion-calendar', 'type' => is_int(strpos($momento, 'hoy, ')) ? 'danger' : 'success',
-                    'text' => 'será el próximo encuentro con el proyecto
+                echo Alert(['title' => ' '.ucfirst($momento), 'icon' => is_int(strpos($momento, 'hoy, ')) ? 'fa fa-calendar-check-o':'fa fa-calendar', 'type' => is_int(strpos($momento, 'hoy, ')) ? 'danger' : 'success',
+                    'text' => ' será el próximo encuentro con el proyecto
                 <a data-toggle="tooltip" title="Ver proyecto"  href="proyectos/verproyecto/' . $proyecto->ID_PROYECTO . '" target="_blank"><b>' . $proyecto->NOMBRE_PROYECTO . '</b></a>']);
                 $c++;
             }
@@ -72,17 +72,15 @@
         ?>
         <?= Endbox() ?>
         <!--Noticias y comunicados-->
-        <?= Beginbox(['title' => 'Noticias', 'icon' => 'fa fa-newspaper-o', 'text' => 'ss', 'col' => 5, 'color' => 'red']) ?>
+        <?= Beginbox(['title' => 'Noticias y comunicados', 'icon' => 'fa fa-newspaper-o', 'text' => 'ss', 'col' => 5, 'color' => 'red']) ?>
 
         <?php
             $c = 0;
             foreach ($this->parametros_model->TraeNoticias() as $noticia)
             {
-                echo Alert(['title' => '<a href="'.site_url('noticias/vernoticia/'.$noticia->ID_NOTICIA).'" data-toggle="tooltip" title="Ver noticia" target="_blank">' . $noticia->ASUNTO . '</a>&nbsp;&nbsp; <small><em>' . Momento($noticia->FECHA_ENVIO) . '</em></small>', 'icon' => 'ion-radio-waves', 'text' => '', 'type' => 'danger']);
-                if(++$c > 5)
-                {
-                    break;
-                }
+                $type = strtotime('now') - strtotime($noticia->FECHA_ENVIO) <= 3600 * 24 * 2 ? 'warning' : 'danger';
+                echo Alert(['title' => '<a href="' . site_url('noticias/vernoticia/' . $noticia->ID_NOTICIA) . '" data-toggle="tooltip" title="Ver noticia" target="_blank">' . $noticia->ASUNTO . '</a>&nbsp;&nbsp; <small><em>' . Momento($noticia->FECHA_ENVIO) . '</em></small>', 'icon' => 'ion-radio-waves', 'text' => '', 'type' => $type]);
+                $c++;
             }
             if($c == 0)
             {
@@ -90,26 +88,6 @@
             }
         ?>
         <?= Endbox() ?>
-        <!--Mensajes-->
-        <?= Beginbox(['title' => 'Mensajes', 'icon' => 'fa fa-comments-o', 'text' => 'ss', 'col' => 5, 'color' => 'blue']) ?>
-
-        <?php
-            $c = 0;
-            foreach ($this->parametros_model->TraeMensajes() as $mensaje)
-            {
-                echo Alert(['title' => ' ','text' => ' '.$mensaje->MENSAJE . '&nbsp;&nbsp; <small><em>' . Momento($mensaje->FECHA_ENVIO) . '</em></small>', 'icon' => 'fa fa-comment', 'type' => '']);
-                if(++$c > 8)
-                {
-                    break;
-                }
-            }
-            if($c == 0)
-            {
-                echo "<p id='mensajes'><b>¡Vea los mensajes de la facultad aquí!</b></p>";
-            }
-        ?>
-        <?= Endbox() ?>
-
     </div>
     <!-- /.row -->
     <!-- Notificaciones de Evaluaciones -->

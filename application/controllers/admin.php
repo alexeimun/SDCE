@@ -13,7 +13,7 @@
         {
             if($this->session->userdata('ADMIN'))
             {
-                $this->load->view('Admin/Inicio/Inicio', $this->Data);
+                redirect(site_url(), 'refresh');
             }
             else if(!$this->session->userdata('ASESOR'))
             {

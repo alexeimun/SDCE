@@ -453,7 +453,7 @@
             }
             #ENCABEZADO
             $pdf->SetFont('Arial', 'b', 10);
-            $pdf->Text(180, 35, 'D0-033-F');
+            $pdf->Text(180, 35, 'DO-033-F');
             $pdf->Text(70, 40, 'FORMATO DE PAY Y SALVO DE LA PRÁCTICA');
 
             #Fields
@@ -541,7 +541,7 @@ SI  X                                   NO', 1, 'L');
 
             #ENCABEZADO
             $pdf->SetFont('Arial', 'B', 9);
-            $pdf->Text(260, 20, 'D0-075-F');
+            $pdf->Text(260, 20, 'DO-075-F');
             $pdf->Text(80, 25, 'FACULTAD DE CIENCIAS EMPRESARIALES Y FACULTAD DE INGENIERÍAS');
             $pdf->Text(97, 30, 'FORMATO SEGUIMIENTO A ESTUDIANTES EN PRÁCTICA');
             $pdf->Text(110, 38, 'PROGRAMA: INGENIERÍA DE SISTEMAS');
@@ -653,7 +653,7 @@ SI  X                                   NO', 1, 'L');
 
             #ENCABEZADO
             $pdf->SetFont('Arial', 'B', 9);
-            $pdf->Text(260, 20, 'D0-075-F');
+            $pdf->Text(260, 20, 'DO-075-F');
             $pdf->Text(80, 25, 'FACULTAD DE CIENCIAS EMPRESARIALES Y FACULTAD DE INGENIERÍAS');
             $pdf->Text(97, 30, 'FORMATO SEGUIMIENTO A ESTUDIANTES EN PRÁCTICA');
             $pdf->SetFont('Arial', '', 8);
@@ -961,7 +961,7 @@ SI  X                                   NO', 1, 'L');
 
             #ENCABEZADO
             $pdf->SetFont('Arial', 'B', 9);
-            $pdf->Text(260, 15, 'D0-075-F');
+            $pdf->Text(260, 15, 'DO-075-F');
             $pdf->Text(80, 20, 'FACULTAD DE CIENCIAS EMPRESARIALES Y FACULTAD DE INGENIERÍAS');
             $pdf->Text(97, 25, 'FORMATO SEGUIMIENTO A ESTUDIANTES EN PRÁCTICA');
             $pdf->Text(120, 30, 'FUNCIÓN FORMATIVA');
@@ -1259,7 +1259,7 @@ SI  X                                   NO', 1, 'L');
 
             #ENCABEZADO
             $pdf->SetFont('Arial', 'B', 9);
-            $pdf->Text(260, 15, 'D0-075-F');
+            $pdf->Text(260, 15, 'DO-075-F');
             $pdf->Text(80, 20, 'FACULTAD DE CIENCIAS EMPRESARIALES Y FACULTAD DE INGENIERÍAS');
             $pdf->Text(97, 25, 'FORMATO SEGUIMIENTO A ESTUDIANTES EN PRÁCTICA');
             #Fields
@@ -1314,7 +1314,7 @@ SI  X                                   NO', 1, 'L');
             #ENCABEZADO
             $pdf->SetFont('Arial', 'B', 9);
             $pdf->SetFillColor(210, 200, 200);
-            $pdf->Text(260, 15, 'D0-075-F');
+            $pdf->Text(260, 15, 'DO-075-F');
             $pdf->Text(85, 20, 'FACULTAD DE CIENCIAS EMPRESARIALES Y FACULTAD DE INGENIERÍAS');
             $pdf->Text(103, 25, 'FORMATO SEGUIMIENTO A ESTUDIANTES EN PRÁCTICA');
             $pdf->Text(125, 30, 'FUNCIÓN SUMATIVA');

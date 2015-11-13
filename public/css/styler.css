@@ -8,12 +8,6 @@ label, .form-group strong
     color: #214e67
 }
 
-.fa-calendar
-{
-    color: #942a89 !important;
-    border: 1px solid #b834ab !important;
-}
-
 .mouse-default
 {
     cursor: pointer !important;

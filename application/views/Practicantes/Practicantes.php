@@ -14,7 +14,7 @@
                                                                                class="fa fa-table"></span>&nbsp;
                         Listado Practicantes</h3>
                 </div>
-                <?= input_submit(['class' => 'col-lg-offset-5 col-sm-offset-5 col-lg-2', 'icon' => 'export', 'text' => 'Exportar']) ?>
+                <?= input_submit(['class' => 'col-lg-offset-5 col-sm-offset-5 col-lg-2 exportar', 'icon' => 'export', 'text' => 'Exportar']) ?>
 
                 <div class="box-body">
                     <?= Component::Table(['columns' => ['Nombre practicante', 'Proyecto', 'Modalidad de la práctica','Cooperador', 'Agencia','Teléfono agencia','Dirección agencia'], 'limitCell' => 120,
@@ -43,14 +43,14 @@
     $(function ()
     {
 
-        $(':button').on('click', function ()
+        $('.exportar').on('click', function ()
         {
             ArmarTabla();
         });
 
         function ArmarTabla()
         {
-            var nombre = 'Listado practicantes - <?=$this->session->userdata('PERDIODO') ?>';
+            var nombre = 'Listado practicantes';
             $('#itable').html($('#tabla').html());
             $('#itable thead tr th:nth-of-type(8)').remove();
             $('#itable tbody tr td:nth-of-type(8)').remove();
@@ -63,7 +63,7 @@
 
         function Pulir()
         {
-            $('#tabla').css({fontSize: '12pt'});
+            $('#tabla').css({fontSize: '15pt'});
             $('#itable thead th').css({background: '#5082BD', color: 'white'});
             $('#itable thead th').each(function (i, el)
             {

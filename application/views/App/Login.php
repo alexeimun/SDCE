@@ -18,7 +18,7 @@
 
         <?= form_open('app/ValidarCredenciales', ['method' => 'post']) ?>
         <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Correo" name="usuario"/>
+            <input autofocus type="text" class="form-control" placeholder="Correo" name="usuario"/>
             <span class="glyphicon glyphicon-envelope form-control-feedback" style="color:#0d9155; "></span>
         </div>
         <div class="form-group has-feedback">

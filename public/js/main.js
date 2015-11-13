@@ -2,7 +2,7 @@ $(function ()
 {
     if (localStorage.collapse && localStorage.collapse == 1)
     {
-        $('body').addClass('sidebar-collapse')
+        $('body').addClass('sidebar-collapse');
     }
 
     $('body').on('click', 'a[data-periodo_academico]', function ()
@@ -33,4 +33,14 @@ $(function ()
             }
         });
     }, 15 * 60 * 1000);
+});
+
+$(document).on('ready', function ()
+{
+   if(localStorage.cooperador && localStorage.cooperador==1)
+   {
+       $('header').hide(500);
+       $('.main-sidebar').hide(500);
+       $('#unlockcooperador').show(500);
+   }
 });

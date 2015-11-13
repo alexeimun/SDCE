@@ -55,7 +55,12 @@
                             ['label' => 'Listado usuarios', 'url' => 'usuarios', 'options' => ['icon' => 'fa fa-list-alt']],
                         ],
                 ],
-                ['label' => 'Noticias', 'url' => 'noticias', 'options' => ['icon' => 'ion-speakerphone']],
+                ['label' => 'Noticias', 'options' => ['icon' => 'fa fa-newspaper-o'], 'items' =>
+                    [
+                        ['label' => 'Crear noticia', 'url' => 'noticias/crearnoticia', 'options' => ['icon' => 'fa fa-plus']],
+                        ['label' => 'Noticias', 'url' => 'noticias', 'options' => ['icon' => 'fa fa-newspaper-o']],
+                    ],
+                ],
                 ['label' => 'Parámetros', 'url' => 'parametros', 'options' => ['icon' => 'fa fa-sliders'], 'visible' => $this->rbca->can('parámetros', false)],
                 ['label' => 'Acerca', 'url' => 'app/acerca', 'options' => ['icon' => 'fa fa-leaf']],
             ],

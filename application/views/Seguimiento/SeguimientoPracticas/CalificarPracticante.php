@@ -12,7 +12,7 @@
 </section>
 <!-- Main content -->
 <div class="container">
-    <?= form_open('', ['class' => 'form-horizontal col-md-8', 'style' => 'margin-left: 15%']) ?>
+    <?= form_open('', ['class' => 'form-horizontal col-md-8', 'id' => 'main', 'style' => 'margin-left: 15%']) ?>
     <hr style="border: 1px solid #099a5b;"/>
     <br>
     <?= Alert(['icon' => 'ion-ios-chatboxes', 'title' => 'Nota:', 'text' => 'Recuerde que sí no se califica como <b>Ambos</b>, el sistema esperará la calificación individual del <b>Asesor</b> y el <b>Cooperador</b>']) ?>
@@ -184,9 +184,6 @@
             radioClass: 'iradio_flat-green',
             increaseArea: '90%' // optional
         });
-
-        //$('input:radio').iCheck('check');
-
     });
 
     function UpdateRate(val)
@@ -212,6 +209,75 @@
         lines: 10, width: 4,
         radius: 6, color: '#000', speed: 1, length: 15, top: '10%'
     })).spin(document.getElementById("spin"));
+
+    var inC = false;
+    $('select[name=PERSONA]').on('change', function ()
+    {
+        if ($(this).val() == 'C')
+        {
+            localStorage.cooperador = 1;
+            $('header').hide(500);
+            $('.main-sidebar').hide(500);
+            $('#unlockcooperador').show(500);
+            inC = true;
+        }
+        else if (inC || (localStorage.cooperador && localStorage.cooperador == 1))
+        {
+            Lock();
+        }
+    });
+    function Lock()
+    {
+        BootstrapDialog.show({
+            title: '<span class="ion ion-log-in" style="font-size: 20pt;font-weight: bold; color: white;"></span>&nbsp;&nbsp;&nbsp; <span  style="font-size: 18pt;">Ingrese su contraseña...</span>',
+            draggable: true,
+            message: '<form id="fclave" onsubmit="event.preventDefault()" style="margin-left: 20%" class="form-horizontal col-md-8"><input autofocus name="CLAVE" type="password" style="padding: 6px;width: 80%;font-size: 16pt;" class="form-group"><div class="mess"></div></form>',
+            buttons: [{
+                label: 'Desbloquear',
+                cssClass: 'btn-info',
+                action: function (modal)
+                {
+                    $.ajax({
+                        type: 'post', url: '<?= site_url('app/ValidarClaveAjax')?>', data: $('form#fclave').serialize(),
+                        success: function (data)
+                        {
+                            if (data == 'ok')
+                            {
+                                localStorage.cooperador = 0;
+                                inC = false;
+                                modal.close();
+                                $('#unlockcooperador').hide();
+                                $('header').show(500);
+                                $('.main-sidebar').show(500);
+                            }
+                            else
+                            {
+                                $('form#fclave .mess').html('<br> <span style="color: #8c4646"><b>&nbsp;Clave incorrecta! </b>Asegurese de que esté utilizando una clave válida de ingreso a la plataforma.</span>');
+                            }
+                        },
+                        error: function (a)
+                        {
+                            if (a.status == 500)
+                            {
+                                $(".bootstrap-dialog-message").html('<br> <span style="color: #8c4646"><b>&nbsp;No se puede eliminar este registro! </b>Asegurese de que no esté siendo utilizado en otros módulos del sistema.</span>')
+                            }
+                        }
+                    });
+                }
+            }]
+        });
+    }
+    $('body').on('keyup', 'form input:password', function (e)
+    {
+        if (e.keyCode == 13)
+        {
+            $('.btn-info').trigger('click');
+        }
+    });
+    $('#unlockcooperador').on('click', function ()
+    {
+        Lock();
+    });
 
     function validateRadios()
     {
@@ -258,7 +324,7 @@
             {
                 $.ajax({
                     type: 'post', url: '<?=site_url('seguimiento/calificarpracticante')?>',
-                    data: $('form').serialize(),
+                    data: $('form#main').serialize(),
                     beforeSend: function ()
                     {
                         $('body').addClass('Wait');
@@ -267,7 +333,6 @@
                     },
                     success: function (response)
                     {
-                        console.log(response);
                         var message = 'La calificación se ha realizado correctamente...';
                         var type = BootstrapDialog.TYPE_SUCCESS;
                         var title = true;
@@ -296,6 +361,13 @@
             $(element).css({'color': '#06674e'});
         })
     }
+    $(document).on('ready', function ()
+    {
+        if (document.location.hash && document.location.hash == '#unlock' && localStorage.cooperador == 1)
+        {
+            Lock();
+        }
+    });
 
 </script>
 <style>

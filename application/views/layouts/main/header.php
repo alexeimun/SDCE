@@ -14,7 +14,12 @@
 
 <body class="skin-green-light sidebar-mini">
 <div class="wrapper">
-
+    <div id="unlockcooperador" style="display: none" class="row">
+        <button
+            <?= @explode('/', uri_string())[1] != 'calificarpracticante' ? "onclick='location.href=\"" . site_url("seguimiento/calificarpracticante#unlock") . "\"'" : '' ?>
+            class="btn btn-lg btn-dropbox col-lg-12 col-md-12 col-sm-12 col-xs-12">Desbloquear
+        </button>
+    </div>
     <header class="main-header">
         <!-- Logo -->
         <a href="<?= site_url() ?>" class="logo">
@@ -56,7 +61,7 @@
                                 </p>
                             </li>
                             <!-- Menu Footer-->
-                            <li class="user-footer" style="background-color: rgba(2, 140, 76, 0.7)">
+                            <li class="user-footer" style="background-color: rgba(42, 39, 39, 0.95)">
                                 <div class="pull-left">
                                     <a href="<?= site_url('perfil') ?>" class="btn btn-default btn-flat">Perfil <i
                                             class="ion-ios-color-wand"></i></a>
@@ -73,6 +78,4 @@
                 </ul>
             </div>
         </nav>
-        <script>
-        </script>
     </header>
