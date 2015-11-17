@@ -19,7 +19,7 @@
                 seguimiento de sus practicantes.</p>
         </div>
         <div class="panel-footer bg-green-active">
-            <p><b>Copyright &copy; <?= date('Y') ?> FI-FUMC</b></p>
+            <p><b>Copyright &copy; <?= date('Y') ?> <a style="color: white;text-decoration: underline" href="http://www.fumc.edu.co" target="_self">FI-FUMC</a></b></p>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body " id="contenedor" style="opacity: .95;">
-        <p class="login-box-msg" style="font-size: 18pt;"><img src="../../../../public/images/logo.jpg"
+        <p class="login-box-msg" style="font-size: 18pt;"><img src="../../../../public/images/logo.jpg" onclick="window.open('http://www.fumc.edu.co')" style="cursor:pointer;"
                                                                class="img-responsive"></p>
 
         <?= form_open('app/ValidarCredenciales', ['method' => 'post']) ?>

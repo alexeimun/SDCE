@@ -41,12 +41,12 @@
                 "<img src='<?=site_url('asesorfotos/tour/periodo.png') ?>' height='135' width='245'>"
             },
             {
-                element: "#totalpracticantes",
-                title: "<i class='green ion-help-buoy'></i> <b>Total de proyectos</b>",
+                element: "#totalproyectos",
+                title: "<i class='green fa fa-rocket'></i> <b>Total de proyectos</b>",
                 content: "Aquí podrá visualizar los proyectos del periodo académico que usted haya seleccionado."
             },
             {
-                element: "#totalproyectos",
+                element: "#totalpracticantes",
                 title: "<i class='green ion-person-stalker'></i> <b>Total de practicantes</b>",
                 content: "Aquí podrá visualizar los practicantes del periodo académico que usted haya seleccionado."
             },
@@ -61,12 +61,6 @@
                 element: "#noticias",
                 title: "<i class='green fa fa-newspaper-o'></i> <b>Noticias</b>",
                 content: "<b>¡Permanezca al día con las noticias!</b> <br>Revise las noticias que llegan desde la faculta en esta sección, no se pierda de ningún evento o información"
-            },
-            {
-                placement: "left",
-                element: "#mensajes",
-                title: "<i class='green fa fa-comments'></i> <b>Mensajes</b>",
-                content: "<b>¡Revise los mensajes que la facultad tiene para usted!</b><br>Esté siempre informado sobre novedades y comentarios dirigidos hacia usted"
             },
             {
                 element: "#informes",
@@ -85,8 +79,14 @@
             },
             {
                 element: "#proyectos",
-                title: "<i class='green ion-help-buoy'></i> <b>Proyectos de prácticas</b>",
-                content: "En esta sección podrá ver sus <span class='green'>proyectos de prácticas</span> y modificar sus <span class='green'>horarios de asesoría</span> en la semana."
+                title: "<i class='green fa fa-rocket'></i> <b>Proyectos de prácticas</b>",
+                content: "En esta sección podrá ver sus <span class='green'>proyectos de prácticas</span> y modificar sus <span class='green'>horarios de asesoría</span> semanales."
+            },
+
+            {
+                element: "#practicantes",
+                title: "<i class='green fa fa-group'></i> <b>Practicantes</b>",
+                content: "En esta sección podrá ver los practicantes que tiene su periodo académico actual (<?=$per ?>)"
             },
             {
                 element: "#documentación",
@@ -94,14 +94,9 @@
                 content: "En esta sección podrá ver la documentación relacionada con la <span class='green'>asesoría de prácticas</span> y el funcionamiento de la aplicación <span class='green'>SDCE</span>"
             },
             {
-                element: "#practicantes",
-                title: "<i class='green ion-person-stalker'></i> <b>Practicantes</b>",
-                content: "En esta sección podrá ver los practicantes que tiene su periodo académico actual (<?=$per ?>)"
-            },
-            {
                 element: "#acerca",
-                title: "<i class='green ion-android-contact'></i> <b>Acerca de SDCE</b>",
-                content: "¿Cuál es nuestro propósito con SDCE?"
+                title: "<i class='green fa fa-leaf'></i> <b>Acerca de SDCE</b>",
+                content: "Conozca un poco más acerca de esta útil plataforma de gestión."
             },
         ]
     });

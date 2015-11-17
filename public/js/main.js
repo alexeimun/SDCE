@@ -23,24 +23,14 @@ $(function ()
             localStorage.collapse = 0;
         }
     });
-    setTimeout(function ()
-    {
-        $.post($('li[data-periodo_academico_url]').data('periodo_academico_url') ? $('li[data-periodo_academico_url]').data('periodo_academico_url') : '' + '/app/sessionIsActive', function (data)
-        {
-            if (data == 'ok')
-            {
-                location.replace('http://www.fumc.edu.co');
-            }
-        });
-    }, 15 * 60 * 1000);
 });
 
 $(document).on('ready', function ()
 {
-   if(localStorage.cooperador && localStorage.cooperador==1)
-   {
-       $('header').hide(500);
-       $('.main-sidebar').hide(500);
-       $('#unlockcooperador').show(500);
-   }
+    if (localStorage.cooperador && localStorage.cooperador == 1)
+    {
+        $('header').hide(500);
+        $('.main-sidebar').hide(500);
+        $('#unlockcooperador').show(500);
+    }
 });

@@ -6,7 +6,7 @@
 <section class="content">
     <!-- Small boxes (Stat box) -->
     <div class="row">
-        <div class="col-lg-3 col-xs-6" id="totalproyectos">
+        <div class="col-lg-3 col-xs-6" id="totalpracticantes">
             <!-- small box -->
             <div class="small-box bg-green-gradient">
                 <div class="inner">
@@ -24,7 +24,7 @@
 
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6" id="totalpracticantes">
+        <div class="col-lg-3 col-xs-6" id="totalproyectos">
             <!-- small box -->
             <div class="small-box bg-blue-gradient">
                 <div class="inner">
