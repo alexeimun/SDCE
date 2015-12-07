@@ -186,8 +186,7 @@
 
         public function TraeAsesores()
         {
-            return $this->db->query('
-            SELECT DISTINCT
+            return $this->db->query('SELECT DISTINCT
 		    t_usuarios.ID_USUARIO,
 		    t_usuarios.NOMBRE,
 		    t_usuarios.FOTO,

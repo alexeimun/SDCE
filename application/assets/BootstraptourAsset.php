@@ -9,7 +9,6 @@
         #Css styles
         'css' => [
             'plugins/Bootstraptour/bootstrap-tour.min.css',
-
         ],
         #Js files
         'js' => [
