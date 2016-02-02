@@ -538,10 +538,10 @@
             }
             if(!empty($errors))
             {
-                echo '<ul style="background: #f4f4f4;padding: 25px;border: 1px solid;margin: 5px">';
+                echo '<ul style="background: #f4f4f4;padding: 30px;border: 1px solid;margin: 5px">';
                 foreach ($errors as $error)
                 {
-                    echo '<li style="color: lightcoral">the asset file name <b>' . $error . 'Asset.php</b> does not exist in application/assets...</li>';
+                    echo '<li style="color: lightcoral;">the asset file name <b>' . $error . 'Asset.php</b> does not exist in application/assets...</li>';
                 }
                 echo '</ul>';
             }

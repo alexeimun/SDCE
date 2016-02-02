@@ -50,7 +50,6 @@
         $.ajax({
             url: 'app/ValidarCredenciales', type: 'post', data: $('form').serialize() + '&nivel=0',
             success: function (data) {
-                console.log(data);
                 if (data == 'ok') {
                     location.href = '<?=site_url()?>';
                 }

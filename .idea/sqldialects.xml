@@ -8,8 +8,6 @@
     <file url="file://$USER_HOME$/Desktop/Backups/bck006.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/Backups/bck010.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/INVERBIENES/inconciudades.sql" dialect="MySQL" />
-    <file url="file://$USER_HOME$/Desktop/dump.sql" dialect="MySQL" />
-    <file url="file://$USER_HOME$/Desktop/sdce volcado.sql" dialect="MySQL" />
     <file url="file://$USER_HOME$/Desktop/sdce1.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/application/models" dialect="MySQL" />
   </component>
